@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomText {
+  static TextStyle default_title = Title_S;
+  static TextStyle default_subtitle = Subtitle_M;
+  static TextStyle default_body = Body_Light_M;
+
   static TextStyle Headline_L = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w700,
