@@ -1,6 +1,7 @@
 import 'package:teamfit/src/data/models/member_task_dto.dart';
 
 class ProjectMemberDto {
+  // UID 추가하기?
   String memberName;
   List<MemberTaskDto> assignedTasks;
 
