@@ -4,7 +4,7 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 class SocialLoginButton extends StatelessWidget {
   String title;
   IconData icon;
-  MaterialColor background;
+  Color background;
   Future<void> Function() loginFunction;
 
   SocialLoginButton({
@@ -22,6 +22,7 @@ class SocialLoginButton extends StatelessWidget {
       height: 64,
       child: ElevatedButton(
         onPressed: loginFunction,
+        style: ElevatedButton.styleFrom(backgroundColor: background),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Icon(icon), Text(title, style: CustomText.Subtitle_M)],

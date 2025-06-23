@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:teamfit/src/domain/models/user_data.dart';
 import 'package:teamfit/src/presentation/providers/login_provider.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginViewModel extends Notifier<void> {
   @override
@@ -30,6 +31,38 @@ class LoginViewModel extends Notifier<void> {
 
     // 로그인 반환.
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future loginWighApple() async {
+    try {
+      //애플 로그인창 띄우고 로그인
+      final AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
+            scopes: [
+              AppleIDAuthorizationScopes.email,
+              AppleIDAuthorizationScopes.fullName,
+            ],
+          );
+
+      //OAuth 생성
+      final OAuthCredential userOAuthCredential = OAuthProvider(
+        'apple.com',
+      ).credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      //firebase유저 생성
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        userOAuthCredential,
+      );
+
+      print('${userCredential.user!.email}');
+
+      return userCredential;
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> uploadUserData(UserCredential userCredential) async {
