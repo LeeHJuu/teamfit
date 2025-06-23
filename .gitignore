@@ -1,5 +1,6 @@
 .env
 GoogleService-Info.plist
+/ios/Runner/Info.plist
 google-services.json
 
 # Miscellaneous
