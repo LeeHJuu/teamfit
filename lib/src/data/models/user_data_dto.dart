@@ -6,7 +6,7 @@ class UserDataDto {
   String? password;
   String nickname;
   List<String> projectIds;
-  UserDetailDataDto detailData;
+  UserDetailDataDto? detailData;
 
   UserDataDto({
     required this.uid,
@@ -35,7 +35,7 @@ class UserDataDto {
       'password': password,
       'nickname': nickname,
       'projectIds': projectIds,
-      'detailData': detailData.toJson(),
+      'detailData': detailData?.toJson(),
     };
   }
 }

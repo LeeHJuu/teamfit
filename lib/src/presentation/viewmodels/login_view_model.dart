@@ -2,17 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:teamfit/src/domain/models/user_data.dart';
+import 'package:teamfit/src/domain/models/user_detail_data.dart';
 import 'package:teamfit/src/presentation/providers/login_provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class LoginViewModel extends Notifier<UserCredential?> {
+class LoginViewModel extends Notifier<UserData?> {
   @override
-  UserCredential? build() {
+  UserData? build() {
     return null;
-  }
-
-  void setUserCredential(UserCredential userCredential){
-    state = userCredential;
   }
 
   Future<UserCredential?> signInWithGoogle() async {
@@ -85,8 +82,44 @@ class LoginViewModel extends Notifier<UserCredential?> {
   Future<UserData?> fetchUser() async {
     return await ref.read(userDataUsecaseProvider).fetchUser();
   }
+
+  void setUserCredential(UserCredential userCredential) {
+    final user = userCredential.user!;
+    final userData = UserData(
+      uid: user.uid,
+      email: user.email,
+      password: null,
+      nickname: '',
+      projectIds: [],
+      detailData: null,
+    );
+
+    state = userData;
+  }
+
+  void setUserInfo(String nickname, int gender, DateTime birthday) {
+    if (state != null) {
+      state = UserData(
+        uid: state!.uid,
+        email: state!.email,
+        password: state!.password,
+        nickname: nickname,
+        projectIds: state!.projectIds,
+        detailData: UserDetailData(
+          gender: gender,
+          birthDate: birthday,
+          badges: [],
+          mannerTemperature: 0.0,
+          attendanceRate: 0.0,
+          completionRate: 0.0,
+          roleTags: [],
+          stackTags: [],
+        ),
+      );
+    }
+  }
 }
 
-final loginViewModel = NotifierProvider<LoginViewModel, void>(
+final loginViewModel = NotifierProvider<LoginViewModel, UserData?>(
   () => LoginViewModel(),
 );

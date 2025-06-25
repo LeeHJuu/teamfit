@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_role_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
-class AddUserInfoPage extends StatefulWidget {
+class AddUserInfoPage extends ConsumerStatefulWidget {
   @override
-  State<AddUserInfoPage> createState() => _AddUserInfoPageState();
+  ConsumerState<AddUserInfoPage> createState() => _AddUserInfoPageState();
 }
 
-class _AddUserInfoPageState extends State<AddUserInfoPage> {
+class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   bool _isPossible = false;
   int selectedGender = 2;
 
@@ -59,7 +61,16 @@ class _AddUserInfoPageState extends State<AddUserInfoPage> {
               title: '다음',
               isPossible: _isPossible,
               moveNext: () {
-                // TODO: 입력한 유저 정보 저장.
+                final loginVM = ref.read(loginViewModel.notifier);
+
+                final nickname = _nameTextController.text.trim();
+                final gender = selectedGender;
+                final birthday = DateTime.parse(
+                  '${_birthYearController.text.trim()}-${_birthMonthController.text.trim()}-${_birthDayController.text.trim()}',
+                );
+
+                loginVM.setUserInfo(nickname, gender, birthday);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => AddUserRolePage()),

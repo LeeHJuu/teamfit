@@ -3,11 +3,11 @@ import 'package:teamfit/src/domain/models/user_detail_data.dart';
 
 class UserData {
   String uid;
-  String email;
+  String? email;
   String? password;
   String nickname;
   List<String> projectIds;
-  UserDetailData detailData;
+  UserDetailData? detailData;
 
   UserData({
     required this.uid,
@@ -25,18 +25,18 @@ class UserData {
       password: dto.password,
       nickname: dto.nickname,
       projectIds: dto.projectIds,
-      detailData: UserDetailData.fromDto(dto.detailData),
+      detailData: UserDetailData.fromDto(dto.detailData!),
     );
   }
 
   UserDataDto toDto() {
     return UserDataDto(
       uid: uid,
-      email: email,
+      email: email ?? '',
       password: password,
       nickname: nickname,
       projectIds: projectIds,
-      detailData: detailData.toDto(),
+      detailData: detailData?.toDto(),
     );
   }
 }

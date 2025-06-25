@@ -28,7 +28,7 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
 
   void _updateIsPossible() {
     setState(() {
-      _isPossible = _isFirstChecked && _isSecondChecked;
+      _isPossible = _isFirstChecked && _isSecondChecked && _isThirdChecked;
     });
   }
 
@@ -93,7 +93,7 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
               _updateAllChecked();
             });
           }),
-          _aggrementRow('[필수] 마케팅 정보 수신 동의', _isFourthChecked, (value) {
+          _aggrementRow('[선택] 마케팅 정보 수신 동의', _isFourthChecked, (value) {
             setState(() {
               _isFourthChecked = value!;
               _updateIsPossible();
