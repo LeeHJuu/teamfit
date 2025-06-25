@@ -23,7 +23,7 @@ class NextStepBottomButton extends StatelessWidget {
           style: FilledButton.styleFrom(
             backgroundColor: isPossible ? Colors.amber : Colors.grey,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(14),
+              borderRadius: BorderRadiusGeometry.circular(10),
             ),
           ),
           child: Text(title),
