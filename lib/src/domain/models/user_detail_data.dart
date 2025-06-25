@@ -1,10 +1,7 @@
 import 'package:teamfit/src/data/models/user_badge_dto.dart';
 import 'package:teamfit/src/data/models/user_detail_data_dto.dart';
 
-class UserData {
-  String uid;
-  String? password;
-  String nickname;
+class UserDetailData {
   int gender;
   DateTime birthDate;
   List<UserBadgeDto> badges;
@@ -14,10 +11,7 @@ class UserData {
   List<String> roleTags;
   List<String> stackTags;
 
-  UserData({
-    required this.uid,
-    required this.password,
-    required this.nickname,
+  UserDetailData({
     required this.gender,
     required this.birthDate,
     required this.badges,
@@ -28,11 +22,8 @@ class UserData {
     required this.stackTags,
   });
 
-  factory UserData.fromDto(UserDetailDataDto dto) {
-    return UserData(
-      uid: dto.uid,
-      password: dto.password,
-      nickname: dto.nickname,
+  factory UserDetailData.fromDto(UserDetailDataDto dto) {
+    return UserDetailData(
       gender: dto.gender,
       birthDate: dto.birthDate,
       badges: dto.badges,
@@ -46,9 +37,6 @@ class UserData {
 
   UserDetailDataDto toDto() {
     return UserDetailDataDto(
-      uid: uid,
-      password: password,
-      nickname: nickname,
       gender: gender,
       birthDate: birthDate,
       badges: badges,

@@ -10,15 +10,13 @@ class AddUserInfoPage extends StatefulWidget {
 }
 
 class _AddUserInfoPageState extends State<AddUserInfoPage> {
-  bool _isPossible = true;
+  bool _isPossible = false;
   int selectedGender = 2;
 
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _birthYearController = TextEditingController();
   final TextEditingController _birthMonthController = TextEditingController();
   final TextEditingController _birthDayController = TextEditingController();
-  final FocusNode _nameFocusNode = FocusNode();
-  final FocusNode _genderFocusNode = FocusNode();
   final FocusNode _birthYearFocusNode = FocusNode();
   final FocusNode _birthMonthFocusNode = FocusNode();
   final FocusNode _birthDayFocusNode = FocusNode();
@@ -29,12 +27,20 @@ class _AddUserInfoPageState extends State<AddUserInfoPage> {
     _birthYearController.dispose();
     _birthMonthController.dispose();
     _birthDayController.dispose();
-    _nameFocusNode.dispose();
-    _genderFocusNode.dispose();
     _birthYearFocusNode.dispose();
     _birthMonthFocusNode.dispose();
     _birthDayFocusNode.dispose();
     super.dispose();
+  }
+
+  void _updateIsPossible() {
+    setState(() {
+      _isPossible =
+          _nameTextController.text.trim().isNotEmpty &&
+          _birthYearController.text.trim().isNotEmpty &&
+          _birthMonthController.text.trim().isNotEmpty &&
+          _birthDayController.text.trim().isNotEmpty;
+    });
   }
 
   @override
@@ -74,10 +80,9 @@ class _AddUserInfoPageState extends State<AddUserInfoPage> {
             '닉네임',
             TextField(
               controller: _nameTextController,
-              focusNode: _nameFocusNode,
               textInputAction: TextInputAction.next,
               onSubmitted: (value) {
-                FocusScope.of(context).requestFocus(_genderFocusNode);
+                _updateIsPossible();
               },
               decoration: InputDecoration(
                 hintText: 'ex) 냥냥이',
@@ -151,6 +156,7 @@ class _AddUserInfoPageState extends State<AddUserInfoPage> {
       focusNode: focusNode,
       textInputAction: TextInputAction.next,
       onSubmitted: (_) {
+        _updateIsPossible();
         FocusScope.of(context).requestFocus(nextFocusNode);
       },
       textAlign: TextAlign.center,
@@ -168,12 +174,11 @@ class _AddUserInfoPageState extends State<AddUserInfoPage> {
       child: SizedBox(
         height: 54,
         child: OutlinedButton(
-          focusNode: _genderFocusNode,
           onPressed: () {
-            FocusScope.of(context).requestFocus(_genderFocusNode);
             setState(() {
               selectedGender = gender;
             });
+            _updateIsPossible();
           },
           style: OutlinedButton.styleFrom(
             backgroundColor:

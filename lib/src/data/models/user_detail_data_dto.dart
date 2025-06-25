@@ -1,9 +1,6 @@
 import 'package:teamfit/src/data/models/user_badge_dto.dart';
 
 class UserDetailDataDto {
-  String uid;
-  String? password;
-  String nickname;
   int gender;
   DateTime birthDate;
   List<UserBadgeDto> badges;
@@ -14,9 +11,6 @@ class UserDetailDataDto {
   List<String> stackTags;
 
   UserDetailDataDto({
-    required this.uid,
-    required this.password,
-    required this.nickname,
     required this.gender,
     required this.birthDate,
     required this.badges,
@@ -29,9 +23,6 @@ class UserDetailDataDto {
 
   factory UserDetailDataDto.fromJson(Map<String, dynamic> json) {
     return UserDetailDataDto(
-      uid: json['uid'],
-      password: json['password'],
-      nickname: json['nickname'] ?? '',
       badges:
           (json['badges'] as List<dynamic>? ?? [])
               .map((e) => UserBadgeDto.fromJson(e))
@@ -48,9 +39,6 @@ class UserDetailDataDto {
 
   Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
-      'password': password,
-      'nickname': nickname,
       'gender': gender,
       'birthDate': birthDate.toIso8601String(),
       'badges': badges.map((e) => e.toJson()).toList(),
