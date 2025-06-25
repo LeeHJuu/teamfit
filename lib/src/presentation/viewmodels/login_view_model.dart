@@ -5,10 +5,14 @@ import 'package:teamfit/src/domain/models/user_data.dart';
 import 'package:teamfit/src/presentation/providers/login_provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class LoginViewModel extends Notifier<void> {
+class LoginViewModel extends Notifier<UserCredential?> {
   @override
-  void build() {
-    // TODO: implement build
+  UserCredential? build() {
+    return null;
+  }
+
+  void setUserCredential(UserCredential userCredential){
+    state = userCredential;
   }
 
   Future<UserCredential?> signInWithGoogle() async {
@@ -33,7 +37,7 @@ class LoginViewModel extends Notifier<void> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future loginWighApple() async {
+  Future<UserCredential?> loginWighApple() async {
     try {
       //애플 로그인창 띄우고 로그인
       final AuthorizationCredentialAppleID appleCredential =
@@ -63,6 +67,7 @@ class LoginViewModel extends Notifier<void> {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<void> uploadUserData(UserCredential userCredential) async {

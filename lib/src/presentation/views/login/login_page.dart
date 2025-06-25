@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
-import 'package:teamfit/src/presentation/views/login/email_login_page.dart';
+import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/login/widgets/login_button_column.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -24,7 +24,7 @@ class LoginPage extends ConsumerWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EmailLoginPage()),
+                  MaterialPageRoute(builder: (context) => HomePage()),
                 );
               },
               child: Text(

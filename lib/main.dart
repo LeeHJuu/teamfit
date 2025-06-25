@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:teamfit/firebase_options.dart';
 import 'package:teamfit/src/presentation/views/login/login_page.dart';
+import 'package:teamfit/src/presentation/views/signup/service_agreement_page.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -19,12 +20,10 @@ Future<void> main() async {
       //   DeviceOrientation.portraitDown,
       // ]);
 
-      // await Firebase.app().delete();
-
       await dotenv.load(fileName: ".env");
 
       await Firebase.initializeApp(
-        name: "teamfit",
+        // name: "teamfit",
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
@@ -45,6 +44,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(themeMode: ThemeMode.light, home: LoginPage());
+    return MaterialApp(
+      themeMode: ThemeMode.light,
+      home: ServiceAgreementPage(),
+    );
   }
 }
