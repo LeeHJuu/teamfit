@@ -22,13 +22,13 @@ class LoginPage extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => HomePage()),
                 );
               },
               child: Text(
-                '이메일로 로그인',
+                '비회원으로 둘러보기',
                 style: CustomText.Body_Light_M.copyWith(
                   decoration: TextDecoration.underline,
                 ),

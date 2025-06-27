@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
-import 'package:teamfit/src/presentation/views/login/login_page.dart';
 import 'package:teamfit/src/presentation/views/login/widgets/social_login_button.dart';
 import 'package:teamfit/src/presentation/views/signup/service_agreement_page.dart';
 
@@ -34,35 +34,7 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          final isUserExist = await loginVM.findUser(userCredential);
-          if (!isUserExist) {
-            loginVM.setUserCredential(userCredential);
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => ServiceAgreementPage()),
-            );
-          } else {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          }
-          // //유저 데이터 파이어 베이스에 업로드
-          // await loginVM.uploadUserData(userCredential);
-
-          // // 로그인 처리 후 페이지 이동
-          // if (context.mounted) {
-          //   await loginVM.fetchUser();
-
-          //   Navigator.pushReplacement(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) {
-          //         return LoginPage();
-          //       },
-          //     ),
-          //   );
-          // }
+          await _goToNextPage(userCredential, context);
         }
       },
     );
@@ -80,13 +52,7 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          // await loginVM.uploadUserData(userCredential);
-
-          // // 로그인 처리 후 페이지 이동
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => LoginPage()),
-          // );
+          await _goToNextPage(userCredential, context);
         }
       },
     );
@@ -104,24 +70,28 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          // //유저 데이터 파이어 베이스에 업로드
-          // await loginVM.uploadUserData(userCredential);
-
-          // // 로그인 처리 후 페이지 이동
-          // if (context.mounted) {
-          //   await loginVM.fetchUser();
-
-          //   Navigator.pushReplacement(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) {
-          //         return LoginPage();
-          //       },
-          //     ),
-          //   );
-          // }
+          await _goToNextPage(userCredential, context);
         }
       },
     );
+  }
+
+  Future<void> _goToNextPage(
+    UserCredential userCredential,
+    BuildContext context,
+  ) async {
+    final isUserExist = await loginVM.findUser(userCredential);
+    if (!isUserExist) {
+      loginVM.setUserCredential(userCredential);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ServiceAgreementPage()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
   }
 }
