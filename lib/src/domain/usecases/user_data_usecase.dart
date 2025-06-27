@@ -6,8 +6,8 @@ class UserDataUsecase {
   final LoginRepository _loginRepository;
   UserDataUsecase(this._loginRepository);
 
-  Future<void> uploadUserData(UserCredential userCredential) async {
-    return await _loginRepository.uploadUserData(userCredential);
+  Future<void> uploadUserData(UserData userData) async {
+    await _loginRepository.uploadUserData(userData);
   }
 
   Future<bool> deleteUser(AuthCredential authcredential) async {
@@ -15,10 +15,14 @@ class UserDataUsecase {
   }
 
   Future<void> sendUserOpinion(String text) async {
-    return await _loginRepository.sendUserOpinion(text);
+    await _loginRepository.sendUserOpinion(text);
   }
 
   Future<UserData?> fetchUser() {
     return _loginRepository.fetchUser();
+  }
+
+  Future<bool> findUser(UserCredential userCredential) async {
+    return await _loginRepository.findUser(userCredential);
   }
 }

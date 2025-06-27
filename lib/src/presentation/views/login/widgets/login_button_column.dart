@@ -34,9 +34,9 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          loginVM.setUserCredential(userCredential);
-          final isUserExist = await loginVM.fetchUser();
-          if (isUserExist == null) {
+          final isUserExist = await loginVM.findUser(userCredential);
+          if (!isUserExist) {
+            loginVM.setUserCredential(userCredential);
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => ServiceAgreementPage()),
@@ -80,13 +80,13 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          await loginVM.uploadUserData(userCredential);
+          // await loginVM.uploadUserData(userCredential);
 
-          // 로그인 처리 후 페이지 이동
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
+          // // 로그인 처리 후 페이지 이동
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => LoginPage()),
+          // );
         }
       },
     );
@@ -104,22 +104,22 @@ class LoginButtonColumn extends ConsumerWidget {
           print("userCredential == null");
           return;
         } else {
-          //유저 데이터 파이어 베이스에 업로드
-          await loginVM.uploadUserData(userCredential);
+          // //유저 데이터 파이어 베이스에 업로드
+          // await loginVM.uploadUserData(userCredential);
 
-          // 로그인 처리 후 페이지 이동
-          if (context.mounted) {
-            await loginVM.fetchUser();
+          // // 로그인 처리 후 페이지 이동
+          // if (context.mounted) {
+          //   await loginVM.fetchUser();
 
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return LoginPage();
-                },
-              ),
-            );
-          }
+          //   Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) {
+          //         return LoginPage();
+          //       },
+          //     ),
+          //   );
+          // }
         }
       },
     );

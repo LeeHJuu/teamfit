@@ -96,7 +96,7 @@ class CustomText {
     letterSpacing: -0.02,
   );
   static TextStyle Caption_M = TextStyle(
-    fontSize: 109,
+    fontSize: 10,
     fontWeight: FontWeight.w400,
     height: 1.5,
     letterSpacing: -0.02,

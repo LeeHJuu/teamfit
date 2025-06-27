@@ -9,21 +9,12 @@ class LoginDataSourceImpl implements LoginDataSource {
 
   //사용자 정보 파이어베이스에 업로드
   @override
-  Future<void> uploadUserData(UserCredential userCredential) async {
+  Future<void> uploadUserData(UserDataDto userData) async {
     try {
-      final user = userCredential.user;
+      final userDocRef = _firestore.collection('user').doc(userData.uid);
+      final userDoc = await userDocRef.get();
 
-      if (user != null) {
-        final userDocRef = _firestore.collection('user').doc(user.uid);
-        final userDoc = await userDocRef.get();
-
-        if (userDoc.exists) {
-          //사용자가 존재할 때
-        } else {
-          //존재하지 않으면 사용자 정보 업로드
-          await userDocRef.set({'uid': user.uid, 'email': user.email});
-        }
-      }
+      await userDocRef.set(userData.toJson());
     } catch (e) {
       print(e);
     }
@@ -84,5 +75,13 @@ class LoginDataSourceImpl implements LoginDataSource {
     } catch (e) {
       throw Exception('No user found with uid: $e');
     }
+  }
+
+  @override
+  Future<bool> findUser(UserCredential userCredential) async {
+    final user = userCredential.user;
+    final userDocRef = _firestore.collection('user').doc(user?.uid);
+    final userDoc = await userDocRef.get();
+    return userDoc.exists;
   }
 }

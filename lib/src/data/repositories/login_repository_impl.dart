@@ -8,9 +8,11 @@ class LoginRepositoryImpl implements LoginRepository {
   final LoginDataSource _loginDataSource;
 
   @override
-  Future<void> uploadUserData(UserCredential userCredential) async {
+  Future<void> uploadUserData(UserData userData) async {
     try {
-      await _loginDataSource.uploadUserData(userCredential);
+      final userDataDto = userData.toDto();
+
+      await _loginDataSource.uploadUserData(userDataDto);
     } catch (e) {
       throw Exception('failed to upload user data: $e');
     }
@@ -42,6 +44,16 @@ class LoginRepositoryImpl implements LoginRepository {
       return UserData.fromDto(userDataDto);
     } else {
       return null;
+    }
+  }
+
+  @override
+  Future<bool> findUser(UserCredential userCredential) async {
+    try {
+      final result = await _loginDataSource.findUser(userCredential);
+      return result;
+    } catch (e) {
+      throw Exception('failed to delete user data: $e');
     }
   }
 }

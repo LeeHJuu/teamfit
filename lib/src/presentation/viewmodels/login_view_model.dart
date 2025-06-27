@@ -67,8 +67,14 @@ class LoginViewModel extends Notifier<UserData?> {
     return null;
   }
 
-  Future<void> uploadUserData(UserCredential userCredential) async {
-    await ref.read(userDataUsecaseProvider).uploadUserData(userCredential);
+  Future<bool> findUser(UserCredential userCredential) async {
+    return await ref.read(userDataUsecaseProvider).findUser(userCredential);
+  }
+
+  Future<void> uploadUserData() async {
+    if (state != null) {
+      await ref.read(userDataUsecaseProvider).uploadUserData(state!);
+    }
   }
 
   Future<bool> deleteUser(AuthCredential authcredential) async {
