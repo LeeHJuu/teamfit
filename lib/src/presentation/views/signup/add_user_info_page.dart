@@ -139,9 +139,10 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
 
                 // 일단 여기서 계정 생성.
                 loginVM.uploadUserData();
-                Navigator.push(
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => HomePage()),
+                  ModalRoute.withName('/'),
                 );
                 // Navigator.push(
                 //   context,
