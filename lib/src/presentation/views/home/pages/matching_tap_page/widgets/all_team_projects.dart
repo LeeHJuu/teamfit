@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/presentation/views/home/pages/matching_tap_page/widgets/project_item_box.dart';
 
 class AllTeamProjects extends StatelessWidget {
   const AllTeamProjects({super.key});
@@ -11,10 +12,19 @@ class AllTeamProjects extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text('냥냥님을 위한 AI 추천 팀프로젝트', style: CustomText.Title_S),
+          child: Text('전체 팀프로젝트', style: CustomText.Title_S),
         ),
-        Text('data'),
-        Text('data'),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
+        ProjectItemBox(),
       ],
     );
   }
