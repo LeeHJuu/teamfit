@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/presentation/views/add_team_project/add_project_meeting_type_page.dart';
+import 'package:teamfit/src/presentation/views/add_team_project/finish_add_project_page.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
-class AddProjectInfoPage extends StatefulWidget {
+class AddProjectDesiredRolesPage extends StatefulWidget {
   @override
-  State<AddProjectInfoPage> createState() => _AddProjectInfoPageState();
+  State<AddProjectDesiredRolesPage> createState() =>
+      _AddProjectDesiredRolesPageState();
 }
 
-class _AddProjectInfoPageState extends State<AddProjectInfoPage> {
+class _AddProjectDesiredRolesPageState
+    extends State<AddProjectDesiredRolesPage> {
   bool _isPossible = true;
 
   @override
@@ -19,9 +21,9 @@ class _AddProjectInfoPageState extends State<AddProjectInfoPage> {
       body: Column(
         children: [
           AddProjectStepTitle(
-            nowStep: '01',
+            nowStep: '03',
             allStep: '/03',
-            title: '프로젝트에 대해 소개해주세요.',
+            title: '모집 인원과 바라는 팀원',
           ),
           Spacer(),
           // _aggrementBox(),
@@ -31,9 +33,7 @@ class _AddProjectInfoPageState extends State<AddProjectInfoPage> {
             moveNext: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => AddProjectMeetingTypePage(),
-                ),
+                MaterialPageRoute(builder: (context) => FinishAddProjectPage()),
               );
             },
           ),

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
-import 'package:teamfit/src/presentation/views/signup/add_user_role_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 

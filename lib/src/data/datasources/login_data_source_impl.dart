@@ -12,7 +12,6 @@ class LoginDataSourceImpl implements LoginDataSource {
   Future<void> uploadUserData(UserDataDto userData) async {
     try {
       final userDocRef = _firestore.collection('user').doc(userData.uid);
-      final userDoc = await userDocRef.get();
 
       await userDocRef.set(userData.toJson());
     } catch (e) {

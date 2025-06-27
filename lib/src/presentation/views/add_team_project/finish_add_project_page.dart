@@ -3,7 +3,7 @@ import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
-class WelcomePage extends StatelessWidget {
+class FinishAddProjectPage extends StatelessWidget {
   bool _isPossible = true;
 
   @override
@@ -12,11 +12,11 @@ class WelcomePage extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('팀Fit에 오신걸 환영해요.'),
+          SignInStepTitle('팀 공고가 올라갔어요!'),
           Spacer(),
           // _aggrementBox(),
           NextStepBottomButton(
-            title: '다음',
+            title: '메인으로 가기',
             isPossible: _isPossible,
             moveNext: () {
               Navigator.pushAndRemoveUntil(
