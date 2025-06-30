@@ -105,45 +105,17 @@ class LoginViewModel extends Notifier<UserData?> {
 
   void setUserInfo(String nickname, int gender, DateTime birthday) {
     if (state != null) {
-      state = UserData(
-        uid: state!.uid,
-        email: state!.email,
-        password: state!.password,
+      state = state!.copyWith(
         nickname: nickname,
-        projectIds: state!.projectIds,
-        detailData: UserDetailData(
-          gender: gender,
-          birthDate: birthday,
-          badges: [],
-          mannerTemperature: 0.0,
-          attendanceRate: 0.0,
-          completionRate: 0.0,
-          roleTags: [],
-          stackTags: [],
-        ),
+        gender: gender,
+        birthDate: birthday,
       );
     }
   }
 
   void setUserRole(String selectedRole) {
     if (state != null) {
-      state = UserData(
-        uid: state!.uid,
-        email: state!.email,
-        password: state!.password,
-        nickname: state!.nickname,
-        projectIds: state!.projectIds,
-        detailData: UserDetailData(
-          gender: state!.detailData!.gender,
-          birthDate: state!.detailData!.birthDate,
-          badges: [],
-          mannerTemperature: 0.0,
-          attendanceRate: 0.0,
-          completionRate: 0.0,
-          roleTags: [],
-          stackTags: [],
-        ),
-      );
+      state = state!.copyWith(roleTag: selectedRole);
     }
   }
 }

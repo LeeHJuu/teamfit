@@ -1,3 +1,4 @@
+import 'package:teamfit/src/data/models/user_badge_dto.dart';
 import 'package:teamfit/src/data/models/user_data_dto.dart';
 import 'package:teamfit/src/domain/models/user_detail_data.dart';
 
@@ -37,6 +38,43 @@ class UserData {
       nickname: nickname,
       projectIds: projectIds,
       detailData: detailData?.toDto(),
+    );
+  }
+
+  UserData copyWith({
+    String? uid,
+    String? email,
+    String? password,
+    String? nickname,
+    List<String>? projectIds,
+    UserDetailData? detailData,
+    int? gender,
+    DateTime? birthDate,
+    List<UserBadgeDto>? badges,
+    double? mannerTemperature,
+    double? attendanceRate,
+    double? completionRate,
+    String? roleTag,
+    List<String>? stackTags,
+  }) {
+    return UserData(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      nickname: nickname ?? this.nickname,
+      projectIds: projectIds ?? List.from(this.projectIds),
+      detailData:
+          detailData ??
+          (this.detailData?.copyWith(
+            gender: gender,
+            birthDate: birthDate,
+            badges: badges,
+            mannerTemperature: mannerTemperature,
+            attendanceRate: attendanceRate,
+            completionRate: completionRate,
+            roleTag: roleTag,
+            stackTags: stackTags,
+          )),
     );
   }
 }

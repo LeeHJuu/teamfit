@@ -7,7 +7,7 @@ class UserDetailDataDto {
   double mannerTemperature;
   double attendanceRate;
   double completionRate;
-  List<String> roleTags;
+  String roleTag;
   List<String> stackTags;
 
   UserDetailDataDto({
@@ -17,7 +17,7 @@ class UserDetailDataDto {
     required this.mannerTemperature,
     required this.attendanceRate,
     required this.completionRate,
-    required this.roleTags,
+    required this.roleTag,
     required this.stackTags,
   });
 
@@ -30,7 +30,7 @@ class UserDetailDataDto {
       mannerTemperature: json['mannerTemperature'] ?? 0.0,
       attendanceRate: json['attendanceRate'] ?? 0.0,
       completionRate: json['completionRate'] ?? 0.0,
-      roleTags: List<String>.from(json['roleTags'] ?? []),
+      roleTag: json['roleTags'] ?? '',
       stackTags: List<String>.from(json['stackTags'] ?? []),
       gender: json['gender'],
       birthDate: DateTime.parse(json['birthDate']),
@@ -45,7 +45,7 @@ class UserDetailDataDto {
       'mannerTemperature': mannerTemperature,
       'attendanceRate': attendanceRate,
       'completionRate': completionRate,
-      'roleTags': roleTags,
+      'roleTags': roleTag,
       'stackTags': stackTags,
     };
   }

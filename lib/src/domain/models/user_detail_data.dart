@@ -8,7 +8,7 @@ class UserDetailData {
   double mannerTemperature;
   double attendanceRate;
   double completionRate;
-  List<String> roleTags;
+  String roleTag;
   List<String> stackTags;
 
   UserDetailData({
@@ -18,7 +18,7 @@ class UserDetailData {
     required this.mannerTemperature,
     required this.attendanceRate,
     required this.completionRate,
-    required this.roleTags,
+    required this.roleTag,
     required this.stackTags,
   });
 
@@ -30,7 +30,7 @@ class UserDetailData {
       mannerTemperature: dto.mannerTemperature,
       attendanceRate: dto.attendanceRate,
       completionRate: dto.completionRate,
-      roleTags: dto.roleTags,
+      roleTag: dto.roleTag,
       stackTags: dto.stackTags,
     );
   }
@@ -43,8 +43,30 @@ class UserDetailData {
       mannerTemperature: mannerTemperature,
       attendanceRate: attendanceRate,
       completionRate: completionRate,
-      roleTags: roleTags,
+      roleTag: roleTag,
       stackTags: stackTags,
+    );
+  }
+
+  UserDetailData copyWith({
+    int? gender,
+    DateTime? birthDate,
+    List<UserBadgeDto>? badges,
+    double? mannerTemperature,
+    double? attendanceRate,
+    double? completionRate,
+    String? roleTag,
+    List<String>? stackTags,
+  }) {
+    return UserDetailData(
+      gender: gender ?? this.gender,
+      birthDate: birthDate ?? this.birthDate,
+      badges: badges ?? List.from(this.badges),
+      mannerTemperature: mannerTemperature ?? this.mannerTemperature,
+      attendanceRate: attendanceRate ?? this.attendanceRate,
+      completionRate: completionRate ?? this.completionRate,
+      roleTag: roleTag ?? this.roleTag,
+      stackTags: stackTags ?? List.from(this.stackTags),
     );
   }
 }

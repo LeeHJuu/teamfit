@@ -141,7 +141,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
         final nickname = _nameTextController.text.trim();
         final gender = selectedGender;
         final birthday = DateTime.parse(
-          '${_birthYearController.text.trim()}-${_birthMonthController.text.trim()}-${_birthDayController.text.trim()}',
+          '${_birthYearController.text.trim()}-${_birthMonthController.text.trim().padLeft(2, '0')}-${_birthDayController.text.trim().padLeft(2, '0')}',
         );
 
         loginVM.setUserInfo(nickname, gender, birthday);
@@ -228,7 +228,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     return TextField(
       controller: _nameTextController,
       textInputAction: TextInputAction.next,
-      onSubmitted: (value) {
+      onChanged: (value) {
         _updateIsPossible();
       },
       decoration: InputDecoration(
@@ -251,10 +251,10 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       focusNode: focusNode,
       textInputAction: TextInputAction.next,
       onSubmitted: (_) {
-        _updateIsPossible();
         FocusScope.of(context).requestFocus(nextFocusNode);
       },
       onChanged: (value) {
+        _updateIsPossible();
         _validateInput();
       },
       textAlign: TextAlign.center,
