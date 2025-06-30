@@ -1,6 +1,6 @@
-import 'package:teamfit/src/data/models/user_badge_dto.dart';
 import 'package:teamfit/src/data/models/user_data_dto.dart';
 import 'package:teamfit/src/domain/models/user_detail_data.dart';
+import 'package:teamfit/src/data/models/user_badge_dto.dart';
 
 class UserData {
   String uid;
@@ -16,7 +16,7 @@ class UserData {
     required this.password,
     required this.nickname,
     required this.projectIds,
-    required this.detailData,
+    this.detailData,
   });
 
   factory UserData.fromDto(UserDataDto dto) {
@@ -65,16 +65,27 @@ class UserData {
       projectIds: projectIds ?? List.from(this.projectIds),
       detailData:
           detailData ??
-          (this.detailData?.copyWith(
-            gender: gender,
-            birthDate: birthDate,
-            badges: badges,
-            mannerTemperature: mannerTemperature,
-            attendanceRate: attendanceRate,
-            completionRate: completionRate,
-            roleTag: roleTag,
-            stackTags: stackTags,
-          )),
+          (this.detailData != null
+              ? this.detailData!.copyWith(
+                gender: gender,
+                birthDate: birthDate,
+                badges: badges,
+                mannerTemperature: mannerTemperature,
+                attendanceRate: attendanceRate,
+                completionRate: completionRate,
+                roleTag: roleTag,
+                stackTags: stackTags,
+              )
+              : UserDetailData(
+                gender: gender ?? 0,
+                birthDate: birthDate ?? DateTime.now(),
+                badges: badges ?? [],
+                mannerTemperature: mannerTemperature ?? 0.0,
+                attendanceRate: attendanceRate ?? 0.0,
+                completionRate: completionRate ?? 0.0,
+                roleTag: roleTag ?? '',
+                stackTags: stackTags ?? [],
+              )),
     );
   }
 }
