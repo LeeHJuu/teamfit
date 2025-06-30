@@ -4,6 +4,7 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
 class AddUserInfoPage extends ConsumerStatefulWidget {
@@ -118,52 +119,54 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       },
       child: Scaffold(
         appBar: AppBar(),
-        body: Column(
+        body: ListView(
           children: [
             SignInStepTitle('간단한 추가 정보를\n입력해주세요.'),
             _infomationInputBox(),
-            NextStepBottomButton(
-              title: '다음',
-              isPossible: _isPossible,
-              moveNext: () {
-                final loginVM = ref.read(loginViewModel.notifier);
-
-                final nickname = _nameTextController.text.trim();
-                final gender = selectedGender;
-                final birthday = DateTime.parse(
-                  '${_birthYearController.text.trim()}-${_birthMonthController.text.trim()}-${_birthDayController.text.trim()}',
-                );
-
-                loginVM.setUserInfo(nickname, gender, birthday);
-
-                // 일단 여기서 계정 생성.
-                loginVM.uploadUserData();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                  ModalRoute.withName('/'),
-                );
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => AddUserRolePage()),
-                // );
-              },
-            ),
+            _nextStepButton(context),
           ],
         ),
       ),
     );
   }
 
+  NextStepBottomButton _nextStepButton(BuildContext context) {
+    return NextStepBottomButton(
+      title: '다음',
+      isPossible: _isPossible,
+      moveNext: () {
+        final loginVM = ref.read(loginViewModel.notifier);
+
+        final nickname = _nameTextController.text.trim();
+        final gender = selectedGender;
+        final birthday = DateTime.parse(
+          '${_birthYearController.text.trim()}-${_birthMonthController.text.trim()}-${_birthDayController.text.trim()}',
+        );
+
+        loginVM.setUserInfo(nickname, gender, birthday);
+
+        // 일단 여기서 계정 생성.
+        loginVM.uploadUserData();
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          ModalRoute.withName('/'),
+        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => AddUserRolePage()),
+        // );
+      },
+    );
+  }
+
   Widget _infomationInputBox() {
-    return Expanded(
-      child: ListView(
-        children: [
-          _inputBoxItem('닉네임', _nicknameInputField()),
-          _inputBoxItem('성별', _genderInputField()),
-          _inputBoxItem('생년월일', _birthdayInputField()),
-        ],
-      ),
+    return Column(
+      children: [
+        InputBoxItem(title: '닉네임', body: _nicknameInputField()),
+        InputBoxItem(title: '성별', body: _genderInputField()),
+        InputBoxItem(title: '생년월일', body: _birthdayInputField()),
+      ],
     );
   }
 
@@ -281,20 +284,6 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           ),
           child: Text(gender == 0 ? '남성' : '여성'),
         ),
-      ),
-    );
-  }
-
-  Widget _inputBoxItem(String title, Widget body) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: CustomText.Subtitle_M),
-          SizedBox(height: 16),
-          body,
-        ],
       ),
     );
   }
