@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
+import 'package:teamfit/src/presentation/views/signup/add_user_role_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
@@ -119,7 +120,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       },
       child: Scaffold(
         appBar: AppBar(),
-        body: ListView(
+        body: Column(
           children: [
             SignInStepTitle('간단한 추가 정보를\n입력해주세요.'),
             _infomationInputBox(),
@@ -146,27 +147,30 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
         loginVM.setUserInfo(nickname, gender, birthday);
 
         // 일단 여기서 계정 생성.
-        loginVM.uploadUserData();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-          ModalRoute.withName('/'),
-        );
-        // Navigator.push(
+        // loginVM.uploadUserData();
+        // Navigator.pushAndRemoveUntil(
         //   context,
-        //   MaterialPageRoute(builder: (context) => AddUserRolePage()),
+        //   MaterialPageRoute(builder: (context) => HomePage()),
+        //   ModalRoute.withName('/'),
         // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddUserRolePage()),
+        );
       },
     );
   }
 
   Widget _infomationInputBox() {
-    return Column(
-      children: [
-        InputBoxItem(title: '닉네임', body: _nicknameInputField()),
-        InputBoxItem(title: '성별', body: _genderInputField()),
-        InputBoxItem(title: '생년월일', body: _birthdayInputField()),
-      ],
+    return Expanded(
+      child: ListView(
+        children: [
+          SizedBox(height: 50),
+          InputBoxItem(title: '닉네임', body: _nicknameInputField()),
+          InputBoxItem(title: '성별', body: _genderInputField()),
+          InputBoxItem(title: '생년월일', body: _birthdayInputField()),
+        ],
+      ),
     );
   }
 

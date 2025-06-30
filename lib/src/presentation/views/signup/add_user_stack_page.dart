@@ -17,7 +17,7 @@ class _AddUserStackPageState extends State<AddUserStackPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('경력과 사용 기술을\n입력해주세요.'),
+          SignInStepTitle('해당 직무에서의\n경력을 알려주세요.'),
           Spacer(),
           // _aggrementBox(),
           NextStepBottomButton(

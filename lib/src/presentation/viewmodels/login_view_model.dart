@@ -124,6 +124,28 @@ class LoginViewModel extends Notifier<UserData?> {
       );
     }
   }
+
+  void setUserRole(String selectedRole) {
+    if (state != null) {
+      state = UserData(
+        uid: state!.uid,
+        email: state!.email,
+        password: state!.password,
+        nickname: state!.nickname,
+        projectIds: state!.projectIds,
+        detailData: UserDetailData(
+          gender: state!.detailData!.gender,
+          birthDate: state!.detailData!.birthDate,
+          badges: [],
+          mannerTemperature: 0.0,
+          attendanceRate: 0.0,
+          completionRate: 0.0,
+          roleTags: [],
+          stackTags: [],
+        ),
+      );
+    }
+  }
 }
 
 final loginViewModel = NotifierProvider<LoginViewModel, UserData?>(
