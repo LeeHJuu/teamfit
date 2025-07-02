@@ -83,7 +83,7 @@ class LoginButtonColumn extends ConsumerWidget {
     final isUserExist = await loginVM.findUser(userCredential);
     if (!isUserExist) {
       loginVM.setUserCredential(userCredential);
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ServiceAgreementPage()),
       );

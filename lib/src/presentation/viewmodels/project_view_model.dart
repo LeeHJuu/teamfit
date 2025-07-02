@@ -10,19 +10,20 @@ class ProjectViewModel extends Notifier<int> {
   }
 
   void onIndexChanged(int newIndex, BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          switch (newIndex) {
-            case 0:
-              return ProjectChatPage();
-            default:
-              return ProjectPage();
-          }
-        },
-      ),
-    );
+    state = newIndex;
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) {
+    //         switch (newIndex) {
+    //           case 0:
+    //             return ProjectChatPage();
+    //           default:
+    //             return ProjectPage();
+    //         }
+    //       },
+    //     ),
+    //   );
   }
 }
 
