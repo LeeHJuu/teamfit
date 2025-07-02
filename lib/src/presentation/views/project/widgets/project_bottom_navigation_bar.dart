@@ -20,7 +20,6 @@ class ProjectBottomNavigationBar extends ConsumerWidget {
       unselectedItemColor: Colors.amber,
       showUnselectedLabels: true,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '홈'),
         BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '채팅'),
         BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '달력'),
         BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '팀원'),

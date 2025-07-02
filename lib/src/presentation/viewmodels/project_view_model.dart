@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/presentation/views/project/project_page.dart';
-import 'package:teamfit/src/presentation/views/project_chat/project_chat_page.dart';
+import 'package:teamfit/src/presentation/views/project_callendar_tap_page/project_callendar_tap_page.dart';
+import 'package:teamfit/src/presentation/views/project_chat_tap_page/project_chat_tap_page.dart';
+import 'package:teamfit/src/presentation/views/project_member_tap_page/project_member_tap_page.dart';
+import 'package:teamfit/src/presentation/views/project_setting_tap_page/project_setting_tap_page.dart';
 
 class ProjectViewModel extends Notifier<int> {
   @override
@@ -10,20 +13,25 @@ class ProjectViewModel extends Notifier<int> {
   }
 
   void onIndexChanged(int newIndex, BuildContext context) {
-    state = newIndex;
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) {
-    //         switch (newIndex) {
-    //           case 0:
-    //             return ProjectChatPage();
-    //           default:
-    //             return ProjectPage();
-    //         }
-    //       },
-    //     ),
-    //   );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          switch (newIndex) {
+            case 0:
+              return ProjectChatTapPage();
+            case 1:
+              return ProjectCallendarTapPage();
+            case 2:
+              return ProjectMemberTapPage();
+            case 3:
+              return ProjectSettingTapPage();
+            default:
+              return ProjectPage();
+          }
+        },
+      ),
+    );
   }
 }
 

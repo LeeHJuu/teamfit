@@ -9,13 +9,17 @@ class MatchingTapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedContainer(
-      ListView(
-        children: [
-          TeatSearchTap(),
-          MakeTeamButton(),
-          AIRecommendedTeamProjects(),
-          AllTeamProjects(),
-        ],
+      background: Colors.black12,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+        child: ListView(
+          children: [
+            TeatSearchTap(),
+            MakeTeamButton(),
+            AIRecommendedTeamProjects(),
+            AllTeamProjects(),
+          ],
+        ),
       ),
     );
   }
