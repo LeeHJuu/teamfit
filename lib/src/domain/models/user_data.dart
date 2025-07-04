@@ -55,6 +55,7 @@ class UserData {
     double? attendanceRate,
     double? completionRate,
     String? roleTag,
+    String? goalTag,
     List<String>? stackTags,
   }) {
     return UserData(
@@ -74,6 +75,7 @@ class UserData {
                 attendanceRate: attendanceRate,
                 completionRate: completionRate,
                 roleTag: roleTag,
+                goalTag: goalTag,
                 stackTags: stackTags,
               )
               : UserDetailData(
@@ -84,6 +86,7 @@ class UserData {
                 attendanceRate: attendanceRate ?? 0.0,
                 completionRate: completionRate ?? 0.0,
                 roleTag: roleTag ?? '',
+                goalTag: goalTag ?? '',
                 stackTags: stackTags ?? [],
               )),
     );

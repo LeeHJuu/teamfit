@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/presentation/views/signup/add_user_goal_page.dart';
 import 'package:teamfit/src/presentation/views/signup/welcome_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
@@ -26,7 +27,7 @@ class _AddUserStackPageState extends State<AddUserStackPage> {
             moveNext: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => WelcomePage()),
+                MaterialPageRoute(builder: (context) => AddUserGoalPage()),
               );
             },
           ),

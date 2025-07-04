@@ -9,6 +9,7 @@ class UserDetailData {
   double attendanceRate;
   double completionRate;
   String roleTag;
+  String goalTag;
   List<String> stackTags;
 
   UserDetailData({
@@ -19,6 +20,7 @@ class UserDetailData {
     required this.attendanceRate,
     required this.completionRate,
     required this.roleTag,
+    required this.goalTag,
     required this.stackTags,
   });
 
@@ -31,6 +33,7 @@ class UserDetailData {
       attendanceRate: dto.attendanceRate,
       completionRate: dto.completionRate,
       roleTag: dto.roleTag,
+      goalTag: dto.goalTag,
       stackTags: dto.stackTags,
     );
   }
@@ -44,6 +47,7 @@ class UserDetailData {
       attendanceRate: attendanceRate,
       completionRate: completionRate,
       roleTag: roleTag,
+      goalTag: goalTag,
       stackTags: stackTags,
     );
   }
@@ -56,6 +60,7 @@ class UserDetailData {
     double? attendanceRate,
     double? completionRate,
     String? roleTag,
+    String? goalTag,
     List<String>? stackTags,
   }) {
     return UserDetailData(
@@ -66,6 +71,7 @@ class UserDetailData {
       attendanceRate: attendanceRate ?? this.attendanceRate,
       completionRate: completionRate ?? this.completionRate,
       roleTag: roleTag ?? this.roleTag,
+      goalTag: goalTag ?? this.goalTag,
       stackTags: stackTags ?? List.from(this.stackTags),
     );
   }

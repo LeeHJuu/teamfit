@@ -117,6 +117,12 @@ class LoginViewModel extends Notifier<UserData?> {
       state = state!.copyWith(roleTag: selectedRole);
     }
   }
+
+  void setUserGoal(String selectedGoal) {
+    if (state != null) {
+      state = state!.copyWith(roleTag: selectedGoal);
+    }
+  }
 }
 
 final loginViewModel = NotifierProvider<LoginViewModel, UserData?>(
