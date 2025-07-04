@@ -120,7 +120,7 @@ class LoginViewModel extends Notifier<UserData?> {
 
   void setUserGoal(String selectedGoal) {
     if (state != null) {
-      state = state!.copyWith(roleTag: selectedGoal);
+      state = state!.copyWith(goalTag: selectedGoal);
     }
   }
 }

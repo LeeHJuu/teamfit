@@ -4,6 +4,7 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_role_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
@@ -223,18 +224,12 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     );
   }
 
-  TextField _nicknameInputField() {
-    return TextField(
-      controller: _nameTextController,
-      textInputAction: TextInputAction.next,
-      onChanged: (value) {
-        _updateIsPossible();
-      },
-      decoration: InputDecoration(
-        hintText: 'ex) 냥냥이',
-        helperText: '서비스내에서 사용할 별명을 입력해주세요.',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
+  Widget _nicknameInputField() {
+    return CustomTextField(
+      textController: _nameTextController,
+      hintText: 'ex) 냥냥이',
+      helperText: '서비스내에서 사용할 별명을 입력해주세요.',
+      onchange: _updateIsPossible,
     );
   }
 

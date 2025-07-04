@@ -7,6 +7,8 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_meeting_type_page.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/custom_scroll_text_field.dart';
+import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
@@ -128,14 +130,8 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        TextField(
-          controller: _titleController,
-          maxLength: 100, // 글자 수 제한
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          ),
-        ),
-        SizedBox(height: 5),
+        CustomTextField(textController: _titleController, maxLength: 100),
+        // SizedBox(height: 5),
         // Text('${_titleController.text.length} / 100'), // 글자 수 표시
       ],
     );
@@ -145,26 +141,9 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        RawScrollbar(
-          padding: EdgeInsets.only(right: 8, top: 10),
-          trackVisibility: true,
-          thumbVisibility: true,
-          thumbColor: Colors.black,
-          thickness: 5,
-          radius: Radius.circular(10),
-          controller: chatInputScrollController,
-          child: TextField(
-            controller: _descriptionController,
-            minLines: 5,
-            maxLines: 5,
-            maxLength: 300, // 글자 수 제한
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            keyboardType: TextInputType.multiline,
-          ),
+        CustomScrollTextField(
+          scrollController: chatInputScrollController,
+          descriptionController: _descriptionController,
         ),
         SizedBox(height: 5),
         // Text('${_descriptionController.text.length} / 300'), // 글자 수 표시
