@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_info_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
@@ -56,52 +57,49 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
     );
   }
 
-  Padding _aggrementBox() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          _aggrementRow('필수 약관 전체 동의', _isAllChecked, (value) {
-            setState(() {
-              _isAllChecked = value!;
-              _isFirstChecked = value;
-              _isSecondChecked = value;
-              _isThirdChecked = value;
-              _isFourthChecked = value;
-              _updateIsPossible();
-            });
-          }),
-          Divider(),
-          _aggrementRow('만 14세 이상입니다.', _isFirstChecked, (value) {
-            setState(() {
-              _isFirstChecked = value!;
-              _updateIsPossible();
-              _updateAllChecked();
-            });
-          }),
-          _aggrementRow('[필수] 서비스 이용 약관', _isSecondChecked, (value) {
-            setState(() {
-              _isSecondChecked = value!;
-              _updateIsPossible();
-              _updateAllChecked();
-            });
-          }),
-          _aggrementRow('[필수] 개인정보 처리 방침', _isThirdChecked, (value) {
-            setState(() {
-              _isThirdChecked = value!;
-              _updateIsPossible();
-              _updateAllChecked();
-            });
-          }),
-          _aggrementRow('[선택] 마케팅 정보 수신 동의', _isFourthChecked, (value) {
-            setState(() {
-              _isFourthChecked = value!;
-              _updateIsPossible();
-              _updateAllChecked();
-            });
-          }),
-        ],
-      ),
+  Widget _aggrementBox() {
+    return Column(
+      children: [
+        _aggrementRow('필수 약관 전체 동의', _isAllChecked, (value) {
+          setState(() {
+            _isAllChecked = value!;
+            _isFirstChecked = value;
+            _isSecondChecked = value;
+            _isThirdChecked = value;
+            _isFourthChecked = value;
+            _updateIsPossible();
+          });
+        }),
+        Divider(),
+        _aggrementRow('만 14세 이상입니다.', _isFirstChecked, (value) {
+          setState(() {
+            _isFirstChecked = value!;
+            _updateIsPossible();
+            _updateAllChecked();
+          });
+        }),
+        _aggrementRow('[필수] 서비스 이용 약관', _isSecondChecked, (value) {
+          setState(() {
+            _isSecondChecked = value!;
+            _updateIsPossible();
+            _updateAllChecked();
+          });
+        }),
+        _aggrementRow('[필수] 개인정보 처리 방침', _isThirdChecked, (value) {
+          setState(() {
+            _isThirdChecked = value!;
+            _updateIsPossible();
+            _updateAllChecked();
+          });
+        }),
+        _aggrementRow('[선택] 마케팅 정보 수신 동의', _isFourthChecked, (value) {
+          setState(() {
+            _isFourthChecked = value!;
+            _updateIsPossible();
+            _updateAllChecked();
+          });
+        }),
+      ],
     );
   }
 
@@ -111,9 +109,11 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
     ValueChanged<bool?> onChanged,
   ) {
     return CheckboxListTile(
+      checkboxShape: CircleBorder(),
+      checkboxScaleFactor: 1.2,
       title: Text(title),
-      activeColor: Colors.deepOrangeAccent,
-      checkColor: Colors.black,
+      activeColor: CustomColor.primary_60,
+      checkColor: Colors.white,
       controlAffinity: ListTileControlAffinity.leading,
       value: isChecked,
       onChanged: onChanged,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 
 class NextStepBottomButton extends StatelessWidget {
   String title;
@@ -21,7 +22,7 @@ class NextStepBottomButton extends StatelessWidget {
         child: FilledButton(
           onPressed: isPossible ? moveNext : null, // 비활성화 상태에서는 null을 설정
           style: FilledButton.styleFrom(
-            backgroundColor: isPossible ? Colors.amber : Colors.grey,
+            backgroundColor: isPossible ? CustomColor.primary_60 : Colors.grey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusGeometry.circular(10),
             ),

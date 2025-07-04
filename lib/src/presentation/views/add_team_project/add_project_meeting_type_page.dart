@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_desired_roles_page.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
 class AddProjectMeetingTypePage extends StatefulWidget {
@@ -24,22 +25,35 @@ class _AddProjectMeetingTypePageState extends State<AddProjectMeetingTypePage> {
             allStep: '/03',
             title: '협업 방식을 설정해주세요.',
           ),
+          SizedBox(height: 50),
+          _meetingTypeInputBox(),
           Spacer(),
-          // _aggrementBox(),
-          NextStepBottomButton(
-            title: '다음',
-            isPossible: _isPossible,
-            moveNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddProjectDesiredRolesPage(),
-                ),
-              );
-            },
-          ),
+          _nextStepButton(context),
         ],
       ),
+    );
+  }
+
+  Column _meetingTypeInputBox() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InputBoxItem(title: '프로젝트 기간', body: SizedBox()),
+        InputBoxItem(title: '회의 방식', body: SizedBox()),
+      ],
+    );
+  }
+
+  NextStepBottomButton _nextStepButton(BuildContext context) {
+    return NextStepBottomButton(
+      title: '다음',
+      isPossible: _isPossible,
+      moveNext: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddProjectDesiredRolesPage()),
+        );
+      },
     );
   }
 }

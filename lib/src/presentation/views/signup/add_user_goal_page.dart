@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/welcome_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
-import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
+import 'package:teamfit/src/presentation/widgets/custom_select_button.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
 class AddUserGoalPage extends ConsumerStatefulWidget {
@@ -54,8 +54,10 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
           ),
           itemCount: userGoals.length, // 총 아이템 갯수
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
+            return CustomSelectButton(
+              title: userGoals[index],
+              isSelected: selectedGoal == userGoals[index],
+              onPress: () {
                 setState(() {
                   selectedGoal = userGoals[index];
                   _isPossible = selectedGoal.isNotEmpty;
@@ -63,16 +65,6 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
                 final vm = ref.read(loginViewModel.notifier);
                 vm.setUserGoal(selectedGoal);
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  color:
-                      selectedGoal == userGoals[index]
-                          ? Colors.amber
-                          : Colors.grey[300],
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Center(child: Text(userGoals[index])), // 텍스트 중앙 정렬
-              ),
             );
           },
         ),

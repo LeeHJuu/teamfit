@@ -49,15 +49,23 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('팀 만들기', style: CustomText.Title_S)),
-      body: ListView(
-        controller: chatInputScrollController,
+      body: Column(
         children: [
-          AddProjectStepTitle(
-            nowStep: '01',
-            allStep: '/03',
-            title: '프로젝트에 대해 소개해주세요.',
+          Expanded(
+            child: ListView(
+              controller: chatInputScrollController,
+              children: [
+                AddProjectStepTitle(
+                  nowStep: '01',
+                  allStep: '/03',
+                  title: '프로젝트에 대해 소개해주세요.',
+                ),
+                SizedBox(height: 50),
+
+                _projectInfoInputColumn(),
+              ],
+            ),
           ),
-          _projectInfoInputColumn(),
           _nextStepButton(context),
         ],
       ),
@@ -85,6 +93,7 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       children: [
         InputBoxItem(title: '프로젝트 이미지(선택)', body: _projectImageInputField()),
         InputBoxItem(title: '프로젝트 제목', body: _projectTitleInputField()),
+        InputBoxItem(title: '프로젝트 유형', body: _projectTitleInputField()),
         InputBoxItem(title: '프로젝트 소개', body: _projectDescriptionInputField()),
       ],
     );
@@ -145,7 +154,7 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
           scrollController: chatInputScrollController,
           descriptionController: _descriptionController,
         ),
-        SizedBox(height: 5),
+        // SizedBox(height: 5),
         // Text('${_descriptionController.text.length} / 300'), // 글자 수 표시
       ],
     );
