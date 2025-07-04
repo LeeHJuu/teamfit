@@ -58,4 +58,33 @@ class ProjectRecruitInfo {
       additionalInfo: additionalInfo,
     );
   }
+
+  ProjectRecruitInfo copyWith({
+    String? projectId,
+    String? title,
+    String? introduction,
+    DateTime? startDate,
+    DateTime? endDate,
+    int? meetingType,
+    List<int>? meetingDays,
+    String? meetingTime,
+    Map<String, int>? desiredRoles,
+    List<String>? preferredMemberTraits,
+    String? additionalInfo,
+  }) {
+    return ProjectRecruitInfo(
+      projectId: projectId ?? this.projectId,
+      title: title ?? this.title,
+      introduction: introduction ?? this.introduction,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      meetingType: meetingType ?? this.meetingType,
+      meetingDays: meetingDays ?? this.meetingDays,
+      meetingTime: meetingTime ?? this.meetingTime,
+      desiredRoles: desiredRoles ?? this.desiredRoles,
+      preferredMemberTraits:
+          preferredMemberTraits ?? this.preferredMemberTraits,
+      additionalInfo: additionalInfo ?? this.additionalInfo,
+    );
+  }
 }

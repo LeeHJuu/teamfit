@@ -14,6 +14,7 @@ class RoundedContainer extends StatelessWidget {
         topRight: Radius.circular(20),
       ),
       child: Container(
+        width: double.infinity,
         decoration: BoxDecoration(color: background),
         child: body,
       ),
