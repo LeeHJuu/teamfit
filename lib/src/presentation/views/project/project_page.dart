@@ -23,9 +23,12 @@ class ProjectPage extends ConsumerWidget {
               background: Colors.black12,
               body: Column(
                 children: [
-                  Row(children: [Text('data'), Text('data')]),
+                  _tapButton(),
+                  SizedBox(height: 10),
                   LeftScheduleAlarm(),
                   TodayTeamSchedule(),
+                  LeftScheduleAlarm(),
+                  LeftScheduleAlarm(),
                 ],
               ),
             ),
@@ -33,6 +36,42 @@ class ProjectPage extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: ProjectBottomNavigationBar(),
+    );
+  }
+
+  Container _tapButton() {
+    return Container(
+      width: double.infinity,
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                print('1');
+              },
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(12),
+                alignment: Alignment.center,
+                child: Text('data 1'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                print('2');
+              },
+              child: Container(
+                color: Colors.amber,
+                padding: EdgeInsets.all(12),
+                alignment: Alignment.center,
+                child: Text('data 2'),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

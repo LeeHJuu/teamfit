@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_desired_roles_page.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
 import 'package:teamfit/src/presentation/widgets/custom_select_button.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
@@ -13,7 +14,7 @@ class AddProjectMeetingTypePage extends StatefulWidget {
 }
 
 class _AddProjectMeetingTypePageState extends State<AddProjectMeetingTypePage> {
-  bool _isPossible = false;
+  bool _isPossible = true;
 
   int selectecMeetingType = 10;
   void _updateIsPossible() {
@@ -50,22 +51,26 @@ class _AddProjectMeetingTypePageState extends State<AddProjectMeetingTypePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InputBoxItem(title: '프로젝트 기간', body: SizedBox()),
         InputBoxItem(
-          title: '회의 방식',
-          body: Row(
-            children: [
-              _meetingTypeBox(0),
-              SizedBox(width: 10),
-              _meetingTypeBox(1),
-            ],
-          ),
+          title: '프로젝트 기간',
+          body: CustomDropdownMenu(title: '선택', items: ['1', '2', '3', '4']),
         ),
+        InputBoxItem(title: '회의 방식', body: _meetingTypeBox()),
       ],
     );
   }
 
-  Expanded _meetingTypeBox(int meetingType) {
+  Row _meetingTypeBox() {
+    return Row(
+      children: [
+        _meetingTypeButton(0),
+        SizedBox(width: 10),
+        _meetingTypeButton(1),
+      ],
+    );
+  }
+
+  Expanded _meetingTypeButton(int meetingType) {
     return Expanded(
       child: CustomSelectButton(
         title: meetingType == 0 ? '오프라인' : '온라인',
