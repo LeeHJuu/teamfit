@@ -7,6 +7,7 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_meeting_type_page.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
 import 'package:teamfit/src/presentation/widgets/custom_scroll_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
@@ -93,10 +94,14 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       children: [
         InputBoxItem(title: '프로젝트 이미지(선택)', body: _projectImageInputField()),
         InputBoxItem(title: '프로젝트 제목', body: _projectTitleInputField()),
-        InputBoxItem(title: '프로젝트 유형', body: _projectTitleInputField()),
+        InputBoxItem(title: '프로젝트 유형', body: _projectTypeSelectBox()),
         InputBoxItem(title: '프로젝트 소개', body: _projectDescriptionInputField()),
       ],
     );
+  }
+
+  Widget _projectTypeSelectBox() {
+    return CustomDropdownMenu(title: '선택', items: ['1', '2', '3', '4']);
   }
 
   Widget _projectImageInputField() {

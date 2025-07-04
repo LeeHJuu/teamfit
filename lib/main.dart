@@ -44,9 +44,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      themeMode: ThemeMode.light,
-      home: ServiceAgreementPage(),
-    );
+    return MaterialApp(themeMode: ThemeMode.light, home: LoginPage());
   }
 }
