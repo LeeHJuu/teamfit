@@ -9,7 +9,6 @@ class ProjectRecruitInfoDto {
   String meetingTime;
   Map<String, int> desiredRoles; // 예: {'디자이너': 2, '개발자': 3}
   List<String> preferredMemberTraits; // 예: ['따뜻한 성격', '1년 이상 경력']
-  String additionalInfo;
 
   ProjectRecruitInfoDto({
     required this.projectId,
@@ -22,7 +21,6 @@ class ProjectRecruitInfoDto {
     required this.meetingTime,
     required this.desiredRoles,
     required this.preferredMemberTraits,
-    required this.additionalInfo,
   });
 
   factory ProjectRecruitInfoDto.fromJson(Map<String, dynamic> json) {
@@ -39,7 +37,6 @@ class ProjectRecruitInfoDto {
       preferredMemberTraits: List<String>.from(
         json['preferredMemberTraits'] ?? [],
       ),
-      additionalInfo: json['additionalInfo'] ?? '',
     );
   }
 
@@ -55,7 +52,6 @@ class ProjectRecruitInfoDto {
       'meetingTime': meetingTime,
       'desiredRoles': desiredRoles,
       'preferredMemberTraits': preferredMemberTraits,
-      'additionalInfo': additionalInfo,
     };
   }
 }

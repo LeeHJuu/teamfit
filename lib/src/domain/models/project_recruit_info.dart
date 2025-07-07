@@ -11,7 +11,6 @@ class ProjectRecruitInfo {
   String meetingTime;
   Map<String, int> desiredRoles;
   List<String> preferredMemberTraits;
-  String additionalInfo;
 
   ProjectRecruitInfo({
     required this.projectId,
@@ -24,7 +23,6 @@ class ProjectRecruitInfo {
     required this.meetingTime,
     required this.desiredRoles,
     required this.preferredMemberTraits,
-    required this.additionalInfo,
   });
 
   factory ProjectRecruitInfo.fromDto(ProjectRecruitInfoDto dto) {
@@ -39,7 +37,6 @@ class ProjectRecruitInfo {
       meetingTime: dto.meetingTime,
       desiredRoles: dto.desiredRoles,
       preferredMemberTraits: dto.preferredMemberTraits,
-      additionalInfo: dto.additionalInfo,
     );
   }
 
@@ -55,7 +52,6 @@ class ProjectRecruitInfo {
       meetingTime: meetingTime,
       desiredRoles: desiredRoles,
       preferredMemberTraits: preferredMemberTraits,
-      additionalInfo: additionalInfo,
     );
   }
 
@@ -70,7 +66,6 @@ class ProjectRecruitInfo {
     String? meetingTime,
     Map<String, int>? desiredRoles,
     List<String>? preferredMemberTraits,
-    String? additionalInfo,
   }) {
     return ProjectRecruitInfo(
       projectId: projectId ?? this.projectId,
@@ -84,7 +79,6 @@ class ProjectRecruitInfo {
       desiredRoles: desiredRoles ?? this.desiredRoles,
       preferredMemberTraits:
           preferredMemberTraits ?? this.preferredMemberTraits,
-      additionalInfo: additionalInfo ?? this.additionalInfo,
     );
   }
 }
