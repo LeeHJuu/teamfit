@@ -26,7 +26,6 @@ class AddTeamProjectViewModel extends Notifier<ProjectRecruitInfo?> {
       meetingTime: '',
       desiredRoles: {},
       preferredMemberTraits: [],
-      additionalInfo: '',
     );
   }
 

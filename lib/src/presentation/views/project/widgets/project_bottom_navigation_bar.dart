@@ -16,7 +16,7 @@ class ProjectBottomNavigationBar extends ConsumerWidget {
         vm.onIndexChanged(value, context);
       },
       type: BottomNavigationBarType.fixed,
-      fixedColor: Colors.red,
+      fixedColor: Colors.amber,
       unselectedItemColor: Colors.amber,
       showUnselectedLabels: true,
       items: [

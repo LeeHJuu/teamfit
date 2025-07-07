@@ -1,26 +1,27 @@
-import 'package:teamfit/src/data/models/member_task_dto.dart';
-
 class ProjectMemberDto {
-  // UID 추가하기?
   String memberName;
-  List<MemberTaskDto> assignedTasks;
+  String position;
+  int workingTimes;
 
-  ProjectMemberDto({required this.memberName, required this.assignedTasks});
+  ProjectMemberDto({
+    required this.memberName,
+    required this.position,
+    required this.workingTimes,
+  });
 
   factory ProjectMemberDto.fromJson(Map<String, dynamic> json) {
     return ProjectMemberDto(
       memberName: json['memberName'] ?? '',
-      assignedTasks:
-          (json['assignedTasks'] as List<dynamic>? ?? [])
-              .map((taskJson) => MemberTaskDto.fromJson(taskJson))
-              .toList(),
+      position: json['position'] ?? '',
+      workingTimes: json['workingTimes'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'memberName': memberName,
-      'assignedTasks': assignedTasks.map((t) => t.toJson()).toList(),
+      'position': position,
+      'workingTimes': workingTimes,
     };
   }
 }
