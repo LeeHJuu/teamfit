@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,7 @@ Future<void> main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      // 세로모드 고정
-      // await SystemChrome.setPreferredOrientations([
-      //   DeviceOrientation.portraitUp,
-      //   DeviceOrientation.portraitDown,
-      // ]);
+      await EasyLocalization.ensureInitialized();
 
       await dotenv.load(fileName: ".env");
 
@@ -31,7 +28,15 @@ Future<void> main() async {
         FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
       };
 
-      runApp(ProviderScope(child: MyApp()));
+      runApp(
+        EasyLocalization(
+          supportedLocales: [Locale('ko', 'KR')],
+          path: 'assets/translations',
+          // fallbackLocale: Locale('ko', 'KR'),
+          useFallbackTranslations: true,
+          child: ProviderScope(child: MyApp()),
+        ),
+      );
     },
     (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
@@ -44,6 +49,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(themeMode: ThemeMode.light, home: LoginPage());
+    return MaterialApp(
+      themeMode: ThemeMode.light,
+      home: LoginPage(),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_schedule_preview.dart';
 import 'package:teamfit/src/presentation/views/project_callendar_tap_page/project_callendar_tap_page.dart';
@@ -20,7 +21,10 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: 50,
-              child: FilledButton(onPressed: () {}, child: Text('스터디 기록하기')),
+              child: FilledButton(
+                onPressed: () {},
+                child: Text('home_page.record_work'.tr()),
+              ),
             ),
           ),
         ],
@@ -40,7 +44,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text('3개의 일정이 있습니다.'),
+          Text('home_page.schedule_count_message').tr(args: ['2']),
           Spacer(),
           Icon(Icons.arrow_forward_ios),
         ],

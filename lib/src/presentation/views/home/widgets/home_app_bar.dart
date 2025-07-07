@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
@@ -14,7 +15,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('12월 24일', style: CustomText.Title_S),
-              Text('스터디 n개 운영중!', style: CustomText.Body_Light_XS),
+              Text(
+                'home_page.active_project_count'.tr(args: ['5']),
+                style: CustomText.Body_Light_XS,
+              ),
             ],
           ),
         ],

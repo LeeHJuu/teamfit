@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
@@ -40,7 +41,7 @@ class ProjectPreviewBox extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Text(
-            '멤버 진척도',
+            'home_page.member_progress'.tr(),
             style: CustomText.Title_S.copyWith(color: Colors.white),
           ),
         ),

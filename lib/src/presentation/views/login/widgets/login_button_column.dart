@@ -24,7 +24,7 @@ class LoginButtonColumn extends ConsumerWidget {
 
   SocialLoginButton _googleLoginButton(BuildContext context) {
     return SocialLoginButton(
-      title: 'Google로 시작하기',
+      title: 'Google',
       icon: Icons.message,
       background: Colors.white,
       loginFunction: () async {
@@ -42,7 +42,7 @@ class LoginButtonColumn extends ConsumerWidget {
 
   SocialLoginButton _appleLoginButton(BuildContext context) {
     return SocialLoginButton(
-      title: 'Apple로 시작하기',
+      title: 'Apple',
       icon: Icons.message,
       background: Colors.black,
       loginFunction: () async {
@@ -60,7 +60,7 @@ class LoginButtonColumn extends ConsumerWidget {
 
   SocialLoginButton _kakaoLoginButton(BuildContext context) {
     return SocialLoginButton(
-      title: 'Kakao로 시작하기',
+      title: 'Kakao',
       icon: Icons.message,
       background: Colors.yellow,
       loginFunction: () async {

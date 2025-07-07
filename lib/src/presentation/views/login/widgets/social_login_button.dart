@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
@@ -25,7 +26,13 @@ class SocialLoginButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(backgroundColor: background),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(icon), Text(title, style: CustomText.Subtitle_M)],
+          children: [
+            Icon(icon),
+            Text(
+              'login.button_text'.tr(args: [title]),
+              style: CustomText.Subtitle_M,
+            ),
+          ],
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
@@ -14,7 +15,7 @@ class LoginPage extends ConsumerWidget {
         child: Column(
           children: [
             Spacer(),
-            Text('소셜 로그인', style: CustomText.Title_S),
+            Text('login.title'.tr(), style: CustomText.Title_S),
             // newMethod(loginVM, context, ref),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 27),
@@ -28,7 +29,7 @@ class LoginPage extends ConsumerWidget {
                 );
               },
               child: Text(
-                '비회원으로 둘러보기',
+                'login.guest_login_text'.tr(),
                 style: CustomText.Body_Light_M.copyWith(
                   decoration: TextDecoration.underline,
                 ),
