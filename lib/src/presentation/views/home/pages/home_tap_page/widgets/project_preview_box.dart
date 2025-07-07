@@ -27,44 +27,54 @@ class ProjectPreviewBox extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: _projectPreviewBoxColumn(),
+      ),
+    );
+  }
+
+  Column _projectPreviewBoxColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ProjectPreviewTitle(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Text(
+            '멤버 진척도',
+            style: CustomText.Title_S.copyWith(color: Colors.white),
+          ),
+        ),
+        Expanded(
+          child: Stack(
+            children: [_projectSchedulePreviewBox(), _teamMemberPreview()],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _projectSchedulePreviewBox() {
+    return Column(
+      children: [
+        SizedBox(height: 25),
+        Expanded(child: ProjectSchedulePreviewBox()),
+      ],
+    );
+  }
+
+  Positioned _teamMemberPreview() {
+    return Positioned(
+      // top: 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ProjectPreviewTitle(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: Text(
-                '멤버 진척도',
-                style: CustomText.Title_S.copyWith(color: Colors.white),
-              ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(height: 25),
-                      Expanded(child: ProjectSchedulePreviewBox()),
-                    ],
-                  ),
-                  Positioned(
-                    // top: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          TeamMemberProgressIcon(),
-                          TeamMemberProgressIcon(),
-                          TeamMemberProgressIcon(),
-                          TeamMemberProgressIcon(),
-                          TeamMemberProgressIcon(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            TeamMemberProgressIcon(),
+            TeamMemberProgressIcon(),
+            TeamMemberProgressIcon(),
+            TeamMemberProgressIcon(),
+            TeamMemberProgressIcon(),
           ],
         ),
       ),
