@@ -46,7 +46,7 @@ class _HomeTapPageState extends State<HomeTapPage> {
           children:
               items.map((i) {
                 return GestureDetector(
-                  onTap: () => _carouselSliderController.animateToPage(i),
+                  onTap: () => _carouselSliderController.animateToPage(i - 1),
                   child: Container(
                     width: _current == i - 1 ? 24.0 : 12.0,
                     height: 12.0,
