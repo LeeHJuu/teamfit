@@ -6,6 +6,7 @@ class SocialLoginButton extends StatelessWidget {
   String title;
   IconData icon;
   Color background;
+  Color textColor;
   Future<void> Function() loginFunction;
 
   SocialLoginButton({
@@ -13,28 +14,32 @@ class SocialLoginButton extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.background,
+    required this.textColor,
     required this.loginFunction,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-      height: 64,
-      child: ElevatedButton(
-        onPressed: loginFunction,
-        style: ElevatedButton.styleFrom(backgroundColor: background),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon),
-            Text(
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          height: 64,
+          child: ElevatedButton(
+            onPressed: loginFunction,
+            style: ElevatedButton.styleFrom(backgroundColor: background),
+            child: Text(
               'login.button_text'.tr(args: [title]),
-              style: CustomText.Subtitle_M,
+              style: CustomText.Subtitle_M.copyWith(color: textColor),
             ),
-          ],
+          ),
         ),
-      ),
+        Positioned(
+          left: 60,
+          child: SizedBox(height: 64, child: Icon(icon, color: textColor)),
+        ),
+      ],
     );
   }
 }

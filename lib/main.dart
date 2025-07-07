@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:teamfit/firebase_options.dart';
+import 'package:teamfit/src/config/theme/theme.dart';
 import 'package:teamfit/src/presentation/views/login/login_page.dart';
 import 'package:teamfit/src/presentation/views/signup/service_agreement_page.dart';
 
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
+      theme: theme,
       home: LoginPage(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

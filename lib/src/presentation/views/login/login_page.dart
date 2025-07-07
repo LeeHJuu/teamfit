@@ -14,32 +14,49 @@ class LoginPage extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(height: 50),
+            _appTitleColumn(),
             Spacer(),
-            Text('login.title'.tr(), style: CustomText.Title_S),
-            // newMethod(loginVM, context, ref),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 27),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: LoginButtonColumn(loginVM: loginVM),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-              child: Text(
-                'login.guest_login_text'.tr(),
-                style: CustomText.Body_Light_M.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
+            _guestLoginButton(context),
 
-            SizedBox(height: 60),
+            SizedBox(height: 40),
           ],
         ),
       ),
+    );
+  }
+
+  TextButton _guestLoginButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      },
+      child: Text(
+        'login.guest_login_text'.tr(),
+        style: CustomText.Body_Light_M.copyWith(
+          decoration: TextDecoration.underline,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  Column _appTitleColumn() {
+    return Column(
+      children: [
+        Text(
+          'app.title'.tr(),
+          style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+        ),
+        Text('app.sub_title'.tr(), style: CustomText.Title_S),
+      ],
     );
   }
 }

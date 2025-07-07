@@ -27,6 +27,7 @@ class LoginButtonColumn extends ConsumerWidget {
       title: 'Google',
       icon: Icons.message,
       background: Colors.white,
+      textColor: Colors.black,
       loginFunction: () async {
         final userCredential = await loginVM.signInWithGoogle();
 
@@ -45,6 +46,7 @@ class LoginButtonColumn extends ConsumerWidget {
       title: 'Apple',
       icon: Icons.message,
       background: Colors.black,
+      textColor: Colors.white,
       loginFunction: () async {
         final userCredential = await loginVM.loginWighApple();
 
@@ -63,6 +65,7 @@ class LoginButtonColumn extends ConsumerWidget {
       title: 'Kakao',
       icon: Icons.message,
       background: Colors.yellow,
+      textColor: Colors.black,
       loginFunction: () async {
         final userCredential = await loginVM.signInWithGoogle();
 
