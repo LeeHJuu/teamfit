@@ -22,4 +22,5 @@ class CustomColor {
   static Color primary_70 = Color(0xFFfe8167);
   static Color primary_80 = Color(0xFFfeab9a);
   static Color primary_90 = Color(0xFFffd5cc);
+  static Color primary_95 = Color(0xFFffeae6);
 }

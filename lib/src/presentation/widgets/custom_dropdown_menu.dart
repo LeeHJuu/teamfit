@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class CustomDropdownMenu extends StatefulWidget {
   String title;
@@ -12,6 +14,7 @@ class CustomDropdownMenu extends StatefulWidget {
 
 class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
   bool isOpened = false;
+  String? selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(width: 1),
+        border: Border.all(width: 1, color: CustomColor.gray_80),
       ),
       child: Column(
         children: List.generate(items.length, (index) {
@@ -44,15 +47,26 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
                 child: GestureDetector(
                   onTap: () {
                     print('${items[index]} 클릭됨');
+                    setState(() {
+                      selectedItem = items[index];
+                      isOpened = false;
+                    });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(items[index]),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 16,
+                    ),
+                    child: Text(
+                      items[index],
+                      style: CustomText.Body_Light_M.copyWith(
+                        color: CustomColor.gray_10,
+                      ),
+                    ),
                   ),
                 ),
               ),
               if (index == items.length - 1) SizedBox(height: 8),
-              if (index < items.length - 1) Divider(),
             ],
           );
         }),
@@ -60,19 +74,45 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
     );
   }
 
-  Container _menuTitle(void Function() onClick) {
-    return Container(
-      height: 56,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(width: 1),
-      ),
-      child: Row(
-        children: [
-          SizedBox(width: 10),
-          Expanded(child: Text(widget.title)),
-          IconButton(onPressed: onClick, icon: Icon(Icons.arrow_drop_down)),
-        ],
+  Widget _menuTitle(void Function() onClick) {
+    return GestureDetector(
+      onTap: onClick,
+      child: Container(
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 1,
+            color:
+                isOpened
+                    ? CustomColor.primary_60
+                    : (selectedItem != null
+                        ? CustomColor.gray_10
+                        : CustomColor.gray_80),
+          ),
+        ),
+        child: Row(
+          children: [
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                selectedItem ?? widget.title,
+                style: CustomText.Label_Light_M.copyWith(
+                  color:
+                      selectedItem != null
+                          ? CustomColor.gray_10
+                          : (isOpened
+                              ? CustomColor.gray_30
+                              : CustomColor.gray_80),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.arrow_drop_down),
+            ),
+          ],
+        ),
       ),
     );
   }

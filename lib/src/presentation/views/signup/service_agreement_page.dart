@@ -40,8 +40,8 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
       body: Column(
         children: [
           SignInStepTitle('서비스 이용 동의를\n선택해주세요.'),
-          Spacer(),
           _aggrementBox(),
+          Spacer(),
           NextStepBottomButton(
             title: '다음',
             isPossible: _isPossible,
@@ -111,6 +111,12 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
     return CheckboxListTile(
       checkboxShape: CircleBorder(),
       checkboxScaleFactor: 1.2,
+      side: BorderSide(
+        width: 1.0,
+        color: CustomColor.gray_80,
+        style: BorderStyle.solid,
+      ),
+
       title: Text(title),
       activeColor: CustomColor.primary_60,
       checkColor: Colors.white,

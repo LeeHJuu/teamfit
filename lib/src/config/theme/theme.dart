@@ -10,4 +10,20 @@ final theme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
   ),
+  dividerTheme: DividerThemeData(
+    color: CustomColor.gray_80,
+    indent: 20,
+    endIndent: 20,
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      side: BorderSide(
+        // width: 1.2,
+        color: CustomColor.primary_60,
+        style: BorderStyle.solid,
+      ),
+      backgroundColor: CustomColor.primary_95,
+      foregroundColor: Colors.black,
+    ),
+  ),
 );

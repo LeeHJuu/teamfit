@@ -38,7 +38,6 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
       body: Column(
         children: [
           SignInStepTitle('나의 직무 또는 전공을\n선택해주세요.'),
-          SizedBox(height: 50),
           _userRoleTagsBox(),
           NextStepBottomButton(
             title: '다음',

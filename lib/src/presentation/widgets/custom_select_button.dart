@@ -26,13 +26,13 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
           widget.onPress();
         },
         style: OutlinedButton.styleFrom(
-          foregroundColor:
-              widget.isSelected ? CustomColor.primary_60 : Colors.black,
+          backgroundColor:
+              widget.isSelected ? CustomColor.primary_95 : Colors.white,
           side: BorderSide(
             color:
                 widget.isSelected
                     ? CustomColor.primary_60
-                    : Colors.grey, // 테두리 색상 변경
+                    : CustomColor.gray_80,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(10),

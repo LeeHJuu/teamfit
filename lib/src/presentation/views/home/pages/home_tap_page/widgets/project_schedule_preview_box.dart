@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_schedule_preview.dart';
-import 'package:teamfit/src/presentation/views/project_callendar_tap_page/project_callendar_tap_page.dart';
 import 'package:teamfit/src/presentation/widgets/rounded_container.dart';
 
 class ProjectSchedulePreviewBox extends StatelessWidget {
@@ -21,7 +20,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: 50,
-              child: FilledButton(
+              child: OutlinedButton(
                 onPressed: () {},
                 child: Text('home_page.record_work'.tr()),
               ),

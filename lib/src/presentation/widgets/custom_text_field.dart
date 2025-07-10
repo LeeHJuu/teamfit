@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class CustomTextField extends StatelessWidget {
-  TextEditingController textController;
-  int? maxLength;
-  int? minLine;
-  String? hintText;
-  String? helperText;
-  void Function()? onchange;
+  final TextEditingController textController;
+  final int? maxLength;
+  final int? minLine;
+  final String? hintText;
+  final String? helperText;
+  final void Function()? onchange;
 
   CustomTextField({
     required this.textController,
@@ -26,10 +28,30 @@ class CustomTextField extends StatelessWidget {
       maxLines: minLine ?? 1,
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
-        hintText: hintText,
-        helperText: helperText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        // hintText: hintText,
+        // helperText: helperText,
+        hint: Text(
+          hintText ?? '',
+          style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
+        ),
+        helper: Text(
+          helperText ?? '',
+          style: CustomText.Body_Light_XS.copyWith(color: CustomColor.gray_50),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: CustomColor.gray_90),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: CustomColor.primary_60),
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
+      onChanged: (value) {
+        if (onchange != null) {
+          onchange!();
+        }
+      },
     );
   }
 }

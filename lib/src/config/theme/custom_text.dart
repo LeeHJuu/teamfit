@@ -47,6 +47,54 @@ class CustomText {
     height: 1.35,
     letterSpacing: -0.02,
   );
+  static TextStyle Label_Heavy_L = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Heavy_M = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Heavy_S = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Heavy_XS = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Light_L = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Light_M = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Light_S = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
+  static TextStyle Label_Light_XS = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: -0.02,
+  );
   static TextStyle Body_Heavy_M = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,

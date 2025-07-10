@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_role_page.dart';
@@ -23,6 +24,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   final TextEditingController _birthYearController = TextEditingController();
   final TextEditingController _birthMonthController = TextEditingController();
   final TextEditingController _birthDayController = TextEditingController();
+
   final FocusNode _birthYearFocusNode = FocusNode();
   final FocusNode _birthMonthFocusNode = FocusNode();
   final FocusNode _birthDayFocusNode = FocusNode();
@@ -54,54 +56,44 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     String monthText = _birthMonthController.text;
     String dayText = _birthDayController.text;
 
-    // 숫자 외의 문자가 포함된 경우
     if (!_isNumeric(yearText) ||
         !_isNumeric(monthText) ||
         !_isNumeric(dayText)) {
-      setState(() {
-        birthdayHelperText = '숫자만 입력 가능합니다.';
-      });
+      _setBirthdayHelperText('숫자만 입력 가능합니다.');
       return;
     }
 
-    // 연도 유효성 검사
     int year = int.tryParse(yearText) ?? 0;
     int currentYear = DateTime.now().year;
     if (year < 1900 || year > currentYear) {
-      setState(() {
-        birthdayHelperText = '유효한 연도를 입력하세요.';
-      });
+      _setBirthdayHelperText('유효한 연도를 입력하세요.');
       return;
     }
 
-    // 월 유효성 검사
     int month = int.tryParse(monthText) ?? 0;
     if (month < 1 || month > 12) {
-      setState(() {
-        birthdayHelperText = '1월부터 12월까지 입력하세요.';
-      });
+      _setBirthdayHelperText('1월부터 12월까지 입력하세요.');
       return;
     }
 
-    // 일 유효성 검사
     int day = int.tryParse(dayText) ?? 0;
     if (day < 1 || day > _daysInMonth(month, year)) {
-      setState(() {
-        birthdayHelperText = '유효한 일을 입력하세요.';
-      });
+      _setBirthdayHelperText('유효한 일을 입력하세요.');
       return;
     }
 
-    // 오늘 날짜를 넘는지 검사
     DateTime inputDate = DateTime(year, month, day);
     if (inputDate.isAfter(DateTime.now())) {
-      setState(() {
-        birthdayHelperText = '오늘 날짜를 넘을 수 없습니다.';
-      });
+      _setBirthdayHelperText('오늘 날짜를 넘을 수 없습니다.');
+      return;
     }
 
+    _setBirthdayHelperText('');
+  }
+
+  void _setBirthdayHelperText(String message) {
     setState(() {
-      birthdayHelperText = '';
+      birthdayHelperText = message;
     });
   }
 
@@ -116,15 +108,13 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(),
         body: Column(
           children: [
             SignInStepTitle('간단한 추가 정보를\n입력해주세요.'),
-            _infomationInputBox(),
+            _informationInputBox(),
             _nextStepButton(context),
           ],
         ),
@@ -138,7 +128,6 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       isPossible: _isPossible,
       moveNext: () {
         final loginVM = ref.read(loginViewModel.notifier);
-
         final nickname = _nameTextController.text.trim();
         final gender = selectedGender;
         final birthday = DateTime.parse(
@@ -146,14 +135,6 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
         );
 
         loginVM.setUserInfo(nickname, gender, birthday);
-
-        // 일단 여기서 계정 생성.
-        // loginVM.uploadUserData();
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => HomePage()),
-        //   ModalRoute.withName('/'),
-        // );
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AddUserRolePage()),
@@ -162,11 +143,10 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     );
   }
 
-  Widget _infomationInputBox() {
+  Widget _informationInputBox() {
     return Expanded(
       child: ListView(
         children: [
-          SizedBox(height: 50),
           InputBoxItem(title: '닉네임', body: _nicknameInputField()),
           InputBoxItem(title: '성별', body: _genderInputField()),
           InputBoxItem(title: '생년월일', body: _birthdayInputField()),
@@ -180,34 +160,28 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       children: [
         Row(
           children: [
-            Expanded(
-              child: _birthdayInputBox(
-                '2024',
-                '년',
-                _birthYearController,
-                _birthYearFocusNode,
-                _birthMonthFocusNode,
-              ),
+            _buildDateInput(
+              '2024',
+              '년',
+              _birthYearController,
+              _birthYearFocusNode,
+              _birthMonthFocusNode,
             ),
             SizedBox(width: 12),
-            Expanded(
-              child: _birthdayInputBox(
-                '1',
-                '월',
-                _birthMonthController,
-                _birthMonthFocusNode,
-                _birthDayFocusNode,
-              ),
+            _buildDateInput(
+              '1',
+              '월',
+              _birthMonthController,
+              _birthMonthFocusNode,
+              _birthDayFocusNode,
             ),
             SizedBox(width: 12),
-            Expanded(
-              child: _birthdayInputBox(
-                '1',
-                '일',
-                _birthDayController,
-                _birthDayFocusNode,
-                null,
-              ),
+            _buildDateInput(
+              '1',
+              '일',
+              _birthDayController,
+              _birthDayFocusNode,
+              null,
             ),
           ],
         ),
@@ -216,6 +190,52 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           style: CustomText.Caption_M.copyWith(color: Colors.red),
         ),
       ],
+    );
+  }
+
+  Widget _buildDateInput(
+    String hint,
+    String unit,
+    TextEditingController controller,
+    FocusNode focusNode,
+    FocusNode? nextFocusNode,
+  ) {
+    return Expanded(
+      child: TextField(
+        controller: controller,
+        focusNode: focusNode,
+        textInputAction: TextInputAction.next,
+        onSubmitted: (_) => FocusScope.of(context).requestFocus(nextFocusNode),
+        onChanged: (value) {
+          _updateIsPossible();
+          _validateInput();
+        },
+        style: CustomText.Body_Heavy_M,
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.numberWithOptions(),
+        decoration: InputDecoration(
+          hint: Text(
+            hint,
+            style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
+            textAlign: TextAlign.center,
+          ),
+          suffix: Text(
+            unit,
+            style: CustomText.Label_Heavy_S.copyWith(
+              color: CustomColor.gray_30,
+            ),
+          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: CustomColor.gray_90),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: CustomColor.primary_60),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
     );
   }
 
@@ -231,34 +251,6 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       hintText: 'ex) 냥냥이',
       helperText: '서비스내에서 사용할 별명을 입력해주세요.',
       onchange: _updateIsPossible,
-    );
-  }
-
-  TextField _birthdayInputBox(
-    String hint,
-    String unit,
-    TextEditingController textController,
-    FocusNode focusNode,
-    FocusNode? nextFocusNode,
-  ) {
-    return TextField(
-      controller: textController,
-      focusNode: focusNode,
-      textInputAction: TextInputAction.next,
-      onSubmitted: (_) {
-        FocusScope.of(context).requestFocus(nextFocusNode);
-      },
-      onChanged: (value) {
-        _updateIsPossible();
-        _validateInput();
-      },
-      textAlign: TextAlign.center,
-      keyboardType: TextInputType.numberWithOptions(),
-      decoration: InputDecoration(
-        hintText: hint,
-        suffixText: unit,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
     );
   }
 

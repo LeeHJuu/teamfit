@@ -8,7 +8,7 @@ class SignInStepTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       width: double.infinity,
       child: Text(title, style: CustomText.Headline_M),
     );
