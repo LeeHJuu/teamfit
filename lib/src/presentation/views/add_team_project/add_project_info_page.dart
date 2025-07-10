@@ -101,7 +101,12 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
   }
 
   Widget _projectTypeSelectBox() {
-    return CustomDropdownMenu(title: '선택', items: ['1', '2', '3', '4']);
+    return CustomDropdownMenu(
+      title: '선택',
+      items: ['1', '2', '3', '4'],
+      onSelect: (p0) {},
+      selectedItem: '',
+    );
   }
 
   Widget _projectImageInputField() {

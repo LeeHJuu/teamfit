@@ -53,7 +53,12 @@ class _AddProjectMeetingTypePageState extends State<AddProjectMeetingTypePage> {
       children: [
         InputBoxItem(
           title: '프로젝트 기간',
-          body: CustomDropdownMenu(title: '선택', items: ['1', '2', '3', '4']),
+          body: CustomDropdownMenu(
+            title: '선택',
+            items: ['1', '2', '3', '4'],
+            onSelect: (p0) {},
+            selectedItem: '',
+          ),
         ),
         InputBoxItem(title: '회의 방식', body: _meetingTypeBox()),
       ],

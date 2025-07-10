@@ -118,6 +118,12 @@ class LoginViewModel extends Notifier<UserData?> {
     }
   }
 
+  void setUserStack(String career, List<String> selectedStacks) {
+    if (state != null) {
+      state = state!.copyWith(career: career, stackTags: selectedStacks);
+    }
+  }
+
   void setUserGoal(String selectedGoal) {
     if (state != null) {
       state = state!.copyWith(goalTag: selectedGoal);

@@ -3,10 +3,17 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class CustomDropdownMenu extends StatefulWidget {
-  String title;
-  List<String> items;
+  final String title;
+  final List<String> items;
+  final String? selectedItem;
+  final void Function(String?) onSelect;
 
-  CustomDropdownMenu({required this.title, required this.items});
+  CustomDropdownMenu({
+    required this.title,
+    required this.items,
+    required this.selectedItem,
+    required this.onSelect,
+  });
 
   @override
   State<CustomDropdownMenu> createState() => _CustomDropdownMenuState();
@@ -14,7 +21,6 @@ class CustomDropdownMenu extends StatefulWidget {
 
 class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
   bool isOpened = false;
-  String? selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +52,10 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
                 width: double.infinity,
                 child: GestureDetector(
                   onTap: () {
-                    print('${items[index]} 클릭됨');
                     setState(() {
-                      selectedItem = items[index];
                       isOpened = false;
                     });
+                    widget.onSelect(items[index]);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -86,7 +91,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
             color:
                 isOpened
                     ? CustomColor.primary_60
-                    : (selectedItem != null
+                    : (widget.selectedItem != null
                         ? CustomColor.gray_10
                         : CustomColor.gray_80),
           ),
@@ -96,10 +101,10 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
             SizedBox(width: 10),
             Expanded(
               child: Text(
-                selectedItem ?? widget.title,
+                widget.selectedItem ?? widget.title,
                 style: CustomText.Label_Light_M.copyWith(
                   color:
-                      selectedItem != null
+                      widget.selectedItem != null
                           ? CustomColor.gray_10
                           : (isOpened
                               ? CustomColor.gray_30

@@ -9,6 +9,7 @@ class UserDetailDataDto {
   double completionRate;
   String roleTag;
   String goalTag;
+  String career;
   List<String> stackTags;
 
   UserDetailDataDto({
@@ -20,6 +21,7 @@ class UserDetailDataDto {
     required this.completionRate,
     required this.roleTag,
     required this.goalTag,
+    required this.career,
     required this.stackTags,
   });
 
@@ -34,6 +36,7 @@ class UserDetailDataDto {
       completionRate: json['completionRate'] ?? 0.0,
       roleTag: json['roleTag'] ?? '',
       goalTag: json['goalTag'] ?? '',
+      career: json['career'] ?? '',
       stackTags: List<String>.from(json['stackTags'] ?? []),
       gender: json['gender'],
       birthDate: DateTime.parse(json['birthDate']),
@@ -50,6 +53,7 @@ class UserDetailDataDto {
       'completionRate': completionRate,
       'roleTag': roleTag,
       'goalTag': goalTag,
+      'career': career,
       'stackTags': stackTags,
     };
   }

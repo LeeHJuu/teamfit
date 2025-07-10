@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_goal_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
@@ -8,16 +10,18 @@ import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
-class AddUserStackPage extends StatefulWidget {
+class AddUserStackPage extends ConsumerStatefulWidget {
   @override
-  State<AddUserStackPage> createState() => _AddUserStackPageState();
+  ConsumerState<AddUserStackPage> createState() => _AddUserStackPageState();
 }
 
-class _AddUserStackPageState extends State<AddUserStackPage> {
-  bool _isPossible = true;
+class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
+  bool _isPossible = false;
+
   final TextEditingController _userStackTextController =
       TextEditingController();
   List<String> userStacks = [];
+  String? selectedCareer;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,8 @@ class _AddUserStackPageState extends State<AddUserStackPage> {
             title: '다음',
             isPossible: _isPossible,
             moveNext: () {
+              final vm = ref.read(loginViewModel.notifier);
+              vm.setUserStack(selectedCareer!, userStacks);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AddUserGoalPage()),
@@ -58,6 +64,13 @@ class _AddUserStackPageState extends State<AddUserStackPage> {
                 '7년 차 이상 ~ 9년 차 이하',
                 '10년 차 이상',
               ],
+              selectedItem: selectedCareer,
+              onSelect: (value) {
+                setState(() {
+                  selectedCareer = value;
+                  _isPossible = selectedCareer != null;
+                });
+              },
             ),
           ),
           InputBoxItem(
