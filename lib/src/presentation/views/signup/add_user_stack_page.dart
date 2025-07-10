@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_goal_page.dart';
-import 'package:teamfit/src/presentation/views/signup/welcome_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
+import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
@@ -13,6 +15,9 @@ class AddUserStackPage extends StatefulWidget {
 
 class _AddUserStackPageState extends State<AddUserStackPage> {
   bool _isPossible = true;
+  final TextEditingController _userStackTextController =
+      TextEditingController();
+  List<String> userStacks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -55,22 +60,56 @@ class _AddUserStackPageState extends State<AddUserStackPage> {
               ],
             ),
           ),
-          InputBoxItem(title: '사용기술', body: _nicknameInputField()),
+          InputBoxItem(
+            title: '사용기술',
+            body: Column(
+              children: [
+                CustomTextField(
+                  textController: _userStackTextController,
+                  hintText: '사용 기술을 입력해 주세요',
+                  onSubmit: () {
+                    setState(() {
+                      userStacks.add(_userStackTextController.text.trim());
+                      _userStackTextController.clear();
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Wrap(
+                    children:
+                        userStacks.map((e) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: 10,
+                              bottom: 10,
+                            ),
+                            child: Chip(
+                              backgroundColor: CustomColor.gray_90,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              label: Text(
+                                e,
+                                style: CustomText.Label_Heavy_XS.copyWith(
+                                  color: CustomColor.gray_10,
+                                ),
+                              ),
+                              deleteIcon: Icon(Icons.close, size: 18),
+                              onDeleted: () {
+                                setState(() {
+                                  userStacks.remove(e);
+                                });
+                              },
+                            ),
+                          );
+                        }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
-      ),
-    );
-  }
-
-  TextField _nicknameInputField() {
-    return TextField(
-      textInputAction: TextInputAction.next,
-      onSubmitted: (value) {
-        // _updateIsPossible();
-      },
-      decoration: InputDecoration(
-        hintText: '사용 기술을 선택해주세요',
-        // helperText: '서비스내에서 사용할 별명을 입력해주세요.',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }

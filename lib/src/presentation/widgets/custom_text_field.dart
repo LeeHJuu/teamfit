@@ -8,7 +8,8 @@ class CustomTextField extends StatelessWidget {
   final int? minLine;
   final String? hintText;
   final String? helperText;
-  final void Function()? onchange;
+  final void Function()? onChange;
+  final void Function()? onSubmit;
 
   CustomTextField({
     required this.textController,
@@ -16,7 +17,8 @@ class CustomTextField extends StatelessWidget {
     this.minLine,
     this.hintText,
     this.helperText,
-    this.onchange,
+    this.onChange,
+    this.onSubmit,
   });
 
   @override
@@ -26,10 +28,9 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxLength, // 글자 수 제한
       minLines: minLine,
       maxLines: minLine ?? 1,
-      keyboardType: TextInputType.multiline,
+      // keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        // hintText: hintText,
-        // helperText: helperText,
         hint: Text(
           hintText ?? '',
           style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
@@ -48,8 +49,13 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       onChanged: (value) {
-        if (onchange != null) {
-          onchange!();
+        if (onChange != null) {
+          onChange!(); // onChange 호출
+        }
+      },
+      onSubmitted: (value) {
+        if (onSubmit != null) {
+          onSubmit!(); // onSubmit 호출
         }
       },
     );

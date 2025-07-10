@@ -250,7 +250,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
       textController: _nameTextController,
       hintText: 'ex) 냥냥이',
       helperText: '서비스내에서 사용할 별명을 입력해주세요.',
-      onchange: _updateIsPossible,
+      onChange: _updateIsPossible,
     );
   }
 
