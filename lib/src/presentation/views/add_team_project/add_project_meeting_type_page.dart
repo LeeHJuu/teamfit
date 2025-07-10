@@ -79,6 +79,7 @@ class _AddProjectMeetingTypePageState extends State<AddProjectMeetingTypePage> {
     return Expanded(
       child: CustomSelectButton(
         title: meetingType == 0 ? '오프라인' : '온라인',
+        textAlign: 1,
         isSelected: selectecMeetingType == meetingType,
         onPress: () {
           setState(() {

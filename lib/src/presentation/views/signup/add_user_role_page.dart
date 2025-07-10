@@ -89,6 +89,7 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
             // );
             return CustomSelectButton(
               title: userRoles[index],
+              textAlign: 1,
               isSelected: selectedRole == userRoles[index],
               onPress: () {
                 setState(() {

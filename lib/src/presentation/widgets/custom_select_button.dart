@@ -3,10 +3,12 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 
 class CustomSelectButton extends StatefulWidget {
   String title;
+  int textAlign;
   bool isSelected;
   void Function() onPress;
   CustomSelectButton({
     required this.title,
+    required this.textAlign,
     required this.isSelected,
     required this.onPress,
   });
@@ -38,7 +40,10 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        child: Text(widget.title),
+        child: Text(
+          widget.title,
+          textAlign: widget.textAlign == 0 ? TextAlign.start : TextAlign.center,
+        ),
       ),
     );
   }

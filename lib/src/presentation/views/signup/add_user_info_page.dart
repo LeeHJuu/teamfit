@@ -258,6 +258,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     return Expanded(
       child: CustomSelectButton(
         title: gender == 0 ? '남성' : '여성',
+        textAlign: 1,
         isSelected: selectedGender == gender,
         onPress: () {
           setState(() {

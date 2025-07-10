@@ -56,6 +56,7 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
           itemBuilder: (context, index) {
             return CustomSelectButton(
               title: userGoals[index],
+              textAlign: 0,
               isSelected: selectedGoal == userGoals[index],
               onPress: () {
                 setState(() {
