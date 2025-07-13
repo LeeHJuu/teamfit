@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
+import 'package:teamfit/src/presentation/views/personality_test/personality_text_alert.dart';
 import 'package:teamfit/src/presentation/views/project/project_page.dart';
 
 class HomeTapPage extends StatefulWidget {
@@ -17,10 +18,11 @@ class _HomeTapPageState extends State<HomeTapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [_carouselSlider(), _carouselNavigator()],
-    );
+    // return Column(
+    //   mainAxisAlignment: MainAxisAlignment.center,
+    //   children: [_carouselSlider(), _carouselNavigator()],
+    // );
+    return PersonalityTestAlert();
   }
 
   Row _carouselNavigator() {

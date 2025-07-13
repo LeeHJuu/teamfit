@@ -1,15 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/presentation/viewmodels/personality_test_view_model.dart';
 import 'package:teamfit/src/presentation/widgets/custom_progress_bar.dart';
 
-class PersonailtyTestPage extends StatelessWidget {
+class PersonailtyTestPage extends ConsumerWidget {
   @override
+  int count;
   String label;
-  PersonailtyTestPage(this.label);
+  PersonailtyTestPage(this.count, this.label);
 
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(personalityTestViewModel);
+    final vm = ref.watch(personalityTestViewModel.notifier);
+
+    final label = state.label;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -24,13 +31,18 @@ class PersonailtyTestPage extends StatelessWidget {
       body: Column(
         children: [
           CustomProgressBar(progress: 1),
-          TestStepTitle('Q1', '$label.question'.tr()),
+          TestStepTitle(
+            '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
+              args: [label.substring(label.lastIndexOf('.') + 1)],
+            ),
+            '$label.question'.tr(),
+          ),
           Column(
             children: [
-              TestAnswerButton(label: label, index: 1),
-              TestAnswerButton(label: label, index: 2),
-              TestAnswerButton(label: label, index: 3),
-              TestAnswerButton(label: label, index: 4),
+              TestAnswerButton(label: label, index: 'D', vm: vm),
+              TestAnswerButton(label: label, index: 'I', vm: vm),
+              TestAnswerButton(label: label, index: 'S', vm: vm),
+              TestAnswerButton(label: label, index: 'K', vm: vm),
             ],
           ),
         ],
@@ -40,10 +52,16 @@ class PersonailtyTestPage extends StatelessWidget {
 }
 
 class TestAnswerButton extends StatelessWidget {
-  const TestAnswerButton({super.key, required this.label, required this.index});
+  const TestAnswerButton({
+    super.key,
+    required this.label,
+    required this.index,
+    required this.vm,
+  });
 
   final String label;
-  final int index;
+  final String index;
+  final PersonalityTestViewModel vm;
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +80,7 @@ class TestAnswerButton extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return PersonailtyTestPage('personality_test.default.2');
-                    },
-                  ),
-                );
+                vm.nextQuestion(context, index); // index를 answer로 사용
               },
               child: Align(
                 alignment: Alignment.centerLeft,

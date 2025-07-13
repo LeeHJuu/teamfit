@@ -8,7 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:teamfit/firebase_options.dart';
 import 'package:teamfit/src/config/theme/theme.dart';
+import 'package:teamfit/src/presentation/views/home/home_page.dart';
+import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/home_tap_page.dart';
 import 'package:teamfit/src/presentation/views/login/login_page.dart';
+import 'package:teamfit/src/presentation/views/personality_test/personailty_test_page.dart';
 import 'package:teamfit/src/presentation/views/signup/service_agreement_page.dart';
 
 Future<void> main() async {
@@ -53,7 +56,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: theme,
-      home: LoginPage(),
+      // home: PersonailtyTestPage('personality_test.default.1'),
+      home: HomePage(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
     );
