@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
@@ -113,7 +114,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
         appBar: AppBar(),
         body: Column(
           children: [
-            SignInStepTitle('간단한 추가 정보를\n입력해주세요.'),
+            SignInStepTitle('signin_page.user_info.title'.tr()),
             _informationInputBox(),
             _nextStepButton(context),
           ],
@@ -124,7 +125,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
 
   NextStepBottomButton _nextStepButton(BuildContext context) {
     return NextStepBottomButton(
-      title: '다음',
+      title: 'button_text.next'.tr(),
       isPossible: _isPossible,
       moveNext: () {
         final loginVM = ref.read(loginViewModel.notifier);
@@ -147,9 +148,18 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     return Expanded(
       child: ListView(
         children: [
-          InputBoxItem(title: '닉네임', body: _nicknameInputField()),
-          InputBoxItem(title: '성별', body: _genderInputField()),
-          InputBoxItem(title: '생년월일', body: _birthdayInputField()),
+          InputBoxItem(
+            title: 'signin_page.user_info.nickname.title'.tr(),
+            body: _nicknameInputField(),
+          ),
+          InputBoxItem(
+            title: 'signin_page.user_info.gender.title'.tr(),
+            body: _genderInputField(),
+          ),
+          InputBoxItem(
+            title: 'signin_page.user_info.birth.title'.tr(),
+            body: _birthdayInputField(),
+          ),
         ],
       ),
     );
@@ -162,7 +172,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           children: [
             _buildDateInput(
               '2024',
-              '년',
+              'signin_page.user_info.birth.year'.tr(),
               _birthYearController,
               _birthYearFocusNode,
               _birthMonthFocusNode,
@@ -170,7 +180,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
             SizedBox(width: 12),
             _buildDateInput(
               '1',
-              '월',
+              'signin_page.user_info.birth.month'.tr(),
               _birthMonthController,
               _birthMonthFocusNode,
               _birthDayFocusNode,
@@ -178,7 +188,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
             SizedBox(width: 12),
             _buildDateInput(
               '1',
-              '일',
+              'signin_page.user_info.birth.date'.tr(),
               _birthDayController,
               _birthDayFocusNode,
               null,
@@ -248,8 +258,8 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   Widget _nicknameInputField() {
     return CustomTextField(
       textController: _nameTextController,
-      hintText: 'ex) 냥냥이',
-      helperText: '서비스내에서 사용할 별명을 입력해주세요.',
+      hintText: 'signin_page.user_info.nickname.hint_text'.tr(),
+      helperText: 'signin_page.user_info.nickname.helper_text'.tr(),
       onChange: _updateIsPossible,
     );
   }
@@ -257,7 +267,10 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   Widget _genderButton(int gender) {
     return Expanded(
       child: CustomSelectButton(
-        title: gender == 0 ? '남성' : '여성',
+        title:
+            gender == 0
+                ? 'signin_page.user_info.gender.male'.tr()
+                : 'signin_page.user_info.gender.female'.tr(),
         textAlign: 1,
         isSelected: selectedGender == gender,
         onPress: () {

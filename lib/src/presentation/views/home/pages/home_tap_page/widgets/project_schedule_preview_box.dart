@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_schedule_preview.dart';
 import 'package:teamfit/src/presentation/widgets/rounded_container.dart';
 
@@ -39,11 +40,14 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.black26,
+        // color: Colors.black26,
       ),
       child: Row(
         children: [
-          Text('home_page.schedule_count_message').tr(args: ['2']),
+          Text(
+            'home_page.schedule_count_message'.tr(args: ['2']),
+            style: CustomText.Label_Light_M,
+          ),
           Spacer(),
           Icon(Icons.arrow_forward_ios),
         ],

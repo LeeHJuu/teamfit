@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
@@ -14,7 +15,7 @@ class AddUserGoalPage extends ConsumerStatefulWidget {
 class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
   bool _isPossible = false;
 
-  List<String> userGoals = ['포트폴리오 제작', '사이드 프로젝트 진행', '공모전', '해커톤'];
+  List<String> userGoals = 'signin_page.user_goal.items'.tr().split(',');
   String selectedGoal = '';
 
   @override
@@ -23,11 +24,11 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('지금 가장 집중하고 싶은\n활동은 무엇인가요?'),
+          SignInStepTitle('signin_page.user_goal.title'.tr()),
           SizedBox(height: 50),
           _userGoalTagsBox(),
           NextStepBottomButton(
-            title: '다음',
+            title: 'button_text.next'.tr(),
             isPossible: _isPossible,
             moveNext: () {
               Navigator.push(

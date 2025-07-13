@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
@@ -29,10 +30,10 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('해당 직무에서의\n경력을 알려주세요.'),
+          SignInStepTitle('signin_page.user_stack.title'.tr()),
           _infomationInputBox(),
           NextStepBottomButton(
-            title: '다음',
+            title: 'button_text.next'.tr(),
             isPossible: _isPossible,
             moveNext: () {
               final vm = ref.read(loginViewModel.notifier);
@@ -53,17 +54,10 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
       child: ListView(
         children: [
           InputBoxItem(
-            title: '경력',
+            title: 'signin_page.user_stack.career.title'.tr(),
             body: CustomDropdownMenu(
-              title: '경력을 선택해주세요',
-              items: [
-                '학생이에요',
-                '1년 차 미만',
-                '1년 차 이상 ~ 3년 차 이하',
-                '4년 차 이상 ~ 6년 차 이하',
-                '7년 차 이상 ~ 9년 차 이하',
-                '10년 차 이상',
-              ],
+              title: 'signin_page.user_stack.career.non_select'.tr(),
+              items: 'signin_page.user_stack.career.items'.tr().split(","),
               selectedItem: selectedCareer,
               onSelect: (value) {
                 setState(() {
@@ -74,12 +68,12 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
             ),
           ),
           InputBoxItem(
-            title: '사용기술',
+            title: 'signin_page.user_stack.stack.title'.tr(),
             body: Column(
               children: [
                 CustomTextField(
                   textController: _userStackTextController,
-                  hintText: '사용 기술을 입력해 주세요',
+                  hintText: 'signin_page.user_stack.stack.hint_text'.tr(),
                   onSubmit: () {
                     setState(() {
                       userStacks.add(_userStackTextController.text.trim());

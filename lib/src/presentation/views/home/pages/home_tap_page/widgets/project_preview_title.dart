@@ -11,11 +11,14 @@ class ProjectPreviewTitle extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('무적팀', style: CustomText.Title_S.copyWith(color: Colors.white)),
+          Text(
+            '무적팀',
+            style: CustomText.Subtitle_M.copyWith(color: Colors.white),
+          ),
           SizedBox(width: 20),
           Text(
             'D-30',
-            style: CustomText.Body_Light_M.copyWith(color: Colors.white),
+            style: CustomText.Body_Heavy_M.copyWith(color: Colors.white),
           ),
           Spacer(),
           GestureDetector(

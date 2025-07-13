@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_info_page.dart';
@@ -39,11 +40,11 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('서비스 이용 동의를\n선택해주세요.'),
+          SignInStepTitle('signin_page.service_agreement.title'.tr()),
           _aggrementBox(),
           Spacer(),
           NextStepBottomButton(
-            title: '다음',
+            title: 'button_text.service_agreement'.tr(),
             isPossible: _isPossible,
             moveNext: () {
               Navigator.push(
@@ -60,45 +61,65 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
   Widget _aggrementBox() {
     return Column(
       children: [
-        _aggrementRow('필수 약관 전체 동의', _isAllChecked, (value) {
-          setState(() {
-            _isAllChecked = value!;
-            _isFirstChecked = value;
-            _isSecondChecked = value;
-            _isThirdChecked = value;
-            _isFourthChecked = value;
-            _updateIsPossible();
-          });
-        }),
+        _aggrementRow(
+          'signin_page.service_agreement.all_agree'.tr(),
+          _isAllChecked,
+          (value) {
+            setState(() {
+              _isAllChecked = value!;
+              _isFirstChecked = value;
+              _isSecondChecked = value;
+              _isThirdChecked = value;
+              _isFourthChecked = value;
+              _updateIsPossible();
+            });
+          },
+        ),
         Divider(),
-        _aggrementRow('만 14세 이상입니다.', _isFirstChecked, (value) {
-          setState(() {
-            _isFirstChecked = value!;
-            _updateIsPossible();
-            _updateAllChecked();
-          });
-        }),
-        _aggrementRow('[필수] 서비스 이용 약관', _isSecondChecked, (value) {
-          setState(() {
-            _isSecondChecked = value!;
-            _updateIsPossible();
-            _updateAllChecked();
-          });
-        }),
-        _aggrementRow('[필수] 개인정보 처리 방침', _isThirdChecked, (value) {
-          setState(() {
-            _isThirdChecked = value!;
-            _updateIsPossible();
-            _updateAllChecked();
-          });
-        }),
-        _aggrementRow('[선택] 마케팅 정보 수신 동의', _isFourthChecked, (value) {
-          setState(() {
-            _isFourthChecked = value!;
-            _updateIsPossible();
-            _updateAllChecked();
-          });
-        }),
+        _aggrementRow(
+          'signin_page.service_agreement.old'.tr(),
+          _isFirstChecked,
+          (value) {
+            setState(() {
+              _isFirstChecked = value!;
+              _updateIsPossible();
+              _updateAllChecked();
+            });
+          },
+        ),
+        _aggrementRow(
+          'signin_page.service_agreement.service'.tr(),
+          _isSecondChecked,
+          (value) {
+            setState(() {
+              _isSecondChecked = value!;
+              _updateIsPossible();
+              _updateAllChecked();
+            });
+          },
+        ),
+        _aggrementRow(
+          'signin_page.service_agreement.personal_info'.tr(),
+          _isThirdChecked,
+          (value) {
+            setState(() {
+              _isThirdChecked = value!;
+              _updateIsPossible();
+              _updateAllChecked();
+            });
+          },
+        ),
+        _aggrementRow(
+          'signin_page.service_agreement.marketing'.tr(),
+          _isFourthChecked,
+          (value) {
+            setState(() {
+              _isFourthChecked = value!;
+              _updateIsPossible();
+              _updateAllChecked();
+            });
+          },
+        ),
       ],
     );
   }

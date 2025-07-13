@@ -30,7 +30,7 @@ class SocialLoginButton extends StatelessWidget {
             onPressed: loginFunction,
             style: ElevatedButton.styleFrom(backgroundColor: background),
             child: Text(
-              'login.button_text'.tr(args: [title]),
+              'button_text.login'.tr(args: [title]),
               style: CustomText.Subtitle_M.copyWith(color: textColor),
             ),
           ),

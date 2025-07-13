@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
@@ -14,33 +15,19 @@ class AddUserRolePage extends ConsumerStatefulWidget {
 class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
   bool _isPossible = false;
 
-  List<String> userRoles = [
-    '개발',
-    '마케팅/광고',
-    '경영/비즈니스',
-    '디자인',
-    '이커머스/리테일',
-    'HR',
-    '의료/제약/바이오',
-    '금융',
-    '미디어',
-    '게임 기획/개발',
-    '교육',
-    '법률/특허',
-  ];
-
   String selectedRole = '';
 
   @override
   Widget build(BuildContext context) {
+    List<String> userRoles = 'signin_page.user_role.items'.tr().split(',');
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('나의 직무 또는 전공을\n선택해주세요.'),
-          _userRoleTagsBox(),
+          SignInStepTitle('signin_page.user_role.title'.tr()),
+          _userRoleTagsBox(userRoles),
           NextStepBottomButton(
-            title: '다음',
+            title: 'button_text.next'.tr(),
             isPossible: _isPossible,
             moveNext: () {
               Navigator.push(
@@ -54,7 +41,7 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
     );
   }
 
-  Widget _userRoleTagsBox() {
+  Widget _userRoleTagsBox(List<String> items) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -65,7 +52,7 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
             crossAxisSpacing: 10, // 좌우 간격
             mainAxisExtent: 50,
           ),
-          itemCount: userRoles.length, // 총 아이템 갯수
+          itemCount: items.length, // 총 아이템 갯수
           itemBuilder: (context, index) {
             // return GestureDetector(
             //   onTap: () {
@@ -88,12 +75,12 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
             //   ),
             // );
             return CustomSelectButton(
-              title: userRoles[index],
+              title: items[index],
               textAlign: 1,
-              isSelected: selectedRole == userRoles[index],
+              isSelected: selectedRole == items[index],
               onPress: () {
                 setState(() {
-                  selectedRole = userRoles[index];
+                  selectedRole = items[index];
                   _isPossible = selectedRole.isNotEmpty;
                 });
                 final vm = ref.read(loginViewModel.notifier);

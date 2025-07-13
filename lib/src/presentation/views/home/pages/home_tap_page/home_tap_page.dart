@@ -18,11 +18,11 @@ class _HomeTapPageState extends State<HomeTapPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Column(
-    //   mainAxisAlignment: MainAxisAlignment.center,
-    //   children: [_carouselSlider(), _carouselNavigator()],
-    // );
-    return PersonalityTestAlert();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [_carouselSlider(), _carouselNavigator()],
+    );
+    // return PersonalityTestAlert();
   }
 
   Row _carouselNavigator() {

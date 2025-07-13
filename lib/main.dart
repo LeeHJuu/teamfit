@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: theme,
       // home: PersonailtyTestPage('personality_test.default.1'),
-      home: HomePage(),
+      home: LoginPage(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
     );
