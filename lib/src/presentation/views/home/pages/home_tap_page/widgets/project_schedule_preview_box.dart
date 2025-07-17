@@ -23,7 +23,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {},
-                child: Text('home_page.record_work'.tr()),
+                child: Text('button_text.record_work'.tr()),
               ),
             ),
           ),

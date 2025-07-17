@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class TestStepTitle extends StatelessWidget {
@@ -16,14 +15,8 @@ class TestStepTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            sub,
-            style: CustomText.Title_S.copyWith(color: CustomColor.gray_10),
-          ),
-          Text(
-            title,
-            style: CustomText.Headline_S.copyWith(color: CustomColor.gray_10),
-          ),
+          Text(sub, style: CustomText.Title_S),
+          Text(title, style: CustomText.Headline_S),
         ],
       ),
     );

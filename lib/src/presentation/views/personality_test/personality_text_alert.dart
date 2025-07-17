@@ -25,7 +25,7 @@ class PersonalityTestAlert extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
                 'personality_test.alert.title'.tr(),
-                style: CustomText.Title_M.copyWith(color: CustomColor.gray_10),
+                style: CustomText.Title_M,
               ),
             ),
             Padding(
@@ -33,9 +33,7 @@ class PersonalityTestAlert extends StatelessWidget {
               child: Text(
                 'personality_test.alert.description'.tr(args: ['냥냥']),
                 textAlign: TextAlign.center,
-                style: CustomText.Body_Light_M.copyWith(
-                  color: CustomColor.gray_10,
-                ),
+                style: CustomText.Body_Light_M,
               ),
             ),
             SizedBox(height: 200),
