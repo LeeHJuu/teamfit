@@ -45,11 +45,7 @@ class PersonalityTestAlert extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:
-                          (context) => PersonailtyTestPage(
-                            1,
-                            'personality_test.default.1',
-                          ),
+                      builder: (context) => PersonailtyTestPage(),
                     ),
                   );
                 },

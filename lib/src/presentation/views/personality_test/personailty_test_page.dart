@@ -8,44 +8,47 @@ import 'package:teamfit/src/presentation/widgets/custom_progress_bar.dart';
 
 class PersonailtyTestPage extends ConsumerWidget {
   @override
-  int count;
-  String label;
-  PersonailtyTestPage(this.count, this.label);
-
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(personalityTestViewModel);
     final vm = ref.watch(personalityTestViewModel.notifier);
 
+    print(state.result);
     final label = state.label;
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.popUntil(context, ModalRoute.withName('/'));
-            },
-            icon: Icon(Icons.cancel),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          CustomProgressBar(progress: 1),
-          TestStepTitle(
-            '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
-              args: [label.substring(label.lastIndexOf('.') + 1)],
+    return PopScope(
+      onPopInvoked: (didPop) {
+        vm.removeLastResponse();
+        return;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              },
+              icon: Icon(Icons.cancel),
             ),
-            '$label.question'.tr(),
-          ),
-          Column(
-            children: [
-              TestAnswerButton(label: label, index: 'D', vm: vm),
-              TestAnswerButton(label: label, index: 'I', vm: vm),
-              TestAnswerButton(label: label, index: 'S', vm: vm),
-              TestAnswerButton(label: label, index: 'K', vm: vm),
-            ],
-          ),
-        ],
+          ],
+        ),
+        body: Column(
+          children: [
+            CustomProgressBar(progress: 1),
+            TestStepTitle(
+              '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
+                args: [label.substring(label.lastIndexOf('.') + 1)],
+              ),
+              '$label.question'.tr(),
+            ),
+            Column(
+              children: [
+                TestAnswerButton(label: label, index: 'D', vm: vm),
+                TestAnswerButton(label: label, index: 'I', vm: vm),
+                TestAnswerButton(label: label, index: 'S', vm: vm),
+                TestAnswerButton(label: label, index: 'K', vm: vm),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
