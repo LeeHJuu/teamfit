@@ -12,7 +12,6 @@ class PersonailtyTestPage extends ConsumerWidget {
     final state = ref.watch(personalityTestViewModel);
     final vm = ref.watch(personalityTestViewModel.notifier);
 
-    print(state.result);
     final label = state.label;
     return PopScope(
       onPopInvoked: (didPop) {
@@ -32,11 +31,15 @@ class PersonailtyTestPage extends ConsumerWidget {
         ),
         body: Column(
           children: [
-            CustomProgressBar(progress: 1),
+            CustomProgressBar(
+              progress: state.index.toDouble() / state.count.toDouble(),
+            ),
             TestStepTitle(
-              '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
-                args: [label.substring(label.lastIndexOf('.') + 1)],
-              ),
+              label.contains('default')
+                  ? '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
+                    args: [label.substring(label.lastIndexOf('.') + 1)],
+                  )
+                  : 'ss',
               '$label.question'.tr(),
             ),
             Column(

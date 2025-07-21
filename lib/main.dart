@@ -56,10 +56,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: theme,
-      // home: PersonailtyTestPage('personality_test.default.1'),
-      home: LoginPage(),
+      home: _startPage(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
     );
+  }
+
+  Widget _startPage() {
+    // 로그인상태 확인
+    final isLogined = false;
+    if (isLogined) {
+      return HomePage();
+    } else {
+      return LoginPage();
+    }
   }
 }
