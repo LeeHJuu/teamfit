@@ -65,18 +65,16 @@ class ProjectPreviewBox extends StatelessWidget {
 
   Positioned _teamMemberPreview() {
     return Positioned(
-      // top: 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TeamMemberProgressIcon(),
-            TeamMemberProgressIcon(),
-            TeamMemberProgressIcon(),
-            TeamMemberProgressIcon(),
-            TeamMemberProgressIcon(),
-          ],
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: 5, // 자식 위젯의 수에 따라 조정하세요.
+          itemBuilder: (context, index) {
+            return TeamMemberProgressIcon();
+          },
+          separatorBuilder: (context, index) => SizedBox(width: 5),
         ),
       ),
     );

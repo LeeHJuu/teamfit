@@ -43,13 +43,8 @@ class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
     String newLabel = determineLabel(updatedResult, nextIndex);
 
     if (newLabel.length <= 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PersonalityResultPage(newLabel),
-        ),
-      );
-      return; // 페이지 이동 후 더 이상 진행하지 않음
+      finishTestAndSaveResult(context, newLabel);
+      return;
     }
 
     int updatedCount = state.count;
@@ -69,6 +64,15 @@ class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PersonailtyTestPage()),
+    );
+  }
+
+  void finishTestAndSaveResult(BuildContext context, String newLabel) {
+    // TODO:: userDataSource 생성 후 유저 정보 갱신
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PersonalityResultPage(newLabel)),
     );
   }
 

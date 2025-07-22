@@ -12,6 +12,7 @@ class UserDetailData {
   String goalTag;
   String career;
   List<String> stackTags;
+  String personalityType;
 
   UserDetailData({
     required this.gender,
@@ -24,6 +25,7 @@ class UserDetailData {
     required this.goalTag,
     required this.career,
     required this.stackTags,
+    required this.personalityType,
   });
 
   factory UserDetailData.fromDto(UserDetailDataDto dto) {
@@ -38,6 +40,7 @@ class UserDetailData {
       goalTag: dto.goalTag,
       career: dto.career,
       stackTags: dto.stackTags,
+      personalityType: dto.personalityType,
     );
   }
 
@@ -53,6 +56,7 @@ class UserDetailData {
       goalTag: goalTag,
       career: career,
       stackTags: stackTags,
+      personalityType: personalityType,
     );
   }
 
@@ -66,6 +70,7 @@ class UserDetailData {
     String? roleTag,
     String? goalTag,
     String? career,
+    String? personalityType,
     List<String>? stackTags,
   }) {
     return UserDetailData(
@@ -78,6 +83,7 @@ class UserDetailData {
       roleTag: roleTag ?? this.roleTag,
       goalTag: goalTag ?? this.goalTag,
       career: career ?? this.career,
+      personalityType: personalityType ?? this.personalityType,
       stackTags: stackTags ?? List.from(this.stackTags),
     );
   }

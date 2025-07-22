@@ -57,6 +57,7 @@ class UserData {
     String? roleTag,
     String? goalTag,
     String? career,
+    String? personalityType,
     List<String>? stackTags,
   }) {
     return UserData(
@@ -78,6 +79,7 @@ class UserData {
                 roleTag: roleTag,
                 goalTag: goalTag,
                 career: career,
+                personalityType: personalityType,
                 stackTags: stackTags,
               )
               : UserDetailData(
@@ -90,6 +92,7 @@ class UserData {
                 roleTag: roleTag ?? '',
                 goalTag: goalTag ?? '',
                 career: career ?? '',
+                personalityType: personalityType ?? '',
                 stackTags: stackTags ?? [],
               )),
     );

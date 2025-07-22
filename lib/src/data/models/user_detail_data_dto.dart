@@ -3,19 +3,19 @@ import 'package:teamfit/src/data/models/user_badge_dto.dart';
 class UserDetailDataDto {
   int gender;
   DateTime birthDate;
-  List<UserBadgeDto> badges;
   double mannerTemperature;
   double attendanceRate;
   double completionRate;
   String roleTag;
   String goalTag;
   String career;
+  String personalityType;
   List<String> stackTags;
+  List<UserBadgeDto> badges;
 
   UserDetailDataDto({
     required this.gender,
     required this.birthDate,
-    required this.badges,
     required this.mannerTemperature,
     required this.attendanceRate,
     required this.completionRate,
@@ -23,14 +23,14 @@ class UserDetailDataDto {
     required this.goalTag,
     required this.career,
     required this.stackTags,
+    required this.personalityType,
+    required this.badges,
   });
 
   factory UserDetailDataDto.fromJson(Map<String, dynamic> json) {
     return UserDetailDataDto(
-      badges:
-          (json['badges'] as List<dynamic>? ?? [])
-              .map((e) => UserBadgeDto.fromJson(e))
-              .toList(),
+      gender: json['gender'],
+      birthDate: DateTime.parse(json['birthDate']),
       mannerTemperature: json['mannerTemperature'] ?? 0.0,
       attendanceRate: json['attendanceRate'] ?? 0.0,
       completionRate: json['completionRate'] ?? 0.0,
@@ -38,8 +38,11 @@ class UserDetailDataDto {
       goalTag: json['goalTag'] ?? '',
       career: json['career'] ?? '',
       stackTags: List<String>.from(json['stackTags'] ?? []),
-      gender: json['gender'],
-      birthDate: DateTime.parse(json['birthDate']),
+      personalityType: json['personailtyType'] ?? '',
+      badges:
+          (json['badges'] as List<dynamic>? ?? [])
+              .map((e) => UserBadgeDto.fromJson(e))
+              .toList(),
     );
   }
 
@@ -47,7 +50,6 @@ class UserDetailDataDto {
     return {
       'gender': gender,
       'birthDate': birthDate.toIso8601String(),
-      'badges': badges.map((e) => e.toJson()).toList(),
       'mannerTemperature': mannerTemperature,
       'attendanceRate': attendanceRate,
       'completionRate': completionRate,
@@ -55,6 +57,8 @@ class UserDetailDataDto {
       'goalTag': goalTag,
       'career': career,
       'stackTags': stackTags,
+      'personailtyType': personalityType,
+      'badges': badges.map((e) => e.toJson()).toList(),
     };
   }
 }
