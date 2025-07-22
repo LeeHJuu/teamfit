@@ -32,7 +32,7 @@ class PersonailtyTestPage extends ConsumerWidget {
         body: Column(
           children: [
             CustomProgressBar(
-              progress: state.index.toDouble() / state.count.toDouble(),
+              progress: (state.index - 1).toDouble() / state.count.toDouble(),
             ),
             TestStepTitle(
               label.contains('default')

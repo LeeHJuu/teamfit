@@ -93,7 +93,10 @@ class LoginButtonColumn extends ConsumerWidget {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+          settings: RouteSettings(name: '/'),
+        ),
       );
     }
   }

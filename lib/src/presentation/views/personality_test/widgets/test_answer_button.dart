@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/personality_test_view_model.dart';
 
@@ -20,7 +21,7 @@ class TestAnswerButton extends StatefulWidget {
 }
 
 class _TestAnswerButtonState extends State<TestAnswerButton> {
-  Color buttonColor = Colors.transparent;
+  Color buttonColor = CustomColor.gray_95;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,9 @@ class _TestAnswerButtonState extends State<TestAnswerButton> {
                 });
 
                 Future.delayed(const Duration(milliseconds: 300), () {
+                  setState(() {
+                    buttonColor = CustomColor.gray_95;
+                  });
                   widget.vm.nextQuestion(context, widget.index);
                 });
               },

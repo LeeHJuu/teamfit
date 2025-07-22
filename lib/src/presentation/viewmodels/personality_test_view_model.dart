@@ -42,10 +42,12 @@ class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
     int nextIndex = state.index + 1;
     String newLabel = determineLabel(updatedResult, nextIndex);
 
-    if (newLabel == '') {
+    if (newLabel.length <= 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PersonalityResultPage()),
+        MaterialPageRoute(
+          builder: (context) => PersonalityResultPage(newLabel),
+        ),
       );
       return; // 페이지 이동 후 더 이상 진행하지 않음
     }
@@ -102,7 +104,7 @@ class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
         }
       } else {
         // 유일한 최대값인 경우
-        return '';
+        return keysWithMaxValue.first;
       }
     } else {
       return 'personality_test.default.$nextIndex';
