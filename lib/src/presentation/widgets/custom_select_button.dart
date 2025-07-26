@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class CustomSelectButton extends StatefulWidget {
   String title;
@@ -40,9 +41,11 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        child: Text(
-          widget.title,
-          textAlign: widget.textAlign == 0 ? TextAlign.start : TextAlign.center,
+        child: Row(
+          children: [
+            Text(widget.title, style: CustomText.Label_Heavy_S),
+            widget.textAlign == 0 ? Spacer() : SizedBox(),
+          ],
         ),
       ),
     );

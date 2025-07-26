@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_info_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
@@ -43,15 +44,18 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
           SignInStepTitle('signin_page.service_agreement.title'.tr()),
           _aggrementBox(),
           Spacer(),
-          NextStepBottomButton(
-            title: 'button_text.service_agreement'.tr(),
-            isPossible: _isPossible,
-            moveNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddUserInfoPage()),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: NextStepBottomButton(
+              title: 'button_text.service_agreement'.tr(),
+              isPossible: _isPossible,
+              moveNext: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddUserInfoPage()),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -138,7 +142,10 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
         style: BorderStyle.solid,
       ),
 
-      title: Text(title),
+      title: Text(
+        title,
+        style: CustomText.Subtitle_M.copyWith(color: CustomColor.gray_30),
+      ),
       activeColor: CustomColor.primary_60,
       checkColor: Colors.white,
       controlAffinity: ListTileControlAffinity.leading,

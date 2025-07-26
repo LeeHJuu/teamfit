@@ -26,15 +26,18 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
         children: [
           SignInStepTitle('signin_page.user_role.title'.tr()),
           _userRoleTagsBox(userRoles),
-          NextStepBottomButton(
-            title: 'button_text.next'.tr(),
-            isPossible: _isPossible,
-            moveNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddUserStackPage()),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: NextStepBottomButton(
+              title: 'button_text.next'.tr(),
+              isPossible: _isPossible,
+              moveNext: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddUserStackPage()),
+                );
+              },
+            ),
           ),
         ],
       ),

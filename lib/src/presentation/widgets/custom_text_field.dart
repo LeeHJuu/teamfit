@@ -28,7 +28,6 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxLength, // 글자 수 제한
       minLines: minLine,
       maxLines: minLine ?? 1,
-      // keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         hint: Text(
@@ -40,11 +39,21 @@ class CustomTextField extends StatelessWidget {
           style: CustomText.Body_Light_XS.copyWith(color: CustomColor.gray_50),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: CustomColor.gray_90),
+          borderSide: BorderSide(
+            color:
+                textController.text.isEmpty
+                    ? CustomColor.gray_80
+                    : CustomColor.gray_10,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: CustomColor.primary_60),
+          borderSide: BorderSide(
+            color:
+                textController.text.isEmpty
+                    ? CustomColor.gray_80
+                    : CustomColor.primary_60,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
       ),

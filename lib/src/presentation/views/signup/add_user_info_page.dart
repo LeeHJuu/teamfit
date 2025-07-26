@@ -116,7 +116,10 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           children: [
             SignInStepTitle('signin_page.user_info.title'.tr()),
             _informationInputBox(),
-            _nextStepButton(context),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: _nextStepButton(context),
+            ),
           ],
         ),
       ),
@@ -172,26 +175,39 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           children: [
             _buildDateInput(
               '2024',
-              'signin_page.user_info.birth.year'.tr(),
               _birthYearController,
               _birthYearFocusNode,
               _birthMonthFocusNode,
             ),
-            SizedBox(width: 12),
-            _buildDateInput(
-              '1',
-              'signin_page.user_info.birth.month'.tr(),
-              _birthMonthController,
-              _birthMonthFocusNode,
-              _birthDayFocusNode,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'signin_page.user_info.birth.year'.tr(),
+                style: CustomText.Label_Heavy_S,
+              ),
             ),
             SizedBox(width: 12),
             _buildDateInput(
               '1',
-              'signin_page.user_info.birth.date'.tr(),
-              _birthDayController,
+              _birthMonthController,
+              _birthMonthFocusNode,
               _birthDayFocusNode,
-              null,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'signin_page.user_info.birth.month'.tr(),
+                style: CustomText.Label_Heavy_S,
+              ),
+            ),
+            SizedBox(width: 12),
+            _buildDateInput('1', _birthDayController, _birthDayFocusNode, null),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'signin_page.user_info.birth.date'.tr(),
+                style: CustomText.Label_Heavy_S,
+              ),
             ),
           ],
         ),
@@ -205,7 +221,6 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
 
   Widget _buildDateInput(
     String hint,
-    String unit,
     TextEditingController controller,
     FocusNode focusNode,
     FocusNode? nextFocusNode,
@@ -229,15 +244,15 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
             style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
             textAlign: TextAlign.center,
           ),
-          suffix: Text(
-            unit,
-            style: CustomText.Label_Heavy_S.copyWith(
-              color: CustomColor.gray_30,
-            ),
-          ),
+
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: CustomColor.gray_90),
+            borderSide: BorderSide(
+              color:
+                  controller.text.isEmpty
+                      ? CustomColor.gray_80
+                      : CustomColor.gray_10,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(

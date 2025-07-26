@@ -4,6 +4,10 @@ google-services.json
 
 ios/Config.xcconfig
 
+
+assets/images/
+assets/translations/
+
 # Miscellaneous
 *.class
 *.log

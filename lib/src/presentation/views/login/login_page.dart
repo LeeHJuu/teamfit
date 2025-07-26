@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
@@ -14,9 +15,20 @@ class LoginPage extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 50),
-            _appTitleColumn(),
-            Spacer(),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 50),
+                  _appTitleColumn(),
+                  SvgPicture.asset(
+                    'assets/images/main_img-optimized.svg',
+                    width: 300,
+                    height: 300,
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: LoginButtonColumn(loginVM: loginVM),

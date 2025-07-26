@@ -27,15 +27,18 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
           SignInStepTitle('signin_page.user_goal.title'.tr()),
           SizedBox(height: 50),
           _userGoalTagsBox(),
-          NextStepBottomButton(
-            title: 'button_text.next'.tr(),
-            isPossible: _isPossible,
-            moveNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WelcomePage()),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: NextStepBottomButton(
+              title: 'button_text.next'.tr(),
+              isPossible: _isPossible,
+              moveNext: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WelcomePage()),
+                );
+              },
+            ),
           ),
         ],
       ),

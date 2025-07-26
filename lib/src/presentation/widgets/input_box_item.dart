@@ -14,7 +14,7 @@ class InputBoxItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: CustomText.Subtitle_M),
+          Text(title, style: CustomText.Label_Light_S),
           SizedBox(height: 16),
           body,
         ],
