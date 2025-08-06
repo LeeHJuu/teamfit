@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/login/widgets/social_login_button.dart';
@@ -45,7 +46,7 @@ class LoginButtonColumn extends ConsumerWidget {
     return SocialLoginButton(
       title: 'Apple',
       icon: Icons.message,
-      background: Colors.black,
+      background: CustomColor.gray_20,
       textColor: Colors.white,
       loginFunction: () async {
         final userCredential = await loginVM.loginWighApple();
@@ -64,7 +65,7 @@ class LoginButtonColumn extends ConsumerWidget {
     return SocialLoginButton(
       title: 'Kakao',
       icon: Icons.message,
-      background: Colors.yellow,
+      background: Color(0xffFCEC4E),
       textColor: Colors.black,
       loginFunction: () async {
         final userCredential = await loginVM.signInWithGoogle();

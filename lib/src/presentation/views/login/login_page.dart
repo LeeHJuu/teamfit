@@ -20,22 +20,32 @@ class LoginPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 50),
-                  _appTitleColumn(),
+                  // _appTitleColumn(),
                   SvgPicture.asset(
-                    'assets/images/main_img-optimized.svg',
-                    width: 300,
-                    height: 300,
+                    'assets/images/main_title.svg',
+                    // width: 300,
+                    // height: 300,
+                  ),
+                  // SvgPicture.asset(
+                  //   'assets/images/main_img.svg',
+                  //   width: 300,
+                  //   height: 300,
+                  // ),
+                  Image.asset(
+                    'assets/images/main_img.png',
+                    width: 280,
+                    height: 280,
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: LoginButtonColumn(loginVM: loginVM),
             ),
             _guestLoginButton(context),
 
-            SizedBox(height: 40),
+            SizedBox(height: 20),
           ],
         ),
       ),

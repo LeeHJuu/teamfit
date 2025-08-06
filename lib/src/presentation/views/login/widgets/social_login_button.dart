@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class SocialLoginButton extends StatelessWidget {
@@ -25,10 +26,16 @@ class SocialLoginButton extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-          height: 64,
-          child: ElevatedButton(
+          height: 72,
+          child: FilledButton(
             onPressed: loginFunction,
-            style: ElevatedButton.styleFrom(backgroundColor: background),
+            style: FilledButton.styleFrom(
+              backgroundColor: background,
+              side:
+                  background == Colors.white
+                      ? BorderSide(color: CustomColor.gray_90)
+                      : null,
+            ),
             child: Text(
               'button_text.login'.tr(args: [title]),
               style: CustomText.Subtitle_M.copyWith(color: textColor),
@@ -37,7 +44,7 @@ class SocialLoginButton extends StatelessWidget {
         ),
         Positioned(
           left: 60,
-          child: SizedBox(height: 64, child: Icon(icon, color: textColor)),
+          child: SizedBox(height: 72, child: Icon(icon, color: textColor)),
         ),
       ],
     );

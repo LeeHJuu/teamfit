@@ -13,7 +13,11 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
     return AppBar(
       title: Row(
         children: [
-          Text('로고'),
+          // Text('로고'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/images/app_logo.png', width: 50),
+          ),
           state == 0
               ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
