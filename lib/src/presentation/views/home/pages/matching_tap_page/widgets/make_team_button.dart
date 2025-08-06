@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/presentation/views/add_team_project/add_project_info_page.dart';
+import 'package:teamfit/src/presentation/views/add_team_project/add_project_goal_page.dart';
 
 class MakeTeamButton extends StatelessWidget {
   const MakeTeamButton({super.key});
@@ -14,7 +14,7 @@ class MakeTeamButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddProjectInfoPage()),
+            MaterialPageRoute(builder: (context) => AddProjectGoalPage()),
           );
         },
         style: FilledButton.styleFrom(

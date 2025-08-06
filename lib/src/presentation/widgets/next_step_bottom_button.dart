@@ -16,7 +16,7 @@ class NextStepBottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
       child: SizedBox(
         height: 60,
         width: double.infinity,

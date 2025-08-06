@@ -14,7 +14,6 @@ class AddUserRolePage extends ConsumerStatefulWidget {
 
 class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
   bool _isPossible = false;
-
   String selectedRole = '';
 
   @override
@@ -26,18 +25,15 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
         children: [
           SignInStepTitle('signin_page.user_role.title'.tr()),
           _userRoleTagsBox(userRoles),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: NextStepBottomButton(
-              title: 'button_text.next'.tr(),
-              isPossible: _isPossible,
-              moveNext: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddUserStackPage()),
-                );
-              },
-            ),
+          NextStepBottomButton(
+            title: 'button_text.next'.tr(),
+            isPossible: _isPossible,
+            moveNext: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddUserStackPage()),
+              );
+            },
           ),
         ],
       ),

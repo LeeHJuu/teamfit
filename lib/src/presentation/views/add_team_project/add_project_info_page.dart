@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_meeting_type_page.dart';
-import 'package:teamfit/src/presentation/views/add_team_project/widgets/add_project_step_title.dart';
+import 'package:teamfit/src/presentation/views/personality_test/widgets/test_step_title.dart';
+import 'package:teamfit/src/presentation/widgets/custom_progress_bar.dart';
 import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
 import 'package:teamfit/src/presentation/widgets/custom_scroll_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
@@ -48,27 +48,32 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('팀 만들기', style: CustomText.Title_S)),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              controller: chatInputScrollController,
-              children: [
-                AddProjectStepTitle(
-                  nowStep: '01',
-                  allStep: '/03',
-                  title: '프로젝트에 대해 소개해주세요.',
-                ),
-                SizedBox(height: 50),
+    final state = ref.watch(addTeamProjectViewModel);
 
-                _projectInfoInputColumn(),
-              ],
+    return PopScope(
+      onPopInvoked: (didPop) {
+        ref.read(addTeamProjectViewModel.notifier).goBack();
+        return;
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: [
+            CustomProgressBar(progress: state.progress),
+            Expanded(
+              child: ListView(
+                controller: chatInputScrollController,
+                children: [
+                  TestStepTitle('02', '프로젝트에 대해 소개해주세요.'),
+                  SizedBox(height: 50),
+
+                  _projectInfoInputColumn(),
+                ],
+              ),
             ),
-          ),
-          _nextStepButton(context),
-        ],
+            _nextStepButton(context),
+          ],
+        ),
       ),
     );
   }
@@ -80,6 +85,7 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       moveNext: () {
         final vm = ref.read(addTeamProjectViewModel.notifier);
         vm.setProjectInfo(_images, _titleController, _descriptionController);
+        vm.nextStep(context);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AddProjectMeetingTypePage()),

@@ -43,8 +43,24 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
         ),
         child: Row(
           children: [
-            Text(widget.title, style: CustomText.Label_Heavy_S),
-            widget.textAlign == 0 ? Spacer() : SizedBox(),
+            if (widget.textAlign == 0) ...[
+              Text(
+                widget.title,
+                style: CustomText.Label_Heavy_S,
+                textAlign: TextAlign.left,
+              ),
+              Spacer(),
+            ] else ...[
+              Expanded(
+                child: Center(
+                  child: Text(
+                    widget.title,
+                    style: CustomText.Label_Heavy_S,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),

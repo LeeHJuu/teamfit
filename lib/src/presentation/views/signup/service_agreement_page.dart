@@ -44,18 +44,15 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
           SignInStepTitle('signin_page.service_agreement.title'.tr()),
           _aggrementBox(),
           Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: NextStepBottomButton(
-              title: 'button_text.service_agreement'.tr(),
-              isPossible: _isPossible,
-              moveNext: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddUserInfoPage()),
-                );
-              },
-            ),
+          NextStepBottomButton(
+            title: 'button_text.service_agreement'.tr(),
+            isPossible: _isPossible,
+            moveNext: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddUserInfoPage()),
+              );
+            },
           ),
         ],
       ),

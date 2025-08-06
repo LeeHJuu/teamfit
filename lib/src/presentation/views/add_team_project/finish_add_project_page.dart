@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
-import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
+import 'package:teamfit/src/presentation/views/personality_test/widgets/test_step_title.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
 class FinishAddProjectPage extends StatelessWidget {
@@ -12,7 +12,7 @@ class FinishAddProjectPage extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          SignInStepTitle('팀 공고가 올라갔어요!'),
+          TestStepTitle('완료', '팀 공고가 올라갔어요!'),
           Spacer(),
           // _aggrementBox(),
           NextStepBottomButton(

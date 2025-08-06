@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
-import 'package:teamfit/src/presentation/views/personality_test/personality_test_alert.dart';
 import 'package:teamfit/src/presentation/views/project/project_page.dart';
+import 'package:teamfit/src/presentation/views/personality_test/personality_test_alert.dart';
 
 class HomeTapPage extends StatefulWidget {
   @override
@@ -10,7 +10,8 @@ class HomeTapPage extends StatefulWidget {
 }
 
 class _HomeTapPageState extends State<HomeTapPage> {
-  final items = [1, 2, 3, 4, 5];
+  // final items = [1, 2, 3, 4, 5];
+  final items = [];
 
   int _current = 0;
   final CarouselSliderController _carouselSliderController =
@@ -18,11 +19,12 @@ class _HomeTapPageState extends State<HomeTapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [_carouselSlider(), _carouselNavigator()],
-    );
-    // return PersonalityTestAlert();
+    return items.isEmpty
+        ? PersonalityTestAlert()
+        : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_carouselSlider(), _carouselNavigator()],
+        );
   }
 
   Row _carouselNavigator() {

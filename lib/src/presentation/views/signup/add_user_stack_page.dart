@@ -32,20 +32,17 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
         children: [
           SignInStepTitle('signin_page.user_stack.title'.tr()),
           _infomationInputBox(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: NextStepBottomButton(
-              title: 'button_text.next'.tr(),
-              isPossible: _isPossible,
-              moveNext: () {
-                final vm = ref.read(loginViewModel.notifier);
-                vm.setUserStack(selectedCareer!, userStacks);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddUserGoalPage()),
-                );
-              },
-            ),
+          NextStepBottomButton(
+            title: 'button_text.next'.tr(),
+            isPossible: _isPossible,
+            moveNext: () {
+              final vm = ref.read(loginViewModel.notifier);
+              vm.setUserStack(selectedCareer!, userStacks);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddUserGoalPage()),
+              );
+            },
           ),
         ],
       ),
