@@ -141,7 +141,7 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
 
       title: Text(
         title,
-        style: CustomText.Subtitle_M.copyWith(color: CustomColor.gray_30),
+        style: CustomText.Subtitle_M_16.copyWith(color: CustomColor.gray_30),
       ),
       activeColor: CustomColor.primary_60,
       checkColor: Colors.white,

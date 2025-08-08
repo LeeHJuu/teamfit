@@ -12,7 +12,7 @@ class AIRecommendedTeamProjects extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text('냥냥님을 위한 AI 추천 팀프로젝트', style: CustomText.Title_S),
+          child: Text('냥냥님을 위한 AI 추천 팀프로젝트', style: CustomText.Title_S_18),
         ),
         ProjectItemBox(),
         ProjectItemBox(),

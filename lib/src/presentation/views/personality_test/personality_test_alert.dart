@@ -55,7 +55,7 @@ class AlertTitle extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: Text(
         'personality_test.alert.title'.tr(),
-        style: CustomText.Title_M,
+        style: CustomText.Title_M_20,
       ),
     );
   }
@@ -69,7 +69,7 @@ class AlertDescription extends StatelessWidget {
       child: Text(
         'personality_test.alert.description'.tr(args: ['냥냥']),
         textAlign: TextAlign.center,
-        style: CustomText.Body_Light_M,
+        style: CustomText.Body_Light_M_14,
       ),
     );
   }
@@ -105,7 +105,7 @@ class AlertButton extends StatelessWidget {
         ),
         child: Text(
           'personality_test.alert.button_text'.tr(),
-          style: CustomText.Subtitle_M.copyWith(color: Colors.white),
+          style: CustomText.Subtitle_M_16.copyWith(color: Colors.white),
         ),
       ),
     );

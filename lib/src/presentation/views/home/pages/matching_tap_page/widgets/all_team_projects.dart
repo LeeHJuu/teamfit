@@ -12,7 +12,7 @@ class AllTeamProjects extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text('전체 팀프로젝트', style: CustomText.Title_S),
+          child: Text('전체 팀프로젝트', style: CustomText.Title_S_18),
         ),
         ProjectItemBox(),
         ProjectItemBox(),

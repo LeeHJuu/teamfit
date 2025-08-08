@@ -38,7 +38,7 @@ class SocialLoginButton extends StatelessWidget {
             ),
             child: Text(
               'button_text.login'.tr(args: [title]),
-              style: CustomText.Subtitle_M.copyWith(color: textColor),
+              style: CustomText.Subtitle_M_16.copyWith(color: textColor),
             ),
           ),
         ),

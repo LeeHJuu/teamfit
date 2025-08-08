@@ -19,7 +19,8 @@ class PersonalityTestState {
   });
 }
 
-class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
+class PersonalityTestViewModel
+    extends AutoDisposeNotifier<PersonalityTestState> {
   @override
   PersonalityTestState build() {
     return PersonalityTestState(
@@ -125,7 +126,7 @@ class PersonalityTestViewModel extends Notifier<PersonalityTestState> {
   }
 }
 
-final personalityTestViewModel =
-    NotifierProvider<PersonalityTestViewModel, PersonalityTestState>(
-      () => PersonalityTestViewModel(),
-    );
+final personalityTestViewModel = NotifierProvider.autoDispose<
+  PersonalityTestViewModel,
+  PersonalityTestState
+>(() => PersonalityTestViewModel());

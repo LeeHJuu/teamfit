@@ -23,11 +23,11 @@ class AddProjectStepTitle extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(nowStep, style: CustomText.Headline_M),
-              Text(allStep, style: CustomText.Subtitle_M),
+              Text(nowStep, style: CustomText.Headline_M_26),
+              Text(allStep, style: CustomText.Subtitle_M_16),
             ],
           ),
-          Text(title, style: CustomText.Headline_M),
+          Text(title, style: CustomText.Headline_M_26),
         ],
       ),
     );

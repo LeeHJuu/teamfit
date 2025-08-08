@@ -10,12 +10,12 @@ class InputBoxItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 40),
+      padding: const EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: CustomText.Label_Light_S),
-          SizedBox(height: 16),
+          Text(title, style: CustomText.Label_Light_S_14),
+          SizedBox(height: 8),
           body,
         ],
       ),

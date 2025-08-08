@@ -14,7 +14,7 @@ class TodayTeamSchedule extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Text('오늘의 팀일정', style: CustomText.Title_S),
+            child: Text('오늘의 팀일정', style: CustomText.Title_S_18),
           ),
         ],
       ),

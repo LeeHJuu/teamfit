@@ -46,7 +46,7 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
             if (widget.textAlign == 0) ...[
               Text(
                 widget.title,
-                style: CustomText.Label_Heavy_S,
+                style: CustomText.Label_Heavy_S_14,
                 textAlign: TextAlign.left,
               ),
               Spacer(),
@@ -55,7 +55,7 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
                 child: Center(
                   child: Text(
                     widget.title,
-                    style: CustomText.Label_Heavy_S,
+                    style: CustomText.Label_Heavy_S_14,
                     textAlign: TextAlign.center,
                   ),
                 ),

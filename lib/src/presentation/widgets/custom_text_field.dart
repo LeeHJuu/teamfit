@@ -32,11 +32,15 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hint: Text(
           hintText ?? '',
-          style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
+          style: CustomText.Body_Light_M_14.copyWith(
+            color: CustomColor.gray_80,
+          ),
         ),
         helper: Text(
           helperText ?? '',
-          style: CustomText.Body_Light_XS.copyWith(color: CustomColor.gray_50),
+          style: CustomText.Body_Light_XS_12.copyWith(
+            color: CustomColor.gray_50,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(

@@ -46,7 +46,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
         children: [
           Text(
             'home_page.schedule_count_message'.tr(args: ['2']),
-            style: CustomText.Label_Light_M,
+            style: CustomText.Label_Light_M_16,
           ),
           Spacer(),
           Icon(Icons.arrow_forward_ios),

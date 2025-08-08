@@ -64,8 +64,8 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
                     ),
                     child: Text(
                       items[index],
-                      style: CustomText.Body_Light_M.copyWith(
-                        color: CustomColor.gray_10,
+                      style: CustomText.Body_Light_M_14.copyWith(
+                        color: CustomColor.gray_80,
                       ),
                     ),
                   ),
@@ -102,7 +102,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
             Expanded(
               child: Text(
                 widget.selectedItem ?? widget.title,
-                style: CustomText.Label_Light_M.copyWith(
+                style: CustomText.Label_Light_M_16.copyWith(
                   color:
                       widget.selectedItem != null
                           ? CustomColor.gray_10

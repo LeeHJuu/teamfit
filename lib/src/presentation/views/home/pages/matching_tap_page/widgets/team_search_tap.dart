@@ -22,7 +22,7 @@ class TeatSearchTap extends StatelessWidget {
                     decoration: InputDecoration(
                       hint: Text(
                         '찾으시는 팀프로젝트를 입력해주세요.',
-                        style: CustomText.Body_Light_XS,
+                        style: CustomText.Body_Light_XS_12,
                       ),
                       border: OutlineInputBorder(borderSide: BorderSide.none),
                       // filled: true,

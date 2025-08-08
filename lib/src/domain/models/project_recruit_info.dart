@@ -1,84 +1,83 @@
 import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
 
 class ProjectRecruitInfo {
-  String projectId;
-  String title;
-  String introduction;
-  DateTime startDate;
-  DateTime endDate;
-  int meetingType;
-  List<int> meetingDays;
-  String meetingTime;
-  Map<String, int> desiredRoles;
-  List<String> preferredMemberTraits;
+  String? projectImage; // 프로젝트 이미지(파일)(선택)
+  String title; // 모집글 제목
+  String introduction; // 프로젝트 내용 소개
+  String teamName; // 팀 이름
+  ProjectDuration duration; // 프로젝트 기간
+  MeetingType meetingType; // 회의방식
+  List<RecruitMember> recruitMembers; // 모집 팀원
+  PassionLevel passionLevel; // 선호 팀원 열정온도
+  ExperienceLevel experienceLevel; // 선호 팀원 경력
+  int projectGoal; // 프로젝트 목표 (1: 포트폴리오 제작, 2: 사이드 프로젝트, 3: 공모전, 4: 해커톤)
 
   ProjectRecruitInfo({
-    required this.projectId,
+    this.projectImage,
     required this.title,
     required this.introduction,
-    required this.startDate,
-    required this.endDate,
+    required this.teamName,
+    required this.duration,
     required this.meetingType,
-    required this.meetingDays,
-    required this.meetingTime,
-    required this.desiredRoles,
-    required this.preferredMemberTraits,
+    required this.recruitMembers,
+    required this.passionLevel,
+    required this.experienceLevel,
+    required this.projectGoal,
   });
 
   factory ProjectRecruitInfo.fromDto(ProjectRecruitInfoDto dto) {
     return ProjectRecruitInfo(
-      projectId: dto.projectId,
+      projectImage: dto.projectImage,
       title: dto.title,
       introduction: dto.introduction,
-      startDate: dto.startDate,
-      endDate: dto.endDate,
+      teamName: dto.teamName,
+      duration: dto.duration,
       meetingType: dto.meetingType,
-      meetingDays: dto.meetingDays,
-      meetingTime: dto.meetingTime,
-      desiredRoles: dto.desiredRoles,
-      preferredMemberTraits: dto.preferredMemberTraits,
+      recruitMembers: dto.recruitMembers,
+      passionLevel: dto.passionLevel,
+      experienceLevel: dto.experienceLevel,
+      projectGoal: dto.projectGoal,
     );
   }
 
   ProjectRecruitInfoDto toDto() {
     return ProjectRecruitInfoDto(
-      projectId: projectId,
+      projectImage: projectImage,
       title: title,
       introduction: introduction,
-      startDate: startDate,
-      endDate: endDate,
+      teamName: teamName,
+      duration: duration,
       meetingType: meetingType,
-      meetingDays: meetingDays,
-      meetingTime: meetingTime,
-      desiredRoles: desiredRoles,
-      preferredMemberTraits: preferredMemberTraits,
+      recruitMembers: recruitMembers,
+      passionLevel: passionLevel,
+      experienceLevel: experienceLevel,
+      projectGoal: projectGoal,
     );
   }
 
   ProjectRecruitInfo copyWith({
-    String? projectId,
+    String? projectImage,
     String? title,
     String? introduction,
-    DateTime? startDate,
-    DateTime? endDate,
-    int? meetingType,
-    List<int>? meetingDays,
-    String? meetingTime,
-    Map<String, int>? desiredRoles,
-    List<String>? preferredMemberTraits,
+    String? teamName,
+    ProjectDuration? duration,
+    MeetingType? meetingType,
+    List<RecruitMember>? recruitMembers,
+    PassionLevel? passionLevel,
+    ExperienceLevel? experienceLevel,
+    int? projectGoal,
   }) {
     return ProjectRecruitInfo(
-      projectId: projectId ?? this.projectId,
+      projectImage: projectImage ?? this.projectImage,
       title: title ?? this.title,
       introduction: introduction ?? this.introduction,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
+      teamName: teamName ?? this.teamName,
+      duration: duration ?? this.duration,
       meetingType: meetingType ?? this.meetingType,
-      meetingDays: meetingDays ?? this.meetingDays,
-      meetingTime: meetingTime ?? this.meetingTime,
-      desiredRoles: desiredRoles ?? this.desiredRoles,
-      preferredMemberTraits:
-          preferredMemberTraits ?? this.preferredMemberTraits,
+      recruitMembers: recruitMembers ?? this.recruitMembers,
+      passionLevel: passionLevel ?? this.passionLevel,
+      experienceLevel: experienceLevel ?? this.experienceLevel,
+      projectGoal: projectGoal ?? this.projectGoal,
     );
   }
 }

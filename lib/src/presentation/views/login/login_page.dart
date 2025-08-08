@@ -62,7 +62,7 @@ class LoginPage extends ConsumerWidget {
       },
       child: Text(
         'login.guest_login_text'.tr(),
-        style: CustomText.Body_Light_M.copyWith(
+        style: CustomText.Body_Light_M_14.copyWith(
           decoration: TextDecoration.underline,
           color: Colors.black,
         ),
@@ -77,7 +77,7 @@ class LoginPage extends ConsumerWidget {
           'app.title'.tr(),
           style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
         ),
-        Text('app.sub_title'.tr(), style: CustomText.Title_S),
+        Text('app.sub_title'.tr(), style: CustomText.Title_S_18),
       ],
     );
   }

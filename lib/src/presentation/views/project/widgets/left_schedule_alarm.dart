@@ -12,13 +12,13 @@ class LeftScheduleAlarm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.alarm),
-          Text('아직 1개의 남은 일정이 있어요!', style: CustomText.Title_S),
+          Text('아직 1개의 남은 일정이 있어요!', style: CustomText.Title_S_18),
           SizedBox(
             height: 50,
             width: double.infinity,
             child: OutlinedButton(
               onPressed: () {},
-              child: Text('기록하고 매너온도 올리기', style: CustomText.Title_S),
+              child: Text('기록하고 매너온도 올리기', style: CustomText.Title_S_18),
             ),
           ),
         ],

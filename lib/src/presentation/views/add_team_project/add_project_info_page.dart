@@ -65,8 +65,8 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
                 controller: chatInputScrollController,
                 children: [
                   TestStepTitle('02', '프로젝트에 대해 소개해주세요.'),
-                  SizedBox(height: 50),
 
+                  // SizedBox(height: 50),
                   _projectInfoInputColumn(),
                 ],
               ),
@@ -84,7 +84,11 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       isPossible: _isPossible,
       moveNext: () {
         final vm = ref.read(addTeamProjectViewModel.notifier);
-        vm.setProjectInfo(_images, _titleController, _descriptionController);
+        vm.setProjectBasicInfo(
+          projectImage: _images.isNotEmpty ? _images.first.path : null,
+          title: _titleController.text,
+          introduction: _descriptionController.text,
+        );
         vm.nextStep(context);
         Navigator.push(
           context,
@@ -100,7 +104,6 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       children: [
         InputBoxItem(title: '프로젝트 이미지(선택)', body: _projectImageInputField()),
         InputBoxItem(title: '프로젝트 제목', body: _projectTitleInputField()),
-        InputBoxItem(title: '프로젝트 유형', body: _projectTypeSelectBox()),
         InputBoxItem(title: '프로젝트 소개', body: _projectDescriptionInputField()),
       ],
     );
@@ -169,9 +172,10 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
         CustomScrollTextField(
           scrollController: chatInputScrollController,
           descriptionController: _descriptionController,
+          hintText: "프로젝트에 대해 설명해주세요",
         ),
         // SizedBox(height: 5),
-        // Text('${_descriptionController.text.length} / 300'), // 글자 수 표시
+        // Text('${_descriptionController.text.length} / 150'), // 글자 수 표시
       ],
     );
   }

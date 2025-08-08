@@ -24,10 +24,10 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('12월 24일', style: CustomText.Title_S),
+                  Text('12월 24일', style: CustomText.Title_S_18),
                   Text(
                     'home_page.active_project_count'.tr(args: ['5']),
-                    style: CustomText.Body_Light_XS,
+                    style: CustomText.Body_Light_XS_12,
                   ),
                 ],
               )

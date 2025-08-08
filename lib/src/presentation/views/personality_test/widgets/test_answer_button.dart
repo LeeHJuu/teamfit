@@ -56,7 +56,7 @@ class _TestAnswerButtonState extends State<TestAnswerButton> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   '${widget.label}.answers.${widget.index}'.tr(),
-                  style: CustomText.Label_Light_S,
+                  style: CustomText.Label_Light_S_14,
                 ),
               ),
             ),

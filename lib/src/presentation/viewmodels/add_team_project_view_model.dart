@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
 import 'package:teamfit/src/domain/models/project_recruit_info.dart';
 
 class AddTeamProjectState {
@@ -26,40 +27,158 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
     return AddTeamProjectState(
       projectInfo: null,
       index: 1,
-      count: 4, // 목표 선택, 프로젝트 정보, 협업 방식, 모집 인원
+      count: 5, // 목표 선택, 프로젝트 정보, 팀 정보, 모집 팀원, 선호 팀원
       stepHistory: [],
     );
   }
 
-  void setProjectInfo(
-    List<File> images,
-    TextEditingController titleController,
-    TextEditingController descriptionController,
-  ) {
-    final projectInfo = ProjectRecruitInfo(
-      projectId: 'projectId',
-      title: titleController.text.trim(),
-      introduction: descriptionController.text.trim(),
-      startDate: DateTime.now(),
-      endDate: DateTime.now(),
-      meetingType: 0,
-      meetingDays: [],
-      meetingTime: '',
-      desiredRoles: {},
-      preferredMemberTraits: [],
-    );
+  // 프로젝트 목표 설정
+  void setProjectGoal(int projectGoal) {
+    final currentInfo = state.projectInfo;
+    final updatedInfo =
+        currentInfo?.copyWith(projectGoal: projectGoal) ??
+        ProjectRecruitInfo(
+          title: '',
+          introduction: '',
+          teamName: '',
+          duration: ProjectDuration.oneToSixMonths,
+          meetingType: MeetingType.online,
+          recruitMembers: [],
+          passionLevel: PassionLevel.any,
+          experienceLevel: ExperienceLevel.fresh,
+          projectGoal: projectGoal,
+        );
 
     state = AddTeamProjectState(
-      projectInfo: projectInfo,
+      projectInfo: updatedInfo,
       index: state.index,
       count: state.count,
       stepHistory: state.stepHistory,
     );
   }
 
-  void setProjectDesiredRoles() {}
+  // 프로젝트 이미지, 모집글 제목, 프로젝트 소개글 설정
+  void setProjectBasicInfo({
+    String? projectImage,
+    required String title,
+    required String introduction,
+  }) {
+    final currentInfo = state.projectInfo;
+    final updatedInfo =
+        currentInfo?.copyWith(
+          projectImage: projectImage,
+          title: title,
+          introduction: introduction,
+        ) ??
+        ProjectRecruitInfo(
+          title: title,
+          introduction: introduction,
+          teamName: '',
+          duration: ProjectDuration.oneToSixMonths,
+          meetingType: MeetingType.online,
+          recruitMembers: [],
+          passionLevel: PassionLevel.any,
+          experienceLevel: ExperienceLevel.fresh,
+          projectGoal: 1, // 기본값: 포트폴리오 제작
+          projectImage: projectImage,
+        );
 
-  void setProjectMeetingType() {}
+    state = AddTeamProjectState(
+      projectInfo: updatedInfo,
+      index: state.index,
+      count: state.count,
+      stepHistory: state.stepHistory,
+    );
+  }
+
+  // 팀 이름, 프로젝트 기간, 회의 방식 설정
+  void setTeamInfo({
+    required String teamName,
+    required ProjectDuration duration,
+    required MeetingType meetingType,
+  }) {
+    final currentInfo = state.projectInfo;
+    final updatedInfo =
+        currentInfo?.copyWith(
+          teamName: teamName,
+          duration: duration,
+          meetingType: meetingType,
+        ) ??
+        ProjectRecruitInfo(
+          title: '',
+          introduction: '',
+          teamName: teamName,
+          duration: duration,
+          meetingType: meetingType,
+          recruitMembers: [],
+          passionLevel: PassionLevel.any,
+          experienceLevel: ExperienceLevel.fresh,
+          projectGoal: 1, // 기본값: 포트폴리오 제작
+        );
+
+    state = AddTeamProjectState(
+      projectInfo: updatedInfo,
+      index: state.index,
+      count: state.count,
+      stepHistory: state.stepHistory,
+    );
+  }
+
+  // 모집 팀원 설정
+  void setRecruitMembers(List<RecruitMember> recruitMembers) {
+    final currentInfo = state.projectInfo;
+    final updatedInfo =
+        currentInfo?.copyWith(recruitMembers: recruitMembers) ??
+        ProjectRecruitInfo(
+          title: '',
+          introduction: '',
+          teamName: '',
+          duration: ProjectDuration.oneToSixMonths,
+          meetingType: MeetingType.online,
+          recruitMembers: recruitMembers,
+          passionLevel: PassionLevel.any,
+          experienceLevel: ExperienceLevel.fresh,
+          projectGoal: 1, // 기본값: 포트폴리오 제작
+        );
+
+    state = AddTeamProjectState(
+      projectInfo: updatedInfo,
+      index: state.index,
+      count: state.count,
+      stepHistory: state.stepHistory,
+    );
+  }
+
+  // 선호 팀원 온도, 선호 팀원 경력 설정
+  void setPreferredMemberInfo({
+    required PassionLevel passionLevel,
+    required ExperienceLevel experienceLevel,
+  }) {
+    final currentInfo = state.projectInfo;
+    final updatedInfo =
+        currentInfo?.copyWith(
+          passionLevel: passionLevel,
+          experienceLevel: experienceLevel,
+        ) ??
+        ProjectRecruitInfo(
+          title: '',
+          introduction: '',
+          teamName: '',
+          duration: ProjectDuration.oneToSixMonths,
+          meetingType: MeetingType.online,
+          recruitMembers: [],
+          passionLevel: passionLevel,
+          experienceLevel: experienceLevel,
+          projectGoal: 1, // 기본값: 포트폴리오 제작
+        );
+
+    state = AddTeamProjectState(
+      projectInfo: updatedInfo,
+      index: state.index,
+      count: state.count,
+      stepHistory: state.stepHistory,
+    );
+  }
 
   void nextStep(BuildContext context) {
     // 현재 상태를 히스토리에 저장

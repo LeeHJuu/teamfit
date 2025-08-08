@@ -31,7 +31,7 @@ class NextStepBottomButton extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: CustomText.Subtitle_M.copyWith(
+            style: CustomText.Subtitle_M_16.copyWith(
               color: isPossible ? Colors.white : CustomColor.gray_50,
             ),
           ),

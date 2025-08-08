@@ -98,7 +98,7 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
                               ),
                               label: Text(
                                 e,
-                                style: CustomText.Label_Heavy_XS.copyWith(
+                                style: CustomText.Label_Heavy_XS_12.copyWith(
                                   color: CustomColor.gray_10,
                                 ),
                               ),

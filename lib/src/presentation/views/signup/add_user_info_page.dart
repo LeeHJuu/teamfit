@@ -183,7 +183,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'signin_page.user_info.birth.year'.tr(),
-                style: CustomText.Label_Heavy_S,
+                style: CustomText.Label_Heavy_S_14,
               ),
             ),
             SizedBox(width: 12),
@@ -197,7 +197,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'signin_page.user_info.birth.month'.tr(),
-                style: CustomText.Label_Heavy_S,
+                style: CustomText.Label_Heavy_S_14,
               ),
             ),
             SizedBox(width: 12),
@@ -206,14 +206,14 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'signin_page.user_info.birth.date'.tr(),
-                style: CustomText.Label_Heavy_S,
+                style: CustomText.Label_Heavy_S_14,
               ),
             ),
           ],
         ),
         Text(
           birthdayHelperText,
-          style: CustomText.Caption_M.copyWith(color: Colors.red),
+          style: CustomText.Caption_M_10.copyWith(color: Colors.red),
         ),
       ],
     );
@@ -235,13 +235,15 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
           _updateIsPossible();
           _validateInput();
         },
-        style: CustomText.Body_Heavy_M,
+        style: CustomText.Body_Heavy_M_14,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.numberWithOptions(),
         decoration: InputDecoration(
           hint: Text(
             hint,
-            style: CustomText.Body_Light_M.copyWith(color: CustomColor.gray_80),
+            style: CustomText.Body_Light_M_14.copyWith(
+              color: CustomColor.gray_80,
+            ),
             textAlign: TextAlign.center,
           ),
 

@@ -32,14 +32,14 @@ class PersonailtyTestPage extends ConsumerWidget {
         body: Column(
           children: [
             CustomProgressBar(
-              progress: (state.index - 1).toDouble() / state.count.toDouble(),
+              progress: (state.index).toDouble() / state.count.toDouble(),
             ),
             TestStepTitle(
               label.contains('default')
                   ? '${label.substring(0, label.lastIndexOf('.'))}.title'.tr(
                     args: [label.substring(label.lastIndexOf('.') + 1)],
                   )
-                  : 'ss',
+                  : 'personality_test.additional.title'.tr(),
               '$label.question'.tr(),
             ),
             Column(

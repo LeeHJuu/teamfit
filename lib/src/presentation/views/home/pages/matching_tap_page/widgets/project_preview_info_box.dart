@@ -9,9 +9,9 @@ class ProjectPreviewInfoBox extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Subtitle_M),
-        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Body_Light_M),
-        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Body_Light_XS),
+        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Subtitle_M_16),
+        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Body_Light_M_14),
+        Text('사이드 프로젝트 백엔드/디자이너 모집', style: CustomText.Body_Light_XS_12),
       ],
     );
   }

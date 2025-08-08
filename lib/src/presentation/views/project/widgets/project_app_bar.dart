@@ -8,7 +8,10 @@ class ProjectAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
-        children: [Text('무슨팀'), Text('D-30', style: CustomText.Body_Light_XS)],
+        children: [
+          Text('무슨팀'),
+          Text('D-30', style: CustomText.Body_Light_XS_12),
+        ],
       ),
       actions: [IconButton(onPressed: () {}, icon: Icon(Icons.alarm))],
     );

@@ -15,8 +15,8 @@ class TestStepTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(sub, style: CustomText.Title_S),
-          Text(title, style: CustomText.Headline_S),
+          Text(sub, style: CustomText.Title_S_18),
+          Text(title, style: CustomText.Headline_S_24),
         ],
       ),
     );

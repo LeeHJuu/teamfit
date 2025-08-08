@@ -42,7 +42,7 @@ class ProjectPreviewBox extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Text(
             'home_page.member_progress'.tr(),
-            style: CustomText.Title_S.copyWith(color: Colors.white),
+            style: CustomText.Title_S_18.copyWith(color: Colors.white),
           ),
         ),
         Expanded(

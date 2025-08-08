@@ -13,12 +13,12 @@ class ProjectPreviewTitle extends StatelessWidget {
         children: [
           Text(
             '무적팀',
-            style: CustomText.Subtitle_M.copyWith(color: Colors.white),
+            style: CustomText.Subtitle_M_16.copyWith(color: Colors.white),
           ),
           SizedBox(width: 20),
           Text(
             'D-30',
-            style: CustomText.Body_Heavy_M.copyWith(color: Colors.white),
+            style: CustomText.Body_Heavy_M_14.copyWith(color: Colors.white),
           ),
           Spacer(),
           GestureDetector(

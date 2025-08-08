@@ -21,7 +21,7 @@ class WelcomePage extends ConsumerWidget {
             width: double.infinity,
             child: Text(
               'signin_page.welcome.title'.tr(),
-              style: CustomText.Headline_S,
+              style: CustomText.Headline_S_24,
               textAlign: TextAlign.center,
             ),
           ),

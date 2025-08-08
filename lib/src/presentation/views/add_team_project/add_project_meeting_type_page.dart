@@ -6,6 +6,7 @@ import 'package:teamfit/src/presentation/views/personality_test/widgets/test_ste
 import 'package:teamfit/src/presentation/widgets/custom_progress_bar.dart';
 import 'package:teamfit/src/presentation/widgets/custom_dropdown_menu.dart';
 import 'package:teamfit/src/presentation/widgets/custom_select_button.dart';
+import 'package:teamfit/src/presentation/widgets/custom_text_field.dart';
 import 'package:teamfit/src/presentation/widgets/input_box_item.dart';
 import 'package:teamfit/src/presentation/widgets/next_step_bottom_button.dart';
 
@@ -41,11 +42,11 @@ class _AddProjectMeetingTypePageState
       },
       child: Scaffold(
         appBar: AppBar(),
-        body: Column(
+        body: ListView(
           children: [
             CustomProgressBar(progress: state.progress),
             TestStepTitle('03', '협업 방식을 설정해주세요.'),
-            SizedBox(height: 50),
+            // SizedBox(height: 50),
             _meetingTypeInputBox(),
             Spacer(),
             _nextStepButton(context),
@@ -60,15 +61,43 @@ class _AddProjectMeetingTypePageState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InputBoxItem(
+          title: '프로젝트 제목',
+          body: CustomTextField(
+            // controller: TextEditingController(),
+            hintText: '프로젝트 제목을 입력하세요',
+            maxLength: 30,
+            textController: TextEditingController(),
+          ),
+        ),
+        InputBoxItem(
           title: '프로젝트 기간',
           body: CustomDropdownMenu(
             title: '선택',
-            items: ['1', '2', '3', '4'],
+            items: ['1개월', '2개월', '3개월', '4개월'],
             onSelect: (p0) {},
             selectedItem: '',
           ),
         ),
-        InputBoxItem(title: '회의 방식', body: _meetingTypeBox()),
+        InputBoxItem(
+          title: '회의 방식',
+          body: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 3.5,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                _meetingTypeButton(0),
+                _meetingTypeButton(1),
+                _meetingTypeButton(2),
+                _meetingTypeButton(3),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
