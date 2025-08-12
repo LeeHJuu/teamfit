@@ -34,7 +34,9 @@ class _AddProjectDesiredRolesPageState
         appBar: AppBar(),
         body: Column(
           children: [
-            CustomProgressBar(progress: state.progress),
+            CustomProgressBar(
+              progress: (state.index).toDouble() / state.count.toDouble(),
+            ),
             Expanded(
               child: ListView(
                 children: [

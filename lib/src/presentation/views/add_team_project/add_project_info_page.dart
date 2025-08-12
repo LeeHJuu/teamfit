@@ -59,7 +59,9 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
         appBar: AppBar(),
         body: Column(
           children: [
-            CustomProgressBar(progress: state.progress),
+            CustomProgressBar(
+              progress: (state.index).toDouble() / state.count.toDouble(),
+            ),
             Expanded(
               child: ListView(
                 controller: chatInputScrollController,

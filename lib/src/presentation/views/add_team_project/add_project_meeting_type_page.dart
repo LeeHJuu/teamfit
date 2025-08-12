@@ -56,7 +56,9 @@ class _AddProjectMeetingTypePageState
             Expanded(
               child: ListView(
                 children: [
-                  CustomProgressBar(progress: state.progress),
+                  CustomProgressBar(
+                    progress: (state.index).toDouble() / state.count.toDouble(),
+                  ),
                   TestStepTitle('03', '협업 방식을 설정해주세요.'),
                   // SizedBox(height: 50),
                   _meetingTypeInputBox(),

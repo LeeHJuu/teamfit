@@ -17,8 +17,6 @@ class AddTeamProjectState {
     required this.stepHistory,
   });
 
-  double get progress => index / count;
-
   AddTeamProjectState copyWith({
     ProjectRecruitInfo? projectInfo,
     int? index,
