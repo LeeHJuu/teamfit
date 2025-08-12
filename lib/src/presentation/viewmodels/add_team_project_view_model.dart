@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
 import 'package:teamfit/src/domain/models/project_recruit_info.dart';
 
@@ -33,7 +32,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
   }
 
   // 프로젝트 목표 설정
-  void setProjectGoal(int projectGoal) {
+  void setProjectGoal(UserGoal projectGoal) {
     final currentInfo = state.projectInfo;
     final updatedInfo =
         currentInfo?.copyWith(projectGoal: projectGoal) ??
@@ -45,7 +44,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          experienceLevel: ExperienceLevel.fresh,
+          careerLevel: CareerLevel.student,
           projectGoal: projectGoal,
         );
 
@@ -78,8 +77,8 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          experienceLevel: ExperienceLevel.fresh,
-          projectGoal: 1, // 기본값: 포트폴리오 제작
+          careerLevel: CareerLevel.student,
+          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
           projectImage: projectImage,
         );
 
@@ -112,8 +111,8 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: meetingType,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          experienceLevel: ExperienceLevel.fresh,
-          projectGoal: 1, // 기본값: 포트폴리오 제작
+          careerLevel: CareerLevel.student,
+          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
     state = AddTeamProjectState(
@@ -137,8 +136,8 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: recruitMembers,
           passionLevel: PassionLevel.any,
-          experienceLevel: ExperienceLevel.fresh,
-          projectGoal: 1, // 기본값: 포트폴리오 제작
+          careerLevel: CareerLevel.student,
+          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
     state = AddTeamProjectState(
@@ -152,13 +151,13 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
   // 선호 팀원 온도, 선호 팀원 경력 설정
   void setPreferredMemberInfo({
     required PassionLevel passionLevel,
-    required ExperienceLevel experienceLevel,
+    required CareerLevel careerLevel,
   }) {
     final currentInfo = state.projectInfo;
     final updatedInfo =
         currentInfo?.copyWith(
           passionLevel: passionLevel,
-          experienceLevel: experienceLevel,
+          careerLevel: careerLevel,
         ) ??
         ProjectRecruitInfo(
           title: '',
@@ -168,8 +167,8 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: [],
           passionLevel: passionLevel,
-          experienceLevel: experienceLevel,
-          projectGoal: 1, // 기본값: 포트폴리오 제작
+          careerLevel: careerLevel,
+          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
     state = AddTeamProjectState(

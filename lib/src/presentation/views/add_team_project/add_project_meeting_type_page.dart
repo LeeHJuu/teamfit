@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_desired_roles_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/widgets/test_step_title.dart';
@@ -19,19 +20,22 @@ class AddProjectMeetingTypePage extends ConsumerStatefulWidget {
 class _AddProjectMeetingTypePageState
     extends ConsumerState<AddProjectMeetingTypePage> {
   bool _isPossible = true;
-  String? _selectedDuration; // 선택된 기간을 저장할 변수 추가
+  ProjectDuration? _selectedDuration; // 선택된 기간을 저장할 변수 추가
 
-  int selectecMeetingType = 10;
+  MeetingType? selectedMeetingType;
 
   void _updateIsPossible() {
     setState(() {
-      _isPossible = _selectedDuration != null && selectecMeetingType != 10;
+      _isPossible = _selectedDuration != null && selectedMeetingType != null;
     });
   }
 
   void _onDurationSelected(String? duration) {
     setState(() {
-      _selectedDuration = duration;
+      _selectedDuration = ProjectDuration.values.firstWhere(
+        (e) => e.label == duration,
+        orElse: () => ProjectDuration.oneMonth,
+      );
     });
     _updateIsPossible();
   }
@@ -77,9 +81,17 @@ class _AddProjectMeetingTypePageState
           title: '프로젝트 기간',
           body: CustomDropdownMenu(
             title: '프로젝트 기간을 선택해주세요.',
-            items: ['1개월', '2개월', '3개월', '4개월'],
+            items:
+                ProjectDuration.values
+                    .where(
+                      (e) =>
+                          e != ProjectDuration.oneToSixMonths &&
+                          e != ProjectDuration.regular,
+                    )
+                    .map((e) => e.label)
+                    .toList(),
             onSelect: _onDurationSelected,
-            selectedItem: _selectedDuration,
+            selectedItem: _selectedDuration?.label,
           ),
         ),
         InputBoxItem(
@@ -93,12 +105,10 @@ class _AddProjectMeetingTypePageState
               crossAxisSpacing: 10,
               childAspectRatio: 3.5,
               physics: NeverScrollableScrollPhysics(),
-              children: [
-                _meetingTypeButton(0),
-                _meetingTypeButton(1),
-                _meetingTypeButton(2),
-                _meetingTypeButton(3),
-              ],
+              children:
+                  MeetingType.values
+                      .map((type) => _meetingTypeButton(type))
+                      .toList(),
             ),
           ),
         ),
@@ -106,40 +116,15 @@ class _AddProjectMeetingTypePageState
     );
   }
 
-  Row _meetingTypeBox() {
-    return Row(
-      children: [
-        _meetingTypeButton(0),
-        SizedBox(width: 10),
-        _meetingTypeButton(1),
-      ],
-    );
-  }
-
-  Expanded _meetingTypeButton(int meetingType) {
-    String getMeetingTypeTitle(int type) {
-      switch (type) {
-        case 0:
-          return '온라인';
-        case 1:
-          return '오프라인';
-        case 2:
-          return '온/오프라인';
-        case 3:
-          return '협의';
-        default:
-          return '';
-      }
-    }
-
+  Widget _meetingTypeButton(MeetingType meetingType) {
     return Expanded(
       child: CustomSelectButton(
-        title: getMeetingTypeTitle(meetingType),
+        title: meetingType.label,
         textAlign: 1,
-        isSelected: selectecMeetingType == meetingType,
+        isSelected: selectedMeetingType == meetingType,
         onPress: () {
           setState(() {
-            selectecMeetingType = meetingType;
+            selectedMeetingType = meetingType;
           });
           _updateIsPossible();
         },

@@ -1,3 +1,4 @@
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
 
 class ProjectRecruitInfo {
@@ -5,24 +6,24 @@ class ProjectRecruitInfo {
   String title; // 모집글 제목
   String introduction; // 프로젝트 내용 소개
   String teamName; // 팀 이름
-  ProjectDuration duration; // 프로젝트 기간
-  MeetingType meetingType; // 회의방식
+  ProjectDuration? duration; // 프로젝트 기간
+  MeetingType? meetingType; // 회의방식
   List<RecruitMember> recruitMembers; // 모집 팀원
-  PassionLevel passionLevel; // 선호 팀원 열정온도
-  ExperienceLevel experienceLevel; // 선호 팀원 경력
-  int projectGoal; // 프로젝트 목표 (1: 포트폴리오 제작, 2: 사이드 프로젝트, 3: 공모전, 4: 해커톤)
+  PassionLevel? passionLevel; // 선호 팀원 열정온도
+  CareerLevel? careerLevel; // 선호 팀원 경력
+  UserGoal? projectGoal; // 프로젝트 목표
 
   ProjectRecruitInfo({
     this.projectImage,
     required this.title,
     required this.introduction,
     required this.teamName,
-    required this.duration,
-    required this.meetingType,
+    this.duration,
+    this.meetingType,
     required this.recruitMembers,
-    required this.passionLevel,
-    required this.experienceLevel,
-    required this.projectGoal,
+    this.passionLevel,
+    this.careerLevel,
+    this.projectGoal,
   });
 
   factory ProjectRecruitInfo.fromDto(ProjectRecruitInfoDto dto) {
@@ -35,7 +36,7 @@ class ProjectRecruitInfo {
       meetingType: dto.meetingType,
       recruitMembers: dto.recruitMembers,
       passionLevel: dto.passionLevel,
-      experienceLevel: dto.experienceLevel,
+      careerLevel: dto.experienceLevel,
       projectGoal: dto.projectGoal,
     );
   }
@@ -50,7 +51,7 @@ class ProjectRecruitInfo {
       meetingType: meetingType,
       recruitMembers: recruitMembers,
       passionLevel: passionLevel,
-      experienceLevel: experienceLevel,
+      experienceLevel: careerLevel,
       projectGoal: projectGoal,
     );
   }
@@ -64,8 +65,8 @@ class ProjectRecruitInfo {
     MeetingType? meetingType,
     List<RecruitMember>? recruitMembers,
     PassionLevel? passionLevel,
-    ExperienceLevel? experienceLevel,
-    int? projectGoal,
+    CareerLevel? careerLevel,
+    UserGoal? projectGoal,
   }) {
     return ProjectRecruitInfo(
       projectImage: projectImage ?? this.projectImage,
@@ -76,7 +77,7 @@ class ProjectRecruitInfo {
       meetingType: meetingType ?? this.meetingType,
       recruitMembers: recruitMembers ?? this.recruitMembers,
       passionLevel: passionLevel ?? this.passionLevel,
-      experienceLevel: experienceLevel ?? this.experienceLevel,
+      careerLevel: careerLevel ?? this.careerLevel,
       projectGoal: projectGoal ?? this.projectGoal,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/personality_test/widgets/test_step_title.dart';
@@ -17,8 +18,8 @@ class AddProjectGoalPage extends ConsumerStatefulWidget {
 class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
   bool _isPossible = false;
 
-  List<String> projectGoals = 'signin_page.user_goal.items'.tr().split(',');
-  String selectedGoal = '';
+  List<UserGoal> projectGoals = UserGoal.values;
+  UserGoal? selectedGoal;
 
   @override
   Widget build(BuildContext context) {
@@ -60,17 +61,18 @@ class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
           ),
           itemCount: projectGoals.length, // 총 아이템 갯수
           itemBuilder: (context, index) {
+            final goal = projectGoals[index];
             return CustomSelectButton(
-              title: projectGoals[index],
+              title: goal.label,
               textAlign: 0,
-              isSelected: selectedGoal == projectGoals[index],
+              isSelected: selectedGoal == goal,
               onPress: () {
                 setState(() {
-                  selectedGoal = projectGoals[index];
-                  _isPossible = selectedGoal.isNotEmpty;
+                  selectedGoal = goal;
+                  _isPossible = selectedGoal != null;
                 });
                 final vm = ref.read(loginViewModel.notifier);
-                vm.setUserGoal(selectedGoal);
+                vm.setUserGoal(goal.name); // enum의 name을 문자열로 전달
               },
             );
           },
