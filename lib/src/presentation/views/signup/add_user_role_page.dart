@@ -53,26 +53,6 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
           ),
           itemCount: items.length, // 총 아이템 갯수
           itemBuilder: (context, index) {
-            // return GestureDetector(
-            //   onTap: () {
-            //     setState(() {
-            //       selectedRole = userRoles[index];
-            //       _isPossible = selectedRole.isNotEmpty;
-            //     });
-            //     final vm = ref.read(loginViewModel.notifier);
-            //     vm.setUserRole(selectedRole);
-            //   },
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       color:
-            //           selectedRole == userRoles[index]
-            //               ? Colors.amber
-            //               : Colors.grey[300],
-            //       borderRadius: BorderRadius.circular(50),
-            //     ),
-            //     child: Center(child: Text(userRoles[index])), // 텍스트 중앙 정렬
-            //   ),
-            // );
             return CustomSelectButton(
               title: items[index],
               textAlign: 1,

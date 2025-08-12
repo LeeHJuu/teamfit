@@ -10,7 +10,7 @@ class TestStepTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
+      height: 140,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(

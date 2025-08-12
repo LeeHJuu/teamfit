@@ -1,5 +1,7 @@
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
+import '../../data/models/recruit_member_dto.dart';
+import '../../data/models/project_recruit_info_dto.dart';
+import 'recruit_member.dart';
 
 class ProjectRecruitInfo {
   String? projectImage; // 프로젝트 이미지(파일)(선택)
@@ -34,7 +36,10 @@ class ProjectRecruitInfo {
       teamName: dto.teamName,
       duration: dto.duration,
       meetingType: dto.meetingType,
-      recruitMembers: dto.recruitMembers,
+      recruitMembers:
+          dto.recruitMembers
+              .map((member) => RecruitMember.fromDto(member))
+              .toList(),
       passionLevel: dto.passionLevel,
       careerLevel: dto.experienceLevel,
       projectGoal: dto.projectGoal,
@@ -49,7 +54,7 @@ class ProjectRecruitInfo {
       teamName: teamName,
       duration: duration,
       meetingType: meetingType,
-      recruitMembers: recruitMembers,
+      recruitMembers: recruitMembers.map((member) => member.toDto()).toList(),
       passionLevel: passionLevel,
       experienceLevel: careerLevel,
       projectGoal: projectGoal,

@@ -1,29 +1,5 @@
 import '../../config/enums.dart';
-
-// 모집 팀원 정보 클래스
-class RecruitMember {
-  final String role; // 직무
-  final int count; // 인원 수
-  final List<String> technologies; // 사용 기술
-
-  RecruitMember({
-    required this.role,
-    required this.count,
-    required this.technologies,
-  });
-
-  factory RecruitMember.fromJson(Map<String, dynamic> json) {
-    return RecruitMember(
-      role: json['role'] ?? '',
-      count: json['count'] ?? 0,
-      technologies: List<String>.from(json['technologies'] ?? []),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'role': role, 'count': count, 'technologies': technologies};
-  }
-}
+import 'recruit_member_dto.dart';
 
 class ProjectRecruitInfoDto {
   String? projectImage; // 프로젝트 이미지(파일)(선택)
@@ -32,7 +8,7 @@ class ProjectRecruitInfoDto {
   String teamName; // 팀 이름
   ProjectDuration? duration; // 프로젝트 기간
   MeetingType? meetingType; // 회의방식
-  List<RecruitMember> recruitMembers; // 모집 팀원
+  List<RecruitMemberDto> recruitMembers; // 모집 팀원
   PassionLevel? passionLevel; // 선호 팀원 열정온도
   CareerLevel? experienceLevel; // 선호 팀원 경력
   UserGoal? projectGoal; // 프로젝트 목표
@@ -60,7 +36,7 @@ class ProjectRecruitInfoDto {
       meetingType: _parseMeetingType(json['meetingType']),
       recruitMembers:
           (json['recruitMembers'] as List?)
-              ?.map((member) => RecruitMember.fromJson(member))
+              ?.map((member) => RecruitMemberDto.fromJson(member))
               .toList() ??
           [],
       passionLevel: _parsePassionLevel(json['passionLevel']),

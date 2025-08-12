@@ -51,13 +51,18 @@ class _AddProjectMeetingTypePageState
       },
       child: Scaffold(
         appBar: AppBar(),
-        body: ListView(
+        body: Column(
           children: [
-            CustomProgressBar(progress: state.progress),
-            TestStepTitle('03', '협업 방식을 설정해주세요.'),
-            // SizedBox(height: 50),
-            _meetingTypeInputBox(),
-            Spacer(),
+            Expanded(
+              child: ListView(
+                children: [
+                  CustomProgressBar(progress: state.progress),
+                  TestStepTitle('03', '협업 방식을 설정해주세요.'),
+                  // SizedBox(height: 50),
+                  _meetingTypeInputBox(),
+                ],
+              ),
+            ),
             _nextStepButton(context),
           ],
         ),
@@ -117,18 +122,16 @@ class _AddProjectMeetingTypePageState
   }
 
   Widget _meetingTypeButton(MeetingType meetingType) {
-    return Expanded(
-      child: CustomSelectButton(
-        title: meetingType.label,
-        textAlign: 1,
-        isSelected: selectedMeetingType == meetingType,
-        onPress: () {
-          setState(() {
-            selectedMeetingType = meetingType;
-          });
-          _updateIsPossible();
-        },
-      ),
+    return CustomSelectButton(
+      title: meetingType.label,
+      textAlign: 1,
+      isSelected: selectedMeetingType == meetingType,
+      onPress: () {
+        setState(() {
+          selectedMeetingType = meetingType;
+        });
+        _updateIsPossible();
+      },
     );
   }
 

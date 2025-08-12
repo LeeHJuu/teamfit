@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/data/models/project_recruit_info_dto.dart';
 import 'package:teamfit/src/domain/models/project_recruit_info.dart';
+import 'package:teamfit/src/domain/models/recruit_member.dart';
 
 class AddTeamProjectState {
   final ProjectRecruitInfo? projectInfo;
@@ -18,6 +18,20 @@ class AddTeamProjectState {
   });
 
   double get progress => index / count;
+
+  AddTeamProjectState copyWith({
+    ProjectRecruitInfo? projectInfo,
+    int? index,
+    int? count,
+    List<AddTeamProjectState>? stepHistory,
+  }) {
+    return AddTeamProjectState(
+      projectInfo: projectInfo ?? this.projectInfo,
+      index: index ?? this.index,
+      count: count ?? this.count,
+      stepHistory: stepHistory ?? this.stepHistory,
+    );
+  }
 }
 
 class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
@@ -48,12 +62,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           projectGoal: projectGoal,
         );
 
-    state = AddTeamProjectState(
-      projectInfo: updatedInfo,
-      index: state.index,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(projectInfo: updatedInfo);
   }
 
   // 프로젝트 이미지, 모집글 제목, 프로젝트 소개글 설정
@@ -82,12 +91,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           projectImage: projectImage,
         );
 
-    state = AddTeamProjectState(
-      projectInfo: updatedInfo,
-      index: state.index,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(projectInfo: updatedInfo);
   }
 
   // 팀 이름, 프로젝트 기간, 회의 방식 설정
@@ -115,12 +119,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
-    state = AddTeamProjectState(
-      projectInfo: updatedInfo,
-      index: state.index,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(projectInfo: updatedInfo);
   }
 
   // 모집 팀원 설정
@@ -140,12 +139,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
-    state = AddTeamProjectState(
-      projectInfo: updatedInfo,
-      index: state.index,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(projectInfo: updatedInfo);
   }
 
   // 선호 팀원 온도, 선호 팀원 경력 설정
@@ -171,42 +165,27 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
-    state = AddTeamProjectState(
-      projectInfo: updatedInfo,
-      index: state.index,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(projectInfo: updatedInfo);
   }
 
   void nextStep(BuildContext context) {
     // 현재 상태를 히스토리에 저장
-    state.stepHistory.add(state);
+    final updatedHistory = List<AddTeamProjectState>.from(state.stepHistory)
+      ..add(state);
 
-    int nextIndex = state.index + 1;
-
-    state = AddTeamProjectState(
-      projectInfo: state.projectInfo,
-      index: nextIndex,
-      count: state.count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(index: state.index + 1, stepHistory: updatedHistory);
   }
 
   void setCount(int count) {
-    state = AddTeamProjectState(
-      projectInfo: state.projectInfo,
-      index: state.index,
-      count: count,
-      stepHistory: state.stepHistory,
-    );
+    state = state.copyWith(count: count);
   }
 
   void goBack() {
     if (state.stepHistory.isNotEmpty) {
-      AddTeamProjectState previousState = state.stepHistory.removeLast();
+      final updatedHistory = List<AddTeamProjectState>.from(state.stepHistory);
+      final previousState = updatedHistory.removeLast();
 
-      state = previousState;
+      state = previousState.copyWith(stepHistory: updatedHistory);
     }
   }
 }
