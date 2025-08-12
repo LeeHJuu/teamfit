@@ -30,7 +30,6 @@ class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
         children: [
           CustomProgressBar(progress: state.progress),
           TestStepTitle('01', '어떤 프로젝트를 시작하고 싶나요?'),
-          SizedBox(height: 50),
           _projectGoalTagsBox(),
           NextStepBottomButton(
             title: 'button_text.next'.tr(),

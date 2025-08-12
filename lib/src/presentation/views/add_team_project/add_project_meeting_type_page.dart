@@ -19,16 +19,21 @@ class AddProjectMeetingTypePage extends ConsumerStatefulWidget {
 class _AddProjectMeetingTypePageState
     extends ConsumerState<AddProjectMeetingTypePage> {
   bool _isPossible = true;
+  String? _selectedDuration; // 선택된 기간을 저장할 변수 추가
 
   int selectecMeetingType = 10;
+
   void _updateIsPossible() {
-    // setState(() {
-    //   _isPossible =
-    //       _nameTextController.text.trim().isNotEmpty &&
-    //       _birthYearController.text.trim().isNotEmpty &&
-    //       _birthMonthController.text.trim().isNotEmpty &&
-    //       _birthDayController.text.trim().isNotEmpty;
-    // });
+    setState(() {
+      _isPossible = _selectedDuration != null && selectecMeetingType != 10;
+    });
+  }
+
+  void _onDurationSelected(String? duration) {
+    setState(() {
+      _selectedDuration = duration;
+    });
+    _updateIsPossible();
   }
 
   @override
@@ -61,21 +66,20 @@ class _AddProjectMeetingTypePageState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InputBoxItem(
-          title: '프로젝트 제목',
+          title: '팀 이름',
           body: CustomTextField(
-            // controller: TextEditingController(),
-            hintText: '프로젝트 제목을 입력하세요',
-            maxLength: 30,
+            hintText: '팀 이름을 입력해주세요',
+            maxLength: 20,
             textController: TextEditingController(),
           ),
         ),
         InputBoxItem(
           title: '프로젝트 기간',
           body: CustomDropdownMenu(
-            title: '선택',
+            title: '프로젝트 기간을 선택해주세요.',
             items: ['1개월', '2개월', '3개월', '4개월'],
-            onSelect: (p0) {},
-            selectedItem: '',
+            onSelect: _onDurationSelected,
+            selectedItem: _selectedDuration,
           ),
         ),
         InputBoxItem(
@@ -113,9 +117,24 @@ class _AddProjectMeetingTypePageState
   }
 
   Expanded _meetingTypeButton(int meetingType) {
+    String getMeetingTypeTitle(int type) {
+      switch (type) {
+        case 0:
+          return '온라인';
+        case 1:
+          return '오프라인';
+        case 2:
+          return '온/오프라인';
+        case 3:
+          return '협의';
+        default:
+          return '';
+      }
+    }
+
     return Expanded(
       child: CustomSelectButton(
-        title: meetingType == 0 ? '오프라인' : '온라인',
+        title: getMeetingTypeTitle(meetingType),
         textAlign: 1,
         isSelected: selectecMeetingType == meetingType,
         onPress: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/presentation/viewmodels/home_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/home_tap_page.dart';
 import 'package:teamfit/src/presentation/views/home/pages/matching_tap_page/matching_tap_page.dart';
@@ -14,6 +15,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeViewModel);
     return Scaffold(
+      backgroundColor: state != 0 ? CustomColor.primary_60 : null,
       appBar: HomeAppBar(),
       body: IndexedStack(
         index: state,

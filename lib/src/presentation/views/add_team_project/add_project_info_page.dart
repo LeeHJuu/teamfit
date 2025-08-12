@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/presentation/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/presentation/views/add_team_project/add_project_meeting_type_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/widgets/test_step_title.dart';
@@ -28,13 +29,12 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
+    final pickedImage = await picker.pickMedia();
 
-    if (pickedImages.isNotEmpty) {
+    if (pickedImage != null) {
       setState(() {
-        for (var element in pickedImages) {
-          _images.add(File(element.path));
-        }
+        _images.clear(); // 기존 이미지 제거
+        _images.add(File(pickedImage.path));
       });
     }
   }
@@ -103,8 +103,12 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InputBoxItem(title: '프로젝트 이미지(선택)', body: _projectImageInputField()),
-        InputBoxItem(title: '프로젝트 제목', body: _projectTitleInputField()),
-        InputBoxItem(title: '프로젝트 소개', body: _projectDescriptionInputField()),
+        InputBoxItem(title: '모집 제목', body: _projectTitleInputField()),
+        InputBoxItem(
+          title: '프로젝트 내용',
+          body: _projectDescriptionInputField(),
+          helpText: "현재 팀원이 있다면 그외 필요한 인원, 기술, 회의 방식 등\n자세히 작성할 수록 매칭률이 올라가요!",
+        ),
       ],
     );
   }
@@ -129,25 +133,22 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: CustomColor.gray_95,
                 borderRadius: BorderRadius.circular(20),
               ),
-            ),
-          ),
-          Row(
-            children:
-                _images.isNotEmpty
-                    ? _images.map((element) {
-                      return Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(image: FileImage(element)),
+              child:
+                  _images.isNotEmpty
+                      ? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.file(
+                          File(_images.first.path),
+                          fit: BoxFit.cover,
+                          width: 100,
+                          height: 100,
                         ),
-                      );
-                    }).toList()
-                    : [],
+                      )
+                      : Icon(Icons.add, size: 40, color: CustomColor.gray_80),
+            ),
           ),
         ],
       ),
@@ -158,9 +159,13 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        CustomTextField(textController: _titleController, maxLength: 100),
+        CustomTextField(
+          textController: _titleController,
+          maxLength: 20,
+          hintText: "모집글 제목을 입력해주세요",
+        ),
         // SizedBox(height: 5),
-        // Text('${_titleController.text.length} / 100'), // 글자 수 표시
+        // Text('${_titleController.text.length} / 20'), // 글자 수 표시
       ],
     );
   }
@@ -173,6 +178,7 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
           scrollController: chatInputScrollController,
           descriptionController: _descriptionController,
           hintText: "프로젝트에 대해 설명해주세요",
+          maxLength: 150,
         ),
         // SizedBox(height: 5),
         // Text('${_descriptionController.text.length} / 150'), // 글자 수 표시
