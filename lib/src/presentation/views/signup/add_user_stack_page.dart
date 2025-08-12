@@ -50,73 +50,70 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
   }
 
   Widget _infomationInputBox() {
-    return Expanded(
-      child: ListView(
+    return Expanded(child: ListView(children: [userCareer(), userStack()]));
+  }
+
+  InputBoxItem userStack() {
+    return InputBoxItem(
+      title: 'signin_page.user_stack.stack.title'.tr(),
+      body: Column(
         children: [
-          InputBoxItem(
-            title: 'signin_page.user_stack.career.title'.tr(),
-            body: CustomDropdownMenu(
-              title: 'signin_page.user_stack.career.non_select'.tr(),
-              items: 'signin_page.user_stack.career.items'.tr().split(","),
-              selectedItem: selectedCareer,
-              onSelect: (value) {
-                setState(() {
-                  selectedCareer = value;
-                  _isPossible = selectedCareer != null;
-                });
-              },
-            ),
+          CustomTextField(
+            textController: _userStackTextController,
+            hintText: 'signin_page.user_stack.stack.hint_text'.tr(),
+            onSubmit: () {
+              setState(() {
+                userStacks.add(_userStackTextController.text.trim());
+                _userStackTextController.clear();
+              });
+            },
           ),
-          InputBoxItem(
-            title: 'signin_page.user_stack.stack.title'.tr(),
-            body: Column(
-              children: [
-                CustomTextField(
-                  textController: _userStackTextController,
-                  hintText: 'signin_page.user_stack.stack.hint_text'.tr(),
-                  onSubmit: () {
-                    setState(() {
-                      userStacks.add(_userStackTextController.text.trim());
-                      _userStackTextController.clear();
-                    });
-                  },
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Wrap(
-                    children:
-                        userStacks.map((e) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              right: 10,
-                              bottom: 10,
-                            ),
-                            child: Chip(
-                              backgroundColor: CustomColor.gray_90,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              label: Text(
-                                e,
-                                style: CustomText.Label_Heavy_XS_12.copyWith(
-                                  color: CustomColor.gray_10,
-                                ),
-                              ),
-                              deleteIcon: Icon(Icons.close, size: 18),
-                              onDeleted: () {
-                                setState(() {
-                                  userStacks.remove(e);
-                                });
-                              },
-                            ),
-                          );
-                        }).toList(),
-                  ),
-                ),
-              ],
+          SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              spacing: 5,
+              runSpacing: -5,
+              children:
+                  userStacks.map((e) {
+                    return Chip(
+                      backgroundColor: CustomColor.gray_90,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      label: Text(
+                        e,
+                        style: CustomText.Label_Heavy_XS_12.copyWith(
+                          color: CustomColor.gray_10,
+                        ),
+                      ),
+                      deleteIcon: Icon(Icons.close, size: 18),
+                      onDeleted: () {
+                        setState(() {
+                          userStacks.remove(e);
+                        });
+                      },
+                    );
+                  }).toList(),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  InputBoxItem userCareer() {
+    return InputBoxItem(
+      title: 'signin_page.user_stack.career.title'.tr(),
+      body: CustomDropdownMenu(
+        title: 'signin_page.user_stack.career.non_select'.tr(),
+        items: 'signin_page.user_stack.career.items'.tr().split(","),
+        selectedItem: selectedCareer,
+        onSelect: (value) {
+          setState(() {
+            selectedCareer = value;
+            _isPossible = selectedCareer != null;
+          });
+        },
       ),
     );
   }

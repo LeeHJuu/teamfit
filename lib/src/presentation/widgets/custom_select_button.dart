@@ -22,13 +22,14 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 54,
+      height: 50,
       child: OutlinedButton(
         onPressed: () {
           FocusScope.of(context).unfocus();
           widget.onPress();
         },
         style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           backgroundColor:
               widget.isSelected ? CustomColor.primary_95 : Colors.white,
           side: BorderSide(

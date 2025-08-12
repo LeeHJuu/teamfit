@@ -22,7 +22,10 @@ class MakeTeamButton extends StatelessWidget {
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        child: Text('팀 만들기', style: CustomText.Subtitle_M_16),
+        child: Text(
+          '팀 만들기',
+          style: CustomText.Subtitle_M_16.copyWith(color: Colors.white),
+        ),
       ),
     );
   }

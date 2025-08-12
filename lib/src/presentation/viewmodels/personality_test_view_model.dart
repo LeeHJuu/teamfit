@@ -124,6 +124,19 @@ class PersonalityTestViewModel
       state = lastResponse;
     }
   }
+
+  void reset() {
+    // build 메서드와 동일한 초기값으로 설정
+    state = PersonalityTestState(
+      index: 1,
+      count: 4,
+      label: 'personality_test.default.1',
+      result: {'D': 0, 'I': 0, 'S': 0, 'K': 0},
+      responseHistory: [],
+    );
+  }
+
+  Future<void> saveResultToUser() async {}
 }
 
 final personalityTestViewModel = NotifierProvider.autoDispose<

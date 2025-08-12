@@ -10,22 +10,26 @@ class CustomProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
+      child: Stack(
         children: [
-          Expanded(
-            flex: (progress * 100).toInt(), // 진행 비율에 따라 너비 설정
-            child: Container(
-              height: 10,
-              decoration: BoxDecoration(
-                color: CustomColor.primary_60,
-                borderRadius: BorderRadius.circular(5),
-              ),
+          // 배경 막대 (grey95, 100% 길이)
+          Container(
+            height: 10,
+            decoration: BoxDecoration(
+              color: CustomColor.gray_95,
+              borderRadius: BorderRadius.circular(5),
             ),
           ),
-          Expanded(
-            flex: 100 - (progress * 100).toInt(), // 남은 비율
-            child: Container(
-              color: Colors.transparent, // 남은 부분은 투명하게 설정
+          // 진행 막대 (primary60, 진행비율만큼의 길이)
+          Container(
+            height: 10,
+            width:
+                MediaQuery.of(context).size.width *
+                0.8 *
+                progress, // 패딩을 고려한 너비 계산
+            decoration: BoxDecoration(
+              color: CustomColor.primary_60,
+              borderRadius: BorderRadius.circular(5),
             ),
           ),
         ],

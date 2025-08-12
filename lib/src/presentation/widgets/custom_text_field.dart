@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final TextEditingController textController;
   final int? maxLength;
   final int? minLine;
@@ -22,30 +22,67 @@ class CustomTextField extends StatelessWidget {
   });
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool isFocused = false;
+
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: textController,
-      maxLength: maxLength, // 글자 수 제한
-      minLines: minLine,
-      maxLines: minLine ?? 1,
+      controller: widget.textController,
+      maxLength: widget.maxLength, // 글자 수 제한
+      minLines: widget.minLine,
+      maxLines: widget.minLine ?? 1,
       textInputAction: TextInputAction.done,
+      onTap: () {
+        setState(() {
+          isFocused = true;
+        });
+      },
+      onEditingComplete: () {
+        setState(() {
+          isFocused = false;
+        });
+      },
       decoration: InputDecoration(
-        hint: Text(
-          hintText ?? '',
-          style: CustomText.Body_Light_M_14.copyWith(
-            color: CustomColor.gray_80,
-          ),
-        ),
-        helper: Text(
-          helperText ?? '',
-          style: CustomText.Body_Light_XS_12.copyWith(
-            color: CustomColor.gray_50,
-          ),
-        ),
+        isDense: true,
+        hint:
+            widget.hintText != null && widget.hintText!.isNotEmpty
+                ? Text(
+                  widget.hintText!,
+                  style: CustomText.Body_Light_M_14.copyWith(
+                    color: CustomColor.gray_80,
+                  ),
+                )
+                : SizedBox.shrink(),
+        helper:
+            widget.helperText != null && widget.helperText!.isNotEmpty
+                ? Text(
+                  widget.helperText!,
+                  style: CustomText.Body_Light_XS_12.copyWith(
+                    color: CustomColor.gray_50,
+                  ),
+                )
+                : SizedBox.shrink(),
+        // ... existing code ...
+        suffixIcon:
+            isFocused
+                ? IconButton(
+                  icon: Icon(Icons.close, color: CustomColor.gray_80, size: 20),
+                  onPressed: () {
+                    widget.textController.clear();
+                    if (widget.onChange != null) {
+                      widget.onChange!();
+                    }
+                  },
+                )
+                : null,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color:
-                textController.text.isEmpty
+                widget.textController.text.isEmpty
                     ? CustomColor.gray_80
                     : CustomColor.gray_10,
           ),
@@ -54,7 +91,7 @@ class CustomTextField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color:
-                textController.text.isEmpty
+                widget.textController.text.isEmpty
                     ? CustomColor.gray_80
                     : CustomColor.primary_60,
           ),
@@ -62,13 +99,13 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       onChanged: (value) {
-        if (onChange != null) {
-          onChange!(); // onChange 호출
+        if (widget.onChange != null) {
+          widget.onChange!(); // onChange 호출
         }
       },
       onSubmitted: (value) {
-        if (onSubmit != null) {
-          onSubmit!(); // onSubmit 호출
+        if (widget.onSubmit != null) {
+          widget.onSubmit!(); // onSubmit 호출
         }
       },
     );

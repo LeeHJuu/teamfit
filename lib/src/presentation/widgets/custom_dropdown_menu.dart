@@ -65,7 +65,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
                     child: Text(
                       items[index],
                       style: CustomText.Body_Light_M_14.copyWith(
-                        color: CustomColor.gray_80,
+                        // color: CustomColor.gray_80,
                       ),
                     ),
                   ),
@@ -83,7 +83,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
     return GestureDetector(
       onTap: onClick,
       child: Container(
-        height: 56,
+        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(

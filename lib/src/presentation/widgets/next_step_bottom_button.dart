@@ -18,7 +18,7 @@ class NextStepBottomButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
       child: SizedBox(
-        height: 60,
+        height: 50,
         width: double.infinity,
         child: FilledButton(
           onPressed: isPossible ? moveNext : null, // 비활성화 상태에서는 null을 설정

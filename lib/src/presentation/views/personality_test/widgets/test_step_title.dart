@@ -10,12 +10,15 @@ class TestStepTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 160,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 30),
           Text(sub, style: CustomText.Title_S_18),
+          SizedBox(height: 10),
           Text(title, style: CustomText.Headline_S_24),
         ],
       ),

@@ -239,6 +239,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
         textAlign: TextAlign.center,
         keyboardType: TextInputType.numberWithOptions(),
         decoration: InputDecoration(
+          isDense: true,
           hint: Text(
             hint,
             style: CustomText.Body_Light_M_14.copyWith(

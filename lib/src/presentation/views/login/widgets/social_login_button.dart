@@ -26,10 +26,13 @@ class SocialLoginButton extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-          height: 72,
+          height: 68,
           child: FilledButton(
             onPressed: loginFunction,
             style: FilledButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(50),
+              ),
               backgroundColor: background,
               side:
                   background == Colors.white

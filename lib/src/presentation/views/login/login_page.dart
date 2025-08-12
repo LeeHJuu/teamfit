@@ -20,22 +20,8 @@ class LoginPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 50),
-                  // _appTitleColumn(),
-                  SvgPicture.asset(
-                    'assets/images/main_title.svg',
-                    // width: 300,
-                    // height: 300,
-                  ),
-                  // SvgPicture.asset(
-                  //   'assets/images/main_img.svg',
-                  //   width: 300,
-                  //   height: 300,
-                  // ),
-                  Image.asset(
-                    'assets/images/main_img.png',
-                    width: 280,
-                    height: 280,
-                  ),
+                  SvgPicture.asset('assets/images/main_title.svg'),
+                  Image.asset('assets/images/main_img.png', width: 250),
                 ],
               ),
             ),
@@ -57,7 +43,10 @@ class LoginPage extends ConsumerWidget {
       onPressed: () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+            settings: RouteSettings(name: "/"),
+          ),
         );
       },
       child: Text(
