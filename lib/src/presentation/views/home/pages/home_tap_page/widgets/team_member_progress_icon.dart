@@ -9,8 +9,8 @@ class TeamMemberProgressIcon extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          width: 56,
-          height: 56,
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
             color: Colors.green,

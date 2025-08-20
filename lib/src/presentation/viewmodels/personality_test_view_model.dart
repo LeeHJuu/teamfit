@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/domain/usecases/user_data_usecase.dart';
 import 'package:teamfit/src/presentation/providers/user_data_provider.dart';
+import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personailty_test_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personality_result_page.dart';
 

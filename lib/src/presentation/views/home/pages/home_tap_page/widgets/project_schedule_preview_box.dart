@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_schedule_preview.dart';
 import 'package:teamfit/src/presentation/widgets/rounded_container.dart';
@@ -13,7 +14,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
       background: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 70),
+          SizedBox(height: 60),
           _leftScheduleAlarm(context),
           ProjectSchedulePreview(),
           Padding(
@@ -39,7 +40,8 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
       // height: 40,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.black12, width: 1),
         // color: Colors.black26,
       ),
       child: Row(

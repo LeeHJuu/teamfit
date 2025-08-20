@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/signup/add_user_stack_page.dart';
 import 'package:teamfit/src/presentation/views/signup/widgets/sign_in_step_title.dart';
@@ -14,11 +15,11 @@ class AddUserRolePage extends ConsumerStatefulWidget {
 
 class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
   bool _isPossible = false;
-  String selectedRole = '';
+  UserRole? selectedRole;
 
   @override
   Widget build(BuildContext context) {
-    List<String> userRoles = 'signin_page.user_role.items'.tr().split(',');
+    List<UserRole> userRoles = UserRole.values;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -40,7 +41,7 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
     );
   }
 
-  Widget _userRoleTagsBox(List<String> items) {
+  Widget _userRoleTagsBox(List<UserRole> items) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -54,16 +55,16 @@ class _AddUserRolePageState extends ConsumerState<AddUserRolePage> {
           itemCount: items.length, // 총 아이템 갯수
           itemBuilder: (context, index) {
             return CustomSelectButton(
-              title: items[index],
+              title: items[index].label,
               textAlign: 1,
               isSelected: selectedRole == items[index],
               onPress: () {
                 setState(() {
                   selectedRole = items[index];
-                  _isPossible = selectedRole.isNotEmpty;
+                  _isPossible = selectedRole != null;
                 });
                 final vm = ref.read(loginViewModel.notifier);
-                vm.setUserRole(selectedRole);
+                vm.setUserRole(selectedRole!);
               },
             );
           },

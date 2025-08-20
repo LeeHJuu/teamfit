@@ -27,7 +27,10 @@ class UserData {
       password: dto.password,
       nickname: dto.nickname,
       projectIds: dto.projectIds,
-      detailData: UserDetailData.fromDto(dto.detailData!),
+      detailData:
+          dto.detailData != null
+              ? UserDetailData.fromDto(dto.detailData!)
+              : null,
     );
   }
 
@@ -55,8 +58,8 @@ class UserData {
     double? mannerTemperature,
     double? attendanceRate,
     double? completionRate,
-    String? roleTag,
-    String? goalTag,
+    UserRole? role,
+    UserGoal? goal,
     UserCareerLevel? career,
     PersonalityType? personalityType,
     List<String>? stackTags,
@@ -77,24 +80,24 @@ class UserData {
                 mannerTemperature: mannerTemperature,
                 attendanceRate: attendanceRate,
                 completionRate: completionRate,
-                roleTag: roleTag,
-                goalTag: goalTag,
+                role: role,
+                goal: goal,
                 career: career,
                 personalityType: personalityType,
                 stackTags: stackTags,
               )
               : UserDetailData(
-                gender: gender ?? 0,
-                birthDate: birthDate ?? DateTime.now(),
-                badges: badges ?? [],
-                mannerTemperature: mannerTemperature ?? 0.0,
-                attendanceRate: attendanceRate ?? 0.0,
-                completionRate: completionRate ?? 0.0,
-                roleTag: roleTag ?? '',
-                goalTag: goalTag ?? '',
-                career: career ?? UserCareerLevel.student,
-                personalityType: personalityType ?? PersonalityType.D,
-                stackTags: stackTags ?? [],
+                gender: gender,
+                birthDate: birthDate,
+                badges: badges,
+                mannerTemperature: mannerTemperature,
+                attendanceRate: attendanceRate,
+                completionRate: completionRate,
+                role: role,
+                goal: goal,
+                career: career,
+                personalityType: personalityType,
+                stackTags: stackTags,
               )),
     );
   }

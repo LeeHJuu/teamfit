@@ -1,18 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
 import 'package:teamfit/src/presentation/views/project/project_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personality_test_alert.dart';
 
-class HomeTapPage extends StatefulWidget {
+class HomeTapPage extends ConsumerStatefulWidget {
   @override
-  State<HomeTapPage> createState() => _HomeTapPageState();
+  ConsumerState<HomeTapPage> createState() => _HomeTapPageState();
 }
 
-class _HomeTapPageState extends State<HomeTapPage> {
-  // final items = [1, 2, 3, 4, 5];
-  final items = [];
+class _HomeTapPageState extends ConsumerState<HomeTapPage> {
+  final items = [1, 2, 3, 4, 5];
+  // final items = [];
 
   int _current = 0;
   final CarouselSliderController _carouselSliderController =
@@ -20,7 +22,8 @@ class _HomeTapPageState extends State<HomeTapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FirebaseAuth.instance.currentUser == null
+    final loginState = ref.read(loginViewModel);
+    return loginState?.detailData?.personalityType == null
         ? PersonalityTestAlert()
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +67,7 @@ class _HomeTapPageState extends State<HomeTapPage> {
       child: CarouselSlider(
         carouselController: _carouselSliderController,
         options: CarouselOptions(
-          height: 600,
+          height: MediaQuery.of(context).size.height * 0.7,
           viewportFraction: 1.0,
           // enlargeCenterPage: true,
           onPageChanged: (index, reason) {

@@ -103,6 +103,12 @@ class LoginViewModel extends Notifier<UserData?> {
     state = userData;
   }
 
+  // 기존 유저 데이터를 설정하는 메서드
+  void setExistingUserData(UserData userData) {
+    state = userData;
+    print('LoginViewModel: 기존 유저 데이터 설정 완료 - ${userData.nickname}');
+  }
+
   void setUserInfo(String nickname, int gender, DateTime birthday) {
     if (state != null) {
       state = state!.copyWith(
@@ -113,9 +119,9 @@ class LoginViewModel extends Notifier<UserData?> {
     }
   }
 
-  void setUserRole(String selectedRole) {
+  void setUserRole(UserRole role) {
     if (state != null) {
-      state = state!.copyWith(roleTag: selectedRole);
+      state = state!.copyWith(role: role);
     }
   }
 
@@ -125,9 +131,15 @@ class LoginViewModel extends Notifier<UserData?> {
     }
   }
 
-  void setUserGoal(String selectedGoal) {
+  void setUserGoal(UserGoal goal) {
     if (state != null) {
-      state = state!.copyWith(goalTag: selectedGoal);
+      state = state!.copyWith(goal: goal);
+    }
+  }
+
+  void setUserPersonalityType(PersonalityType resultType) {
+    if (state != null) {
+      state = state!.copyWith(personalityType: resultType);
     }
   }
 }

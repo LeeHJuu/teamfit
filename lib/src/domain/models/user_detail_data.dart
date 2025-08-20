@@ -3,30 +3,30 @@ import 'package:teamfit/src/data/models/user_badge_dto.dart';
 import 'package:teamfit/src/data/models/user_detail_data_dto.dart';
 
 class UserDetailData {
-  int gender;
-  DateTime birthDate;
-  List<UserBadgeDto> badges;
-  double mannerTemperature;
-  double attendanceRate;
-  double completionRate;
-  String roleTag;
-  String goalTag;
-  UserCareerLevel career;
-  List<String> stackTags;
-  PersonalityType personalityType;
+  int? gender; // nullable
+  DateTime? birthDate; // nullable
+  List<UserBadgeDto>? badges; // nullable
+  double? mannerTemperature; // nullable
+  double? attendanceRate; // nullable
+  double? completionRate; // nullable
+  UserRole? role; // nullable, enum으로 변경
+  UserGoal? goal; // nullable, enum으로 변경
+  UserCareerLevel? career; // nullable
+  List<String>? stackTags; // nullable
+  PersonalityType? personalityType; // nullable
 
   UserDetailData({
-    required this.gender,
-    required this.birthDate,
-    required this.badges,
-    required this.mannerTemperature,
-    required this.attendanceRate,
-    required this.completionRate,
-    required this.roleTag,
-    required this.goalTag,
-    required this.career,
-    required this.stackTags,
-    required this.personalityType,
+    this.gender,
+    this.birthDate,
+    this.badges,
+    this.mannerTemperature,
+    this.attendanceRate,
+    this.completionRate,
+    this.role,
+    this.goal,
+    this.career,
+    this.stackTags,
+    this.personalityType,
   });
 
   factory UserDetailData.fromDto(UserDetailDataDto dto) {
@@ -37,8 +37,8 @@ class UserDetailData {
       mannerTemperature: dto.mannerTemperature,
       attendanceRate: dto.attendanceRate,
       completionRate: dto.completionRate,
-      roleTag: dto.roleTag,
-      goalTag: dto.goalTag,
+      role: dto.role,
+      goal: dto.goal,
       career: dto.career,
       stackTags: dto.stackTags,
       personalityType: dto.personalityType,
@@ -53,8 +53,8 @@ class UserDetailData {
       mannerTemperature: mannerTemperature,
       attendanceRate: attendanceRate,
       completionRate: completionRate,
-      roleTag: roleTag,
-      goalTag: goalTag,
+      role: role,
+      goal: goal,
       career: career,
       stackTags: stackTags,
       personalityType: personalityType,
@@ -68,8 +68,8 @@ class UserDetailData {
     double? mannerTemperature,
     double? attendanceRate,
     double? completionRate,
-    String? roleTag,
-    String? goalTag,
+    UserRole? role,
+    UserGoal? goal,
     UserCareerLevel? career,
     PersonalityType? personalityType,
     List<String>? stackTags,
@@ -77,15 +77,15 @@ class UserDetailData {
     return UserDetailData(
       gender: gender ?? this.gender,
       birthDate: birthDate ?? this.birthDate,
-      badges: badges ?? List.from(this.badges),
+      badges: badges ?? this.badges,
       mannerTemperature: mannerTemperature ?? this.mannerTemperature,
       attendanceRate: attendanceRate ?? this.attendanceRate,
       completionRate: completionRate ?? this.completionRate,
-      roleTag: roleTag ?? this.roleTag,
-      goalTag: goalTag ?? this.goalTag,
+      role: role ?? this.role,
+      goal: goal ?? this.goal,
       career: career ?? this.career,
       personalityType: personalityType ?? this.personalityType,
-      stackTags: stackTags ?? List.from(this.stackTags),
+      stackTags: stackTags ?? this.stackTags,
     );
   }
 }

@@ -94,7 +94,9 @@ class UserDataSourceImpl implements UserDataSource {
       }
 
       final userDocRef = _firestore.collection('user').doc(user.uid);
-      await userDocRef.update({'personalityType': personalityType.name});
+      await userDocRef.update({
+        'detailData.personalityType': personalityType.name,
+      });
     } catch (e) {
       print('UserDataSourceImpl::updatePersonalityType $e');
       throw Exception('Failed to update personality type: $e');

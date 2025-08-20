@@ -14,7 +14,7 @@ class UserDataDto {
     required this.password,
     required this.nickname,
     required this.projectIds,
-    required this.detailData,
+    this.detailData,
   });
 
   factory UserDataDto.fromJson(Map<String, dynamic> json) {
@@ -24,7 +24,10 @@ class UserDataDto {
       password: json['password'],
       nickname: json['nickname'] ?? '',
       projectIds: List<String>.from(json['projectIds'] ?? []),
-      detailData: UserDetailDataDto.fromJson(json['detailData']),
+      detailData:
+          json['detailData'] != null
+              ? UserDetailDataDto.fromJson(json['detailData'])
+              : null,
     );
   }
 

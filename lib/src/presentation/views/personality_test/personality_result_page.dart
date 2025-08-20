@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/presentation/viewmodels/personality_test_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personailty_test_page.dart';
@@ -140,6 +141,10 @@ class PersonalityResultPage extends StatelessWidget {
                     await vm.saveResultToUser(
                       resultType,
                     ); // 결과를 유저 정보에 저장 (비동기 처리)
+                    ref
+                        .read(loginViewModel.notifier)
+                        .setUserPersonalityType(resultType);
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),

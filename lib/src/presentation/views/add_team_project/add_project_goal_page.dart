@@ -74,7 +74,7 @@ class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
                   _isPossible = selectedGoal != null;
                 });
                 final vm = ref.read(loginViewModel.notifier);
-                vm.setUserGoal(goal.name); // enum의 name을 문자열로 전달
+                vm.setUserGoal(goal); // enum의 name을 문자열로 전달
               },
             );
           },

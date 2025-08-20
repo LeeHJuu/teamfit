@@ -85,20 +85,62 @@ class LoginButtonColumn extends ConsumerWidget {
     BuildContext context,
   ) async {
     final isUserExist = await loginVM.findUser(userCredential);
+
     if (!isUserExist) {
+      // 신규 유저: 기본 정보만 설정하고 회원가입 페이지로 이동
       loginVM.setUserCredential(userCredential);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ServiceAgreementPage()),
       );
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-          settings: RouteSettings(name: '/'),
-        ),
-      );
+      // 기존 유저: 유저 데이터를 조회하여 loginViewModel에 담기
+      try {
+        final userData = await loginVM.fetchUser();
+        if (userData != null) {
+          // 유저 데이터를 loginViewModel에 설정
+          loginVM.setExistingUserData(userData);
+          print('기존 유저 데이터 로드 완료: ${userData.nickname}');
+
+          // HomePage로 이동
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+              settings: RouteSettings(name: '/'),
+            ),
+          );
+        } else {
+          // 유저 데이터 조회 실패 시 에러 처리
+          print('유저 데이터 조회 실패');
+          _showErrorDialog(context, '로그인 오류', '유저 정보를 불러올 수 없습니다.');
+        }
+      } catch (e) {
+        // 에러 발생 시 에러 처리
+        print('유저 데이터 조회 중 에러 발생: $e');
+        _showErrorDialog(context, '로그인 오류', '로그인 중 오류가 발생했습니다.');
+      }
     }
+  }
+
+  // 에러 다이얼로그 표시
+  void _showErrorDialog(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('확인'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
