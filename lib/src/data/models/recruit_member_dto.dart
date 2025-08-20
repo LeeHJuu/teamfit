@@ -14,10 +14,7 @@ class RecruitMemberDto {
 
   factory RecruitMemberDto.fromJson(Map<String, dynamic> json) {
     return RecruitMemberDto(
-      role: UserRole.values.firstWhere(
-        (e) => e.name == json['role'],
-        orElse: () => UserRole.development,
-      ),
+      role: _parseUserRole(json['role']),
       count: json['count'] ?? 0,
       technologies: List<String>.from(json['technologies'] ?? []),
     );
@@ -25,5 +22,15 @@ class RecruitMemberDto {
 
   Map<String, dynamic> toJson() {
     return {'role': role.name, 'count': count, 'technologies': technologies};
+  }
+
+  // Helper methods for parsing enum values
+  static UserRole _parseUserRole(String? value) {
+    if (value == null) return UserRole.development;
+    try {
+      return UserRole.values.firstWhere((e) => e.name == value);
+    } catch (e) {
+      return UserRole.development; // 기본값
+    }
   }
 }

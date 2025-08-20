@@ -56,7 +56,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          careerLevel: CareerLevel.student,
+          careerLevel: ProjectMemberCareerLevel.newbie,
           projectGoal: projectGoal,
         );
 
@@ -84,7 +84,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          careerLevel: CareerLevel.student,
+          careerLevel: ProjectMemberCareerLevel.newbie,
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
           projectImage: projectImage,
         );
@@ -113,7 +113,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: meetingType,
           recruitMembers: [],
           passionLevel: PassionLevel.any,
-          careerLevel: CareerLevel.student,
+          careerLevel: ProjectMemberCareerLevel.newbie,
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
@@ -133,7 +133,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
           meetingType: MeetingType.online,
           recruitMembers: recruitMembers,
           passionLevel: PassionLevel.any,
-          careerLevel: CareerLevel.student,
+          careerLevel: ProjectMemberCareerLevel.newbie,
           projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
@@ -143,7 +143,7 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
   // 선호 팀원 온도, 선호 팀원 경력 설정
   void setPreferredMemberInfo({
     required PassionLevel passionLevel,
-    required CareerLevel careerLevel,
+    required ProjectMemberCareerLevel careerLevel,
   }) {
     final currentInfo = state.projectInfo;
     final updatedInfo =

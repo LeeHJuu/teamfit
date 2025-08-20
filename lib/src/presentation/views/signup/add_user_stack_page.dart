@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/login_view_model.dart';
@@ -22,7 +23,7 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
   final TextEditingController _userStackTextController =
       TextEditingController();
   List<String> userStacks = [];
-  String? selectedCareer;
+  UserCareerLevel? selectedCareer;
 
   @override
   Widget build(BuildContext context) {
@@ -106,11 +107,13 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
       title: 'signin_page.user_stack.career.title'.tr(),
       body: CustomDropdownMenu(
         title: 'signin_page.user_stack.career.non_select'.tr(),
-        items: 'signin_page.user_stack.career.items'.tr().split(","),
-        selectedItem: selectedCareer,
+        items: UserCareerLevel.values.map((career) => career.label).toList(),
+        selectedItem: selectedCareer?.label,
         onSelect: (value) {
           setState(() {
-            selectedCareer = value;
+            selectedCareer = UserCareerLevel.values.firstWhere(
+              (career) => career.label == value,
+            );
             _isPossible = selectedCareer != null;
           });
         },

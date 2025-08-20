@@ -1,3 +1,4 @@
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/data/models/user_badge_dto.dart';
 
 class UserDetailDataDto {
@@ -8,8 +9,8 @@ class UserDetailDataDto {
   double completionRate;
   String roleTag;
   String goalTag;
-  String career;
-  String personalityType;
+  UserCareerLevel career;
+  PersonalityType personalityType;
   List<String> stackTags;
   List<UserBadgeDto> badges;
 
@@ -29,16 +30,16 @@ class UserDetailDataDto {
 
   factory UserDetailDataDto.fromJson(Map<String, dynamic> json) {
     return UserDetailDataDto(
-      gender: json['gender'],
+      gender: json['gender'] ?? 0,
       birthDate: DateTime.parse(json['birthDate']),
       mannerTemperature: json['mannerTemperature'] ?? 0.0,
       attendanceRate: json['attendanceRate'] ?? 0.0,
       completionRate: json['completionRate'] ?? 0.0,
       roleTag: json['roleTag'] ?? '',
       goalTag: json['goalTag'] ?? '',
-      career: json['career'] ?? '',
+      career: _parseCareerLevel(json['career']),
       stackTags: List<String>.from(json['stackTags'] ?? []),
-      personalityType: json['personailtyType'] ?? '',
+      personalityType: _parsePersonalityType(json['personalityType']),
       badges:
           (json['badges'] as List<dynamic>? ?? [])
               .map((e) => UserBadgeDto.fromJson(e))
@@ -55,10 +56,29 @@ class UserDetailDataDto {
       'completionRate': completionRate,
       'roleTag': roleTag,
       'goalTag': goalTag,
-      'career': career,
+      'career': career.key,
       'stackTags': stackTags,
-      'personailtyType': personalityType,
+      'personalityType': personalityType.key,
       'badges': badges.map((e) => e.toJson()).toList(),
     };
+  }
+
+  // Helper methods for parsing enum values
+  static UserCareerLevel _parseCareerLevel(String? value) {
+    if (value == null) return UserCareerLevel.student;
+    try {
+      return UserCareerLevel.values.firstWhere((e) => e.key == value);
+    } catch (e) {
+      return UserCareerLevel.student; // 기본값
+    }
+  }
+
+  static PersonalityType _parsePersonalityType(String? value) {
+    if (value == null) return PersonalityType.D;
+    try {
+      return PersonalityType.values.firstWhere((e) => e.key == value);
+    } catch (e) {
+      return PersonalityType.D; // 기본값
+    }
   }
 }

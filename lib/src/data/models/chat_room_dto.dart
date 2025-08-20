@@ -10,7 +10,7 @@ class ChatRoomDto {
     return ChatRoomDto(
       memberIds: List<String>.from(json['memberIds'] ?? []),
       messages:
-          (json['messages'] as List<dynamic>)
+          (json['messages'] as List<dynamic>? ?? [])
               .map((message) => ChatMessageDto.fromJson(message))
               .toList(),
     );

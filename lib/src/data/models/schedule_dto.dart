@@ -19,8 +19,8 @@ class ScheduleDto {
       startDate: DateTime.parse(json['startDate']),
       endDate: DateTime.parse(json['endDate']),
       memberTasks:
-          (json['messages'] as List<dynamic>)
-              .map((message) => MemberTaskDto.fromJson(message))
+          (json['memberTasks'] as List<dynamic>? ?? [])
+              .map((task) => MemberTaskDto.fromJson(task))
               .toList(),
     );
   }
@@ -31,7 +31,7 @@ class ScheduleDto {
       'startDate': startDate.toIso8601String(),
       'endDate': endDate.toIso8601String(),
       'memberTasks':
-          memberTasks.map((memberTasks) => memberTasks.toJson()).toList(),
+          memberTasks.map((memberTask) => memberTask.toJson()).toList(),
     };
   }
 }

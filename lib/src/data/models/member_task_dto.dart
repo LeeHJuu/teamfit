@@ -12,7 +12,7 @@ class MemberTaskDto {
   factory MemberTaskDto.fromJson(Map<String, dynamic> json) {
     return MemberTaskDto(
       taskName: json['taskName'] ?? '',
-      tag: json['tag'] ?? '',
+      tag: json['tag'] ?? 0,
       isCompleted: json['isCompleted'] ?? false,
     );
   }

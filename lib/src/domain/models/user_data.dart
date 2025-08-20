@@ -1,3 +1,4 @@
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/data/models/user_data_dto.dart';
 import 'package:teamfit/src/domain/models/user_detail_data.dart';
 import 'package:teamfit/src/data/models/user_badge_dto.dart';
@@ -56,8 +57,8 @@ class UserData {
     double? completionRate,
     String? roleTag,
     String? goalTag,
-    String? career,
-    String? personalityType,
+    UserCareerLevel? career,
+    PersonalityType? personalityType,
     List<String>? stackTags,
   }) {
     return UserData(
@@ -91,8 +92,8 @@ class UserData {
                 completionRate: completionRate ?? 0.0,
                 roleTag: roleTag ?? '',
                 goalTag: goalTag ?? '',
-                career: career ?? '',
-                personalityType: personalityType ?? '',
+                career: career ?? UserCareerLevel.student,
+                personalityType: personalityType ?? PersonalityType.D,
                 stackTags: stackTags ?? [],
               )),
     );

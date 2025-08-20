@@ -10,7 +10,7 @@ class ProjectRecruitInfoDto {
   MeetingType? meetingType; // 회의방식
   List<RecruitMemberDto> recruitMembers; // 모집 팀원
   PassionLevel? passionLevel; // 선호 팀원 열정온도
-  CareerLevel? experienceLevel; // 선호 팀원 경력
+  ProjectMemberCareerLevel? experienceLevel; // 선호 팀원 경력
   UserGoal? projectGoal; // 프로젝트 목표
 
   ProjectRecruitInfoDto({
@@ -73,10 +73,10 @@ class ProjectRecruitInfoDto {
     }
   }
 
-  static CareerLevel? _parseCareerLevel(String? value) {
+  static ProjectMemberCareerLevel? _parseCareerLevel(String? value) {
     if (value == null) return null;
     try {
-      return CareerLevel.values.firstWhere((e) => e.name == value);
+      return ProjectMemberCareerLevel.values.firstWhere((e) => e.name == value);
     } catch (e) {
       return null;
     }

@@ -9,4 +9,20 @@ class ProjectDataDto {
     required this.projectRecruitInfo,
     required this.projectMember,
   });
+
+  factory ProjectDataDto.fromJson(Map<String, dynamic> json) {
+    return ProjectDataDto(
+      projectRecruitInfo: ProjectRecruitInfoDto.fromJson(
+        json['projectRecruitInfo'],
+      ),
+      projectMember: ProjectMemberDto.fromJson(json['projectMember']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'projectRecruitInfo': projectRecruitInfo.toJson(),
+      'projectMember': projectMember.toJson(),
+    };
+  }
 }

@@ -13,7 +13,7 @@ class ProjectMemberDto {
     return ProjectMemberDto(
       memberName: json['memberName'] ?? '',
       position: json['position'] ?? '',
-      workingTimes: json['workingTimes'] ?? '',
+      workingTimes: json['workingTimes'] ?? 0,
     );
   }
 

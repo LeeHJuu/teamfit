@@ -18,7 +18,7 @@ class AddProjectPreferredMembersPage extends ConsumerStatefulWidget {
 class _AddProjectPreferredMembersPageState
     extends ConsumerState<AddProjectPreferredMembersPage> {
   PassionLevel? _selectedPassionLevel;
-  CareerLevel? _selectedCareerLevel;
+  ProjectMemberCareerLevel? _selectedCareerLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +59,9 @@ class _AddProjectPreferredMembersPageState
                   // 경력 선택
                   _buildSelectionSection(
                     title: '경력',
-                    options: CareerLevel.values,
+                    options: ProjectMemberCareerLevel.values,
                     selectedValue: _selectedCareerLevel,
-                    onChanged: (CareerLevel? value) {
+                    onChanged: (ProjectMemberCareerLevel? value) {
                       setState(() {
                         _selectedCareerLevel = value;
                       });

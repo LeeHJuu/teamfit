@@ -1,5 +1,4 @@
 import 'package:teamfit/src/config/enums.dart';
-import '../../data/models/recruit_member_dto.dart';
 import '../../data/models/project_recruit_info_dto.dart';
 import 'recruit_member.dart';
 
@@ -12,7 +11,7 @@ class ProjectRecruitInfo {
   MeetingType? meetingType; // 회의방식
   List<RecruitMember> recruitMembers; // 모집 팀원
   PassionLevel? passionLevel; // 선호 팀원 열정온도
-  CareerLevel? careerLevel; // 선호 팀원 경력
+  ProjectMemberCareerLevel? careerLevel; // 선호 팀원 경력
   UserGoal? projectGoal; // 프로젝트 목표
 
   ProjectRecruitInfo({
@@ -70,7 +69,7 @@ class ProjectRecruitInfo {
     MeetingType? meetingType,
     List<RecruitMember>? recruitMembers,
     PassionLevel? passionLevel,
-    CareerLevel? careerLevel,
+    ProjectMemberCareerLevel? careerLevel,
     UserGoal? projectGoal,
   }) {
     return ProjectRecruitInfo(
