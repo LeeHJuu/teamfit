@@ -47,7 +47,7 @@ class PersonailtyTestPage extends ConsumerWidget {
                 TestAnswerButton(label: label, index: 'D', vm: vm),
                 TestAnswerButton(label: label, index: 'I', vm: vm),
                 TestAnswerButton(label: label, index: 'S', vm: vm),
-                TestAnswerButton(label: label, index: 'K', vm: vm),
+                TestAnswerButton(label: label, index: 'C', vm: vm),
               ],
             ),
           ],

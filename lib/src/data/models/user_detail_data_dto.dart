@@ -56,9 +56,9 @@ class UserDetailDataDto {
       'completionRate': completionRate,
       'roleTag': roleTag,
       'goalTag': goalTag,
-      'career': career.key,
+      'career': career.name,
       'stackTags': stackTags,
-      'personalityType': personalityType.key,
+      'personalityType': personalityType.name,
       'badges': badges.map((e) => e.toJson()).toList(),
     };
   }
@@ -67,7 +67,7 @@ class UserDetailDataDto {
   static UserCareerLevel _parseCareerLevel(String? value) {
     if (value == null) return UserCareerLevel.student;
     try {
-      return UserCareerLevel.values.firstWhere((e) => e.key == value);
+      return UserCareerLevel.values.firstWhere((e) => e.name == value);
     } catch (e) {
       return UserCareerLevel.student; // 기본값
     }
@@ -76,7 +76,7 @@ class UserDetailDataDto {
   static PersonalityType _parsePersonalityType(String? value) {
     if (value == null) return PersonalityType.D;
     try {
-      return PersonalityType.values.firstWhere((e) => e.key == value);
+      return PersonalityType.values.firstWhere((e) => e.name == value);
     } catch (e) {
       return PersonalityType.D; // 기본값
     }

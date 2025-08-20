@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/presentation/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
 import 'package:teamfit/src/presentation/views/project/project_page.dart';
@@ -19,7 +20,7 @@ class _HomeTapPageState extends State<HomeTapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return items.isEmpty
+    return FirebaseAuth.instance.currentUser == null
         ? PersonalityTestAlert()
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,
