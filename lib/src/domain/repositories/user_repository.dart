@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/domain/models/user_data.dart';
 
-abstract interface class LoginRepository {
+abstract interface class UserRepository {
   Future<void> uploadUserData(UserData userData);
 
   Future<bool> deleteUser(AuthCredential authcredential);
@@ -11,4 +12,6 @@ abstract interface class LoginRepository {
   Future<UserData?> fetchUser();
 
   Future<bool> findUser(UserCredential userCredential);
+
+  Future<void> updatePersonalityType(PersonalityType personalityType);
 }

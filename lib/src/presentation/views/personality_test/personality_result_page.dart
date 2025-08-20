@@ -1,47 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/presentation/viewmodels/personality_test_view_model.dart';
 import 'package:teamfit/src/presentation/views/home/home_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personailty_test_page.dart';
 
 class PersonalityResultPage extends StatelessWidget {
-  final String resultType;
+  final PersonalityType resultType;
 
   PersonalityResultPage(this.resultType);
 
   // resultType에 따른 데이터를 반환하는 getter
   Map<String, String> get _resultData {
-    switch (resultType.toLowerCase()) {
-      case 'd':
+    switch (resultType) {
+      case PersonalityType.D:
         return {
           'title': 'D 타입 제목\nd\nd',
           'description': 'D 타입에 대한 설명입니다.\nd\nd',
           'imagePath': 'assets/images/type_d.png',
         };
-      case 'i':
+      case PersonalityType.I:
         return {
           'title': 'I 타입 제목\nd\nd',
           'description': 'I 타입에 대한 설명입니다.\nd\nd',
           'imagePath': 'assets/images/type_i.png',
         };
-      case 's':
+      case PersonalityType.S:
         return {
           'title': 'S 타입 제목\nd\nd',
           'description': 'S 타입에 대한 설명입니다.\nd\nd',
           'imagePath': 'assets/images/type_s.png',
         };
-      case 'c':
+      case PersonalityType.C:
         return {
           'title': 'C 타입 제목\nd\nd',
           'description': 'C 타입에 대한 설명입니다.\nd\nd',
           'imagePath': 'assets/images/type_c.png',
-        };
-      default:
-        return {
-          'title': '기본 제목',
-          'description': '기본 설명입니다.',
-          'imagePath': 'assets/images/main_img.png',
         };
     }
   }
@@ -142,7 +137,9 @@ class PersonalityResultPage extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () async {
                     final vm = ref.read(personalityTestViewModel.notifier);
-                    await vm.saveResultToUser(); // 결과를 유저 정보에 저장 (비동기 처리)
+                    await vm.saveResultToUser(
+                      resultType,
+                    ); // 결과를 유저 정보에 저장 (비동기 처리)
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),

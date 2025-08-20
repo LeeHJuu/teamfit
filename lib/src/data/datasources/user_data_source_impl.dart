@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamfit/src/data/datasources/login_data_source.dart';
+import 'package:teamfit/src/config/enums.dart';
+import 'package:teamfit/src/data/datasources/user_data_source.dart';
 import 'package:teamfit/src/data/models/user_data_dto.dart';
 
-class LoginDataSourceImpl implements LoginDataSource {
-  LoginDataSourceImpl(this._firestore);
+class UserDataSourceImpl implements UserDataSource {
+  UserDataSourceImpl(this._firestore);
   final FirebaseFirestore _firestore;
 
   //사용자 정보 파이어베이스에 업로드
@@ -82,5 +83,21 @@ class LoginDataSourceImpl implements LoginDataSource {
     final userDocRef = _firestore.collection('user').doc(user?.uid);
     final userDoc = await userDocRef.get();
     return userDoc.exists;
+  }
+
+  @override
+  Future<void> updatePersonalityType(PersonalityType personalityType) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw Exception('User is not signed in.');
+      }
+
+      final userDocRef = _firestore.collection('user').doc(user.uid);
+      await userDocRef.update({'personalityType': personalityType.name});
+    } catch (e) {
+      print('UserDataSourceImpl::updatePersonalityType $e');
+      throw Exception('Failed to update personality type: $e');
+    }
   }
 }

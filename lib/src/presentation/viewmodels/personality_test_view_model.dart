@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teamfit/src/config/enums.dart';
+import 'package:teamfit/src/domain/usecases/user_data_usecase.dart';
+import 'package:teamfit/src/presentation/providers/user_data_provider.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personailty_test_page.dart';
 import 'package:teamfit/src/presentation/views/personality_test/personality_result_page.dart';
 
@@ -27,7 +30,7 @@ class PersonalityTestViewModel
       index: 1,
       count: 4,
       label: 'personality_test.default.1',
-      result: {'D': 0, 'I': 0, 'S': 0, 'K': 0},
+      result: {'D': 0, 'I': 0, 'S': 0, 'C': 0},
       responseHistory: [],
     );
   }
@@ -69,11 +72,30 @@ class PersonalityTestViewModel
   }
 
   void finishTestAndSaveResult(BuildContext context, String newLabel) {
-    // TODO:: userDataSource 생성 후 유저 정보 갱신
+    // String을 PersonalityType으로 변환
+    PersonalityType personalityType;
+    switch (newLabel) {
+      case 'D':
+        personalityType = PersonalityType.D;
+        break;
+      case 'I':
+        personalityType = PersonalityType.I;
+        break;
+      case 'S':
+        personalityType = PersonalityType.S;
+        break;
+      case 'C':
+        personalityType = PersonalityType.C;
+        break;
+      default:
+        personalityType = PersonalityType.D; // 기본값
+    }
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PersonalityResultPage(newLabel)),
+      MaterialPageRoute(
+        builder: (context) => PersonalityResultPage(personalityType),
+      ),
     );
   }
 
@@ -90,13 +112,13 @@ class PersonalityTestViewModel
         if (keysWithMaxValue.contains('D') && keysWithMaxValue.contains('S')) {
           return 'personality_test.additional.1';
         } else if (keysWithMaxValue.contains('I') &&
-            keysWithMaxValue.contains('K')) {
+            keysWithMaxValue.contains('C')) {
           return 'personality_test.additional.2';
         } else if (keysWithMaxValue.contains('D') &&
-            keysWithMaxValue.contains('K')) {
+            keysWithMaxValue.contains('C')) {
           return 'personality_test.additional.3';
         } else if (keysWithMaxValue.contains('I') &&
-            keysWithMaxValue.contains('K')) {
+            keysWithMaxValue.contains('C')) {
           return 'personality_test.additional.4';
         } else if (keysWithMaxValue.contains('D') &&
             keysWithMaxValue.contains('I')) {
@@ -131,12 +153,14 @@ class PersonalityTestViewModel
       index: 1,
       count: 4,
       label: 'personality_test.default.1',
-      result: {'D': 0, 'I': 0, 'S': 0, 'K': 0},
+      result: {'D': 0, 'I': 0, 'S': 0, 'C': 0},
       responseHistory: [],
     );
   }
 
-  Future<void> saveResultToUser() async {}
+  Future<void> saveResultToUser(PersonalityType resultType) async {
+    await ref.read(userDataUsecaseProvider).updatePersonalityType(resultType);
+  }
 }
 
 final personalityTestViewModel = NotifierProvider.autoDispose<
