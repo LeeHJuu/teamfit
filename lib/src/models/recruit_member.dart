@@ -1,10 +1,16 @@
 import '../config/enums.dart';
 
-// 모집 팀원 정보 클래스
+/// 모집 팀원 정보 모델
+/// 프로젝트에서 모집하고자 하는 직무별 팀원 정보
 class RecruitMember {
-  final UserRole role; // 직무
-  final int count; // 인원 수
-  final List<String> technologies; // 사용 기술
+  /// 모집하는 직무/역할 (개발자, 디자이너, 기획자 등)
+  final UserRole role;
+
+  /// 해당 직무의 모집 인원 수
+  final int count;
+
+  /// 요구되는 기술 스택 목록
+  final List<String> technologies;
 
   RecruitMember({
     required this.role,

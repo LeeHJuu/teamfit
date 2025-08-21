@@ -1,17 +1,38 @@
 import '../config/enums.dart';
 import 'recruit_member.dart';
 
+/// 프로젝트 모집 정보 모델
+/// 모집글 작성 시 입력하는 프로젝트 상세 정보
 class ProjectRecruitInfo {
-  String? projectImage; // 프로젝트 이미지(파일)(선택)
-  String title; // 모집글 제목
-  String introduction; // 프로젝트 내용 소개
-  String teamName; // 팀 이름
-  ProjectDuration? duration; // 프로젝트 기간
-  MeetingType? meetingType; // 회의방식
-  List<RecruitMember> recruitMembers; // 모집 팀원
-  PassionLevel? passionLevel; // 선호 팀원 열정온도
-  ProjectMemberCareerLevel? careerLevel; // 선호 팀원 경력
-  UserGoal? projectGoal; // 프로젝트 목표
+  /// 프로젝트 대표 이미지 (선택적)
+  String? projectImage;
+
+  /// 모집글 제목
+  String title;
+
+  /// 프로젝트 내용 소개
+  String introduction;
+
+  /// 팀 이름
+  String teamName;
+
+  /// 프로젝트 진행 기간
+  ProjectDuration? duration;
+
+  /// 회의 방식 (온라인/오프라인/혼합)
+  MeetingType? meetingType;
+
+  /// 모집하는 팀원 목록 (직무별 인원수와 기술스택)
+  List<RecruitMember> recruitMembers;
+
+  /// 선호하는 팀원의 열정온도 수준
+  PassionLevel? passionLevel;
+
+  /// 선호하는 팀원의 경력 수준
+  ProjectMemberCareerLevel? careerLevel;
+
+  /// 프로젝트 목표 (포트폴리오/창업/취업 등)
+  UserGoal? projectGoal;
 
   ProjectRecruitInfo({
     this.projectImage,

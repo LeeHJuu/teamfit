@@ -138,12 +138,8 @@ class PersonalityResultPage extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () async {
                     final vm = ref.read(personalityTestViewModel.notifier);
-                    await vm.saveResultToUser(
-                      resultType,
-                    ); // 결과를 유저 정보에 저장 (비동기 처리)
-                    ref
-                        .read(loginViewModel.notifier)
-                        .setUserPersonalityType(resultType);
+                    await vm.saveResultToUser(); // 결과를 유저 정보에 저장 (비동기 처리)
+                    ref.read(loginViewModel.notifier).setUserPersonalityType();
 
                     Navigator.pushAndRemoveUntil(
                       context,

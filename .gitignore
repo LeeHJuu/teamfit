@@ -4,6 +4,8 @@ google-services.json
 
 ios/Config.xcconfig
 
+# Documentation files
+docs/
 
 assets/images/
 assets/translations/

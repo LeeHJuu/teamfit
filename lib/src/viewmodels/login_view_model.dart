@@ -94,7 +94,6 @@ class LoginViewModel extends Notifier<UserData?> {
     final userData = UserData(
       uid: user.uid,
       email: user.email,
-      password: null,
       nickname: '',
       projectIds: [],
       detailData: null,
@@ -137,9 +136,11 @@ class LoginViewModel extends Notifier<UserData?> {
     }
   }
 
-  void setUserPersonalityType(PersonalityType resultType) {
+  void setUserPersonalityType() {
     if (state != null) {
-      state = state!.copyWith(personalityType: resultType);
+      state = state!.copyWith(
+        personalityScores: state!.detailData!.personalityScores,
+      );
     }
   }
 }

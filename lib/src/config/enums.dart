@@ -98,3 +98,24 @@ enum PersonalityType {
   const PersonalityType(this.label);
   final String label;
 }
+
+// 프로젝트 상태 enum
+enum ProjectStatus {
+  recruiting('모집중'),
+  inProgress('진행중'),
+  completed('완료'),
+  cancelled('취소');
+
+  const ProjectStatus(this.label);
+  final String label;
+}
+
+// 태스크 우선순위 enum
+enum TaskPriority {
+  high('중요'),
+  normal('보통'),
+  low('나중');
+
+  const TaskPriority(this.label);
+  final String label;
+}

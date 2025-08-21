@@ -24,7 +24,7 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
   @override
   Widget build(BuildContext context) {
     final loginState = ref.read(loginViewModel);
-    return loginState?.detailData?.personalityType == null
+    return loginState?.detailData?.personalityScores == null
         ? PersonalityTestAlert()
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,

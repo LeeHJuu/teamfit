@@ -71,7 +71,7 @@ class PersonalityTestViewModel
   }
 
   void finishTestAndSaveResult(BuildContext context, String newLabel) {
-    // String을 PersonalityType으로 변환
+    // String을 PersonalityType으로 변환 (결과 화면 표시용)
     PersonalityType personalityType;
     switch (newLabel) {
       case 'D':
@@ -89,6 +89,11 @@ class PersonalityTestViewModel
       default:
         personalityType = PersonalityType.D; // 기본값
     }
+
+    // 테스트 완료 시 누적 점수로 저장 (백그라운드에서 실행)
+    saveResultToUser().catchError((error) {
+      print('Failed to save personality test result: $error');
+    });
 
     Navigator.push(
       context,
@@ -157,7 +162,34 @@ class PersonalityTestViewModel
     );
   }
 
-  Future<void> saveResultToUser(PersonalityType resultType) async {
+  /// 성격 테스트 결과를 사용자 데이터로 저장
+  /// 각 DISC 타입별 누적 점수를 Map 형태로 저장
+  Future<void> saveResultToUser() async {
+    // String 결과를 PersonalityType으로 변환
+    final scores = <PersonalityType, int>{};
+    for (final entry in state.result.entries) {
+      switch (entry.key) {
+        case 'D':
+          scores[PersonalityType.D] = entry.value;
+          break;
+        case 'I':
+          scores[PersonalityType.I] = entry.value;
+          break;
+        case 'S':
+          scores[PersonalityType.S] = entry.value;
+          break;
+        case 'C':
+          scores[PersonalityType.C] = entry.value;
+          break;
+      }
+    }
+
+    await ref.read(userServiceProvider).updatePersonalityScores(scores);
+  }
+
+  /// 하위 호환성을 위한 기존 메서드 (단일 타입 저장)
+  /// @deprecated saveResultToUser()를 사용하세요
+  Future<void> saveResultToUserLegacy(PersonalityType resultType) async {
     await ref.read(userServiceProvider).updatePersonalityType(resultType);
   }
 }
