@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/models/recruit_member.dart';
+import '../../../models/recruit_member.dart';
 import 'package:teamfit/src/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/widgets/custom_select_button.dart';
 import 'package:teamfit/src/widgets/custom_text_field.dart';

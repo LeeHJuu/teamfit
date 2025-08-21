@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/models/project_recruit_info.dart';
-import 'package:teamfit/src/models/recruit_member.dart';
+import '../models/project_recruit_info.dart';
+import '../models/recruit_member.dart';
 
 class AddTeamProjectState {
   final ProjectRecruitInfo? projectInfo;

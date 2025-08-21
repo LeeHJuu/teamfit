@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:teamfit/firebase_options.dart';
 import 'package:teamfit/src/config/theme/theme.dart';
-import 'package:teamfit/src/presentation/views/home/home_page.dart';
-import 'package:teamfit/src/presentation/views/login/login_page.dart';
+import 'package:teamfit/src/views/home/home_page.dart';
+import 'package:teamfit/src/views/login/login_page.dart';
 
 Future<void> main() async {
   runZonedGuarded(
