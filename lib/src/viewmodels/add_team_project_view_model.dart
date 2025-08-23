@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
 import '../models/project_recruit_info.dart';
 import '../models/recruit_member.dart';
+import '../provider.dart';
 
 class AddTeamProjectState {
   final ProjectRecruitInfo? projectInfo;
@@ -32,7 +33,7 @@ class AddTeamProjectState {
   }
 }
 
-class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
+class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
   @override
   AddTeamProjectState build() {
     return AddTeamProjectState(
@@ -186,9 +187,18 @@ class AddTeamProjectViewModel extends Notifier<AddTeamProjectState> {
       state = previousState.copyWith(stepHistory: updatedHistory);
     }
   }
+
+  // 프로젝트 등록 완료 - Firebase에 저장
+  Future<void> completeProjectRegistration() async {
+    final projectInfo = state.projectInfo;
+    if (projectInfo == null) {
+      throw Exception('프로젝트 정보가 없습니다.');
+    }
+    await ref.read(projectServiceProvider).createProject(projectInfo);
+  }
 }
 
 final addTeamProjectViewModel =
-    NotifierProvider<AddTeamProjectViewModel, AddTeamProjectState>(
+    NotifierProvider.autoDispose<AddTeamProjectViewModel, AddTeamProjectState>(
       () => AddTeamProjectViewModel(),
     );

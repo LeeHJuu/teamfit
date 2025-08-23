@@ -37,7 +37,7 @@ class ProjectService {
       await projectRef.set(projectData.toJson());
 
       // 사용자의 projectIds에 추가
-      await _firestore.collection('users').doc(user.uid).update({
+      await _firestore.collection('user').doc(user.uid).update({
         'projectIds': FieldValue.arrayUnion([projectRef.id]),
       });
 

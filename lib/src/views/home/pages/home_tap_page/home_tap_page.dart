@@ -14,38 +14,38 @@ class HomeTapPage extends ConsumerStatefulWidget {
 }
 
 class _HomeTapPageState extends ConsumerState<HomeTapPage> {
-  final items = [1, 2, 3, 4, 5];
-  // final items = [];
-
   int _current = 0;
   final CarouselSliderController _carouselSliderController =
       CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.read(loginViewModel);
+    final loginState = ref.watch(loginViewModel);
+    final items = loginState.value?.projectIds ?? [];
+
     return loginState.value?.detailData?.personalityScores == null
         ? PersonalityTestAlert()
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [_carouselSlider(), _carouselNavigator()],
+          children: [_carouselSlider(items), _carouselNavigator(items)],
         );
   }
 
-  Row _carouselNavigator() {
+  Row _carouselNavigator(List<String> items) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children:
-          items.map((i) {
+          items.asMap().entries.map((entry) {
+            int index = entry.key;
             return GestureDetector(
-              onTap: () => _carouselSliderController.animateToPage(i - 1),
+              onTap: () => _carouselSliderController.animateToPage(index),
               child: Container(
-                width: _current == i - 1 ? 24.0 : 12.0,
+                width: _current == index ? 24.0 : 12.0,
                 height: 12.0,
                 margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: _current == i - 1 ? Colors.black : Colors.grey,
+                  color: _current == index ? Colors.black : Colors.grey,
                 ),
               ),
             );
@@ -53,7 +53,7 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
     );
   }
 
-  Widget _carouselSlider() {
+  Widget _carouselSlider(List<String> items) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -78,7 +78,7 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
           },
         ),
         items:
-            items.map((i) {
+            items.map((projectId) {
               return Builder(
                 builder: (BuildContext context) {
                   return ProjectPreviewBox();

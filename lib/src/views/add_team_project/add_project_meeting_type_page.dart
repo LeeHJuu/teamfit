@@ -19,14 +19,30 @@ class AddProjectMeetingTypePage extends ConsumerStatefulWidget {
 
 class _AddProjectMeetingTypePageState
     extends ConsumerState<AddProjectMeetingTypePage> {
-  bool _isPossible = true;
-  ProjectDuration? _selectedDuration; // 선택된 기간을 저장할 변수 추가
-
+  bool _isPossible = false;
+  ProjectDuration? _selectedDuration;
   MeetingType? selectedMeetingType;
+  final TextEditingController _teamNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _teamNameController.addListener(_updateIsPossible);
+  }
+
+  @override
+  void dispose() {
+    _teamNameController.removeListener(_updateIsPossible);
+    _teamNameController.dispose();
+    super.dispose();
+  }
 
   void _updateIsPossible() {
     setState(() {
-      _isPossible = _selectedDuration != null && selectedMeetingType != null;
+      _isPossible =
+          _teamNameController.text.trim().isNotEmpty &&
+          _selectedDuration != null &&
+          selectedMeetingType != null;
     });
   }
 
@@ -81,7 +97,7 @@ class _AddProjectMeetingTypePageState
           body: CustomTextField(
             hintText: '팀 이름을 입력해주세요',
             maxLength: 20,
-            textController: TextEditingController(),
+            textController: _teamNameController,
           ),
         ),
         InputBoxItem(
@@ -142,7 +158,13 @@ class _AddProjectMeetingTypePageState
       title: '다음',
       isPossible: _isPossible,
       moveNext: () {
-        ref.read(addTeamProjectViewModel.notifier).nextStep(context);
+        final vm = ref.read(addTeamProjectViewModel.notifier);
+        vm.setTeamInfo(
+          teamName: _teamNameController.text.trim(),
+          duration: _selectedDuration!,
+          meetingType: selectedMeetingType!,
+        );
+        vm.nextStep(context);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AddProjectDesiredRolesPage()),

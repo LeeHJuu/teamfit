@@ -22,11 +22,26 @@ class AddProjectInfoPage extends ConsumerStatefulWidget {
 
 class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
   ScrollController chatInputScrollController = ScrollController();
-  final bool _isPossible = true;
+  bool _isPossible = false;
 
   final List<File> _images = [];
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController.addListener(_updateIsPossible);
+    _descriptionController.addListener(_updateIsPossible);
+  }
+
+  void _updateIsPossible() {
+    setState(() {
+      _isPossible =
+          _titleController.text.trim().isNotEmpty &&
+          _descriptionController.text.trim().isNotEmpty;
+    });
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -42,6 +57,8 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
 
   @override
   void dispose() {
+    _titleController.removeListener(_updateIsPossible);
+    _descriptionController.removeListener(_updateIsPossible);
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();

@@ -20,8 +20,14 @@ class AddProjectDesiredRolesPage extends ConsumerStatefulWidget {
 
 class _AddProjectDesiredRolesPageState
     extends ConsumerState<AddProjectDesiredRolesPage> {
-  final bool _isPossible = true;
+  bool _isPossible = false;
   List<RecruitMember> recruitMembers = [];
+
+  void _updateIsPossible() {
+    setState(() {
+      _isPossible = recruitMembers.isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,7 @@ class _AddProjectDesiredRolesPageState
                               setState(() {
                                 recruitMembers.add(member);
                               });
+                              _updateIsPossible();
                             },
                           );
                         },

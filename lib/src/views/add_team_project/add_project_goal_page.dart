@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/views/personality_test/widgets/test_step_title.dart';
 import 'package:teamfit/src/widgets/custom_progress_bar.dart';
@@ -73,8 +72,8 @@ class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
                   selectedGoal = goal;
                   _isPossible = selectedGoal != null;
                 });
-                final vm = ref.read(loginViewModel.notifier);
-                vm.setUserGoal(goal); // enum의 name을 문자열로 전달
+                final vm = ref.read(addTeamProjectViewModel.notifier);
+                vm.setProjectGoal(goal);
               },
             );
           },
