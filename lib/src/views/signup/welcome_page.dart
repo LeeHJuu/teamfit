@@ -7,8 +7,6 @@ import 'package:teamfit/src/views/home/home_page.dart';
 import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
 
 class WelcomePage extends ConsumerWidget {
-  bool _isPossible = true;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -38,10 +36,12 @@ class WelcomePage extends ConsumerWidget {
   NextStepBottomButton _nextButton(WidgetRef ref, BuildContext context) {
     return NextStepBottomButton(
       title: 'signin_page.welcome.button_text'.tr(),
-      isPossible: _isPossible,
-      moveNext: () {
+      isPossible: true,
+      moveNext: () async {
         final loginVM = ref.read(loginViewModel.notifier);
-        loginVM.uploadUserData();
+
+        // 회원가입 완료 - 모든 임시 데이터를 Firebase에 저장
+        await loginVM.completeSignup();
 
         Navigator.pushAndRemoveUntil(
           context,

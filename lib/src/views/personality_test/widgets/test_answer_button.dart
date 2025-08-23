@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/viewmodels/personality_test_view_model.dart';
@@ -49,7 +50,26 @@ class _TestAnswerButtonState extends State<TestAnswerButton> {
                   setState(() {
                     buttonColor = CustomColor.gray_95;
                   });
-                  widget.vm.nextQuestion(context, widget.index);
+                  // 문자열 인덱스를 PersonalityType으로 변환
+                  PersonalityType personalityType;
+                  switch (widget.index) {
+                    case 'D':
+                      personalityType = PersonalityType.D;
+                      break;
+                    case 'I':
+                      personalityType = PersonalityType.I;
+                      break;
+                    case 'S':
+                      personalityType = PersonalityType.S;
+                      break;
+                    case 'C':
+                      personalityType = PersonalityType.C;
+                      break;
+                    default:
+                      personalityType = PersonalityType.D; // 기본값
+                  }
+
+                  widget.vm.nextQuestion(context, personalityType);
                 });
               },
               child: Align(

@@ -49,7 +49,7 @@ class UserService {
     }
   }
 
-  // user정보 가져오기
+  // user정보 가져오기 (일회성 - 기존 호환성 유지)
   Future<UserData?> fetchUser() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -71,6 +71,30 @@ class UserService {
     } catch (e) {
       throw Exception('No user found with uid: $e');
     }
+  }
+
+  // 실시간 user 정보 스트림
+  Stream<UserData?> getUserStream() {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return Stream.value(null);
+    }
+
+    return _firestore.collection('user').doc(user.uid).snapshots().map((
+      snapshot,
+    ) {
+      if (!snapshot.exists || snapshot.data() == null) {
+        return null;
+      }
+
+      try {
+        return UserData.fromJson(snapshot.data() as Map<String, dynamic>);
+      } catch (e) {
+        print('UserService::getUserStream parsing error: $e');
+        return null;
+      }
+    });
   }
 
   // 사용자 존재 여부 확인
@@ -108,19 +132,6 @@ class UserService {
       print('UserService::updatePersonalityScores $e');
       throw Exception('Failed to update personality scores: $e');
     }
-  }
-
-  /// 성격 유형 업데이트 (단일 타입 - 하위 호환성 유지)
-  /// @deprecated 이제 updatePersonalityScores를 사용하세요
-  Future<void> updatePersonalityType(PersonalityType personalityType) async {
-    // 단일 타입을 Map 형태로 변환하여 저장
-    final scores = <PersonalityType, int>{
-      PersonalityType.D: personalityType == PersonalityType.D ? 1 : 0,
-      PersonalityType.I: personalityType == PersonalityType.I ? 1 : 0,
-      PersonalityType.S: personalityType == PersonalityType.S ? 1 : 0,
-      PersonalityType.C: personalityType == PersonalityType.C ? 1 : 0,
-    };
-    await updatePersonalityScores(scores);
   }
 
   // 사용자 의견 전송 (sendFeedback의 별칭)

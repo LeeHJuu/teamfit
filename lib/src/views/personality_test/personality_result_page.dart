@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/viewmodels/personality_test_view_model.dart';
 import 'package:teamfit/src/views/home/home_page.dart';
 import 'package:teamfit/src/views/personality_test/personailty_test_page.dart';
@@ -137,15 +136,29 @@ class PersonalityResultPage extends StatelessWidget {
               Expanded(
                 child: FilledButton(
                   onPressed: () async {
-                    final vm = ref.read(personalityTestViewModel.notifier);
-                    await vm.saveResultToUser(); // 결과를 유저 정보에 저장 (비동기 처리)
-                    ref.read(loginViewModel.notifier).setUserPersonalityType();
+                    try {
+                      final vm = ref.read(personalityTestViewModel.notifier);
 
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                      (route) => false,
-                    );
+                      // 결과를 서버에 저장 (실시간 스트림을 통해 자동으로 loginViewModel 상태 업데이트됨)
+                      await vm.saveResultToUser();
+
+                      // 홈 화면으로 이동
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                        (route) => false,
+                      );
+                    } catch (error) {
+                      // 에러 처리
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('결과 저장에 실패했습니다. 다시 시도해 주세요.'),
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 3),
+                        ),
+                      );
+                      print('성향테스트 결과 저장 실패: $error');
+                    }
                   },
                   child: Text('팀 찾으러 가기'),
                 ),
