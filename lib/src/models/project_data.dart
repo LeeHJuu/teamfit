@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'project_recruit_info.dart';
 import 'schedule_data.dart';
 import '../config/enums.dart';
 
 /// 프로젝트 데이터 모델
-/// 팀 프로젝트의 전반적인 정보와 관리 데이터를 포함
+/// 팀 프로젝트의 관리 정보를 포함 (모집 정보는 별도 분리)
 class ProjectData {
   /// 프로젝트 고유 ID
   String id;
@@ -24,8 +23,8 @@ class ProjectData {
   /// 프로젝트 지원자 사용자 ID 목록 (승인 대기 중)
   List<String> applicantIds;
 
-  /// 프로젝트 모집 정보 (모집글 작성 시 입력한 정보)
-  ProjectRecruitInfo recruitInfo;
+  /// 프로젝트 모집 정보 문서 ID (ProjectRecruitInfo 참조)
+  String? recruitInfoId;
 
   /// 프로젝트 상태 (모집중, 진행중, 완료 등)
   ProjectStatus status;
@@ -49,7 +48,7 @@ class ProjectData {
     required this.leaderId,
     this.memberIds = const [],
     this.applicantIds = const [],
-    required this.recruitInfo,
+    this.recruitInfoId,
     this.status = ProjectStatus.recruiting,
     this.schedules = const [],
     this.workTimes = const {},
@@ -65,7 +64,7 @@ class ProjectData {
       leaderId: json['leaderId'] ?? '',
       memberIds: List<String>.from(json['memberIds'] ?? []),
       applicantIds: List<String>.from(json['applicantIds'] ?? []),
-      recruitInfo: ProjectRecruitInfo.fromJson(json['recruitInfo'] ?? {}),
+      recruitInfoId: json['recruitInfoId'],
       status: _parseProjectStatus(json['status']) ?? ProjectStatus.recruiting,
       schedules:
           (json['schedules'] as List?)
@@ -91,7 +90,7 @@ class ProjectData {
       'leaderId': leaderId,
       'memberIds': memberIds,
       'applicantIds': applicantIds,
-      'recruitInfo': recruitInfo.toJson(),
+      'recruitInfoId': recruitInfoId,
       'status': status.name,
       'schedules': schedules.map((schedule) => schedule.toJson()).toList(),
       'workTimes': workTimes.map(

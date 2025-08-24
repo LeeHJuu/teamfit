@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../config/enums.dart';
 import 'recruit_member.dart';
 
 /// 프로젝트 모집 정보 모델
-/// 모집글 작성 시 입력하는 프로젝트 상세 정보
+/// 모집글 작성 시 입력하는 프로젝트 상세 정보 (별도 컬렉션으로 분리)
 class ProjectRecruitInfo {
+  /// 모집 정보 고유 ID
+  String id;
+
+  /// 연관된 프로젝트 ID
+  String projectId;
+
   /// 프로젝트 대표 이미지 (선택적)
   String? projectImage;
 
@@ -34,7 +41,21 @@ class ProjectRecruitInfo {
   /// 프로젝트 목표 (포트폴리오/창업/취업 등)
   UserGoal? projectGoal;
 
+  /// 모집글 작성자 ID (프로젝트 리더)
+  String authorId;
+
+  /// 모집글 생성일
+  DateTime createdAt;
+
+  /// 모집글 마지막 수정일
+  DateTime updatedAt;
+
+  /// 모집 완료 여부
+  bool isCompleted;
+
   ProjectRecruitInfo({
+    required this.id,
+    required this.projectId,
     this.projectImage,
     required this.title,
     required this.introduction,
@@ -45,11 +66,16 @@ class ProjectRecruitInfo {
     this.passionLevel,
     this.careerLevel,
     this.projectGoal,
+    required this.authorId,
+    required this.createdAt,
+    required this.updatedAt,
+    this.isCompleted = false,
   });
 
-  // JSON 직렬화/역직렬화 메서드
   factory ProjectRecruitInfo.fromJson(Map<String, dynamic> json) {
     return ProjectRecruitInfo(
+      id: json['id'] ?? '',
+      projectId: json['projectId'] ?? '',
       projectImage: json['projectImage'],
       title: json['title'] ?? '',
       introduction: json['introduction'] ?? '',
@@ -64,11 +90,17 @@ class ProjectRecruitInfo {
       passionLevel: _parsePassionLevel(json['passionLevel']),
       careerLevel: _parseCareerLevel(json['experienceLevel']),
       projectGoal: _parseUserGoal(json['projectGoal']),
+      authorId: json['authorId'] ?? '',
+      createdAt: (json['createdAt'] as Timestamp).toDate(),
+      updatedAt: (json['updatedAt'] as Timestamp).toDate(),
+      isCompleted: json['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'projectId': projectId,
       'projectImage': projectImage,
       'title': title,
       'introduction': introduction,
@@ -80,10 +112,16 @@ class ProjectRecruitInfo {
       'passionLevel': passionLevel?.name,
       'experienceLevel': careerLevel?.name,
       'projectGoal': projectGoal?.name,
+      'authorId': authorId,
+      'createdAt': Timestamp.fromDate(createdAt),
+      'updatedAt': Timestamp.fromDate(updatedAt),
+      'isCompleted': isCompleted,
     };
   }
 
   ProjectRecruitInfo copyWith({
+    String? id,
+    String? projectId,
     String? projectImage,
     String? title,
     String? introduction,
@@ -94,8 +132,14 @@ class ProjectRecruitInfo {
     PassionLevel? passionLevel,
     ProjectMemberCareerLevel? careerLevel,
     UserGoal? projectGoal,
+    String? authorId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? isCompleted,
   }) {
     return ProjectRecruitInfo(
+      id: id ?? this.id,
+      projectId: projectId ?? this.projectId,
       projectImage: projectImage ?? this.projectImage,
       title: title ?? this.title,
       introduction: introduction ?? this.introduction,
@@ -106,6 +150,10 @@ class ProjectRecruitInfo {
       passionLevel: passionLevel ?? this.passionLevel,
       careerLevel: careerLevel ?? this.careerLevel,
       projectGoal: projectGoal ?? this.projectGoal,
+      authorId: authorId ?? this.authorId,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 

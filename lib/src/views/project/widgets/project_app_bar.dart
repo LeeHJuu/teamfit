@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 
 class ProjectAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -7,6 +8,8 @@ class ProjectAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: CustomColor.primary_60,
+      foregroundColor: Colors.white,
       title: Row(
         children: [
           Text('무슨팀'),

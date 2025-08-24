@@ -18,7 +18,7 @@ class ShadowBoxContainer extends StatelessWidget {
             color: Colors.black12,
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: Offset(0, 0),
           ),
         ],
       ),

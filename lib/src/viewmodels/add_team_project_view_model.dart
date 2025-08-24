@@ -44,22 +44,51 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
     );
   }
 
+  // ProjectRecruitInfo 생성 헬퍼 메서드
+  ProjectRecruitInfo _createDefaultRecruitInfo({
+    String? id,
+    String? projectId,
+    String? projectImage,
+    String? title,
+    String? introduction,
+    String? teamName,
+    ProjectDuration? duration,
+    MeetingType? meetingType,
+    List<RecruitMember>? recruitMembers,
+    PassionLevel? passionLevel,
+    ProjectMemberCareerLevel? careerLevel,
+    UserGoal? projectGoal,
+    String? authorId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? isCompleted,
+  }) {
+    return ProjectRecruitInfo(
+      id: id ?? '',
+      projectId: projectId ?? '',
+      projectImage: projectImage,
+      title: title ?? '',
+      introduction: introduction ?? '',
+      teamName: teamName ?? '',
+      duration: duration ?? ProjectDuration.oneToSixMonths,
+      meetingType: meetingType ?? MeetingType.online,
+      recruitMembers: recruitMembers ?? [],
+      passionLevel: passionLevel ?? PassionLevel.any,
+      careerLevel: careerLevel ?? ProjectMemberCareerLevel.newbie,
+      projectGoal: projectGoal ?? UserGoal.portfolio,
+      authorId: authorId ?? '',
+      createdAt: createdAt ?? DateTime.now(),
+      updatedAt: updatedAt ?? DateTime.now(),
+      isCompleted: isCompleted ?? false,
+    );
+  }
+
   // 프로젝트 목표 설정
   void setProjectGoal(UserGoal projectGoal) {
     final currentInfo = state.projectInfo;
     final updatedInfo =
         currentInfo?.copyWith(projectGoal: projectGoal) ??
-        ProjectRecruitInfo(
-          title: '',
-          introduction: '',
-          teamName: '',
-          duration: ProjectDuration.oneToSixMonths,
-          meetingType: MeetingType.online,
-          recruitMembers: [],
-          passionLevel: PassionLevel.any,
-          careerLevel: ProjectMemberCareerLevel.newbie,
-          projectGoal: projectGoal,
-        );
+        _createDefaultRecruitInfo(projectGoal: projectGoal);
 
     state = state.copyWith(projectInfo: updatedInfo);
   }
@@ -77,17 +106,10 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
           title: title,
           introduction: introduction,
         ) ??
-        ProjectRecruitInfo(
+        _createDefaultRecruitInfo(
+          projectImage: projectImage,
           title: title,
           introduction: introduction,
-          teamName: '',
-          duration: ProjectDuration.oneToSixMonths,
-          meetingType: MeetingType.online,
-          recruitMembers: [],
-          passionLevel: PassionLevel.any,
-          careerLevel: ProjectMemberCareerLevel.newbie,
-          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
-          projectImage: projectImage,
         );
 
     state = state.copyWith(projectInfo: updatedInfo);
@@ -106,16 +128,10 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
           duration: duration,
           meetingType: meetingType,
         ) ??
-        ProjectRecruitInfo(
-          title: '',
-          introduction: '',
+        _createDefaultRecruitInfo(
           teamName: teamName,
           duration: duration,
           meetingType: meetingType,
-          recruitMembers: [],
-          passionLevel: PassionLevel.any,
-          careerLevel: ProjectMemberCareerLevel.newbie,
-          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
     state = state.copyWith(projectInfo: updatedInfo);
@@ -126,17 +142,7 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
     final currentInfo = state.projectInfo;
     final updatedInfo =
         currentInfo?.copyWith(recruitMembers: recruitMembers) ??
-        ProjectRecruitInfo(
-          title: '',
-          introduction: '',
-          teamName: '',
-          duration: ProjectDuration.oneToSixMonths,
-          meetingType: MeetingType.online,
-          recruitMembers: recruitMembers,
-          passionLevel: PassionLevel.any,
-          careerLevel: ProjectMemberCareerLevel.newbie,
-          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
-        );
+        _createDefaultRecruitInfo(recruitMembers: recruitMembers);
 
     state = state.copyWith(projectInfo: updatedInfo);
   }
@@ -152,16 +158,9 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
           passionLevel: passionLevel,
           careerLevel: careerLevel,
         ) ??
-        ProjectRecruitInfo(
-          title: '',
-          introduction: '',
-          teamName: '',
-          duration: ProjectDuration.oneToSixMonths,
-          meetingType: MeetingType.online,
-          recruitMembers: [],
+        _createDefaultRecruitInfo(
           passionLevel: passionLevel,
           careerLevel: careerLevel,
-          projectGoal: UserGoal.portfolio, // 기본값: 포트폴리오 제작
         );
 
     state = state.copyWith(projectInfo: updatedInfo);
@@ -194,6 +193,8 @@ class AddTeamProjectViewModel extends AutoDisposeNotifier<AddTeamProjectState> {
     if (projectInfo == null) {
       throw Exception('프로젝트 정보가 없습니다.');
     }
+
+    // ProjectService의 새로운 createProject 메서드 호출
     await ref.read(projectServiceProvider).createProject(projectInfo);
   }
 }

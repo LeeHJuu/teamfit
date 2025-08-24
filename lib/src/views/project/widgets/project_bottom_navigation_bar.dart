@@ -7,18 +7,22 @@ class ProjectBottomNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(projectViewModel);
     final vm = ref.read(projectViewModel.notifier);
 
     return BottomNavigationBar(
-      currentIndex: state,
+      currentIndex: 0,
       onTap: (value) {
         vm.onIndexChanged(value, context);
       },
       type: BottomNavigationBarType.fixed,
-      fixedColor: Colors.amber,
+      selectedItemColor: Colors.amber,
       unselectedItemColor: Colors.amber,
       showUnselectedLabels: true,
+      showSelectedLabels: true,
+      selectedFontSize: 14,
+      unselectedFontSize: 14,
+      selectedIconTheme: IconThemeData(size: 24),
+      unselectedIconTheme: IconThemeData(size: 24),
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '채팅'),
         BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '달력'),

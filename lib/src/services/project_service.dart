@@ -11,8 +11,8 @@ class ProjectService {
   ProjectService(this._firestore);
   final FirebaseFirestore _firestore;
 
-  // 프로젝트 CRUD (모집글 등록 = 프로젝트 생성)
-  Future<String> createProject(ProjectRecruitInfo projectInfo) async {
+  // 프로젝트 생성 (모집글 등록)
+  Future<String> createProject(ProjectRecruitInfo recruitInfo) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -20,27 +20,43 @@ class ProjectService {
       }
 
       final projectRef = _firestore.collection('projects').doc();
+      final recruitInfoRef =
+          _firestore.collection('project_recruit_infos').doc();
       final now = DateTime.now();
 
+      // 모집 정보 저장
+      final recruitInfoData = recruitInfo.copyWith(
+        id: recruitInfoRef.id,
+        projectId: projectRef.id,
+        authorId: user.uid,
+        createdAt: now,
+        updatedAt: now,
+      );
+
+      // 프로젝트 데이터 생성
       final projectData = ProjectData(
         id: projectRef.id,
-        title: projectInfo.title,
-        description: projectInfo.introduction,
+        title: recruitInfo.title,
+        description: recruitInfo.introduction,
         leaderId: user.uid,
         memberIds: [user.uid], // 팀장은 기본적으로 멤버에 포함
-        recruitInfo: projectInfo,
+        recruitInfoId: recruitInfoRef.id, // 모집 정보 ID 참조
         status: ProjectStatus.recruiting,
         createdAt: now,
         updatedAt: now,
       );
 
-      await projectRef.set(projectData.toJson());
+      // 배치 작업으로 동시 저장
+      final batch = _firestore.batch();
+      batch.set(projectRef, projectData.toJson());
+      batch.set(recruitInfoRef, recruitInfoData.toJson());
 
       // 사용자의 projectIds에 추가
-      await _firestore.collection('user').doc(user.uid).update({
+      batch.update(_firestore.collection('users').doc(user.uid), {
         'projectIds': FieldValue.arrayUnion([projectRef.id]),
       });
 
+      await batch.commit();
       return projectRef.id;
     } catch (e) {
       print('ProjectService::createProject $e');
@@ -48,6 +64,7 @@ class ProjectService {
     }
   }
 
+  // 프로젝트 조회 (모집 정보 제외)
   Future<ProjectData?> getProject(String projectId) async {
     try {
       final projectDoc =
@@ -61,6 +78,133 @@ class ProjectService {
     } catch (e) {
       print('ProjectService::getProject $e');
       throw Exception('Failed to get project: $e');
+    }
+  }
+
+  // 모집 정보 조회
+  Future<ProjectRecruitInfo?> getProjectRecruitInfo(
+    String recruitInfoId,
+  ) async {
+    try {
+      final recruitDoc =
+          await _firestore
+              .collection('project_recruit_infos')
+              .doc(recruitInfoId)
+              .get();
+
+      if (!recruitDoc.exists) {
+        return null;
+      }
+
+      return ProjectRecruitInfo.fromJson(
+        recruitDoc.data() as Map<String, dynamic>,
+      );
+    } catch (e) {
+      print('ProjectService::getProjectRecruitInfo $e');
+      throw Exception('Failed to get project recruit info: $e');
+    }
+  }
+
+  // 모집글 목록 조회 (홍보글 전용)
+  Future<List<ProjectRecruitInfo>> getRecruitInfoList({
+    String? keyword,
+    List<String>? techStack,
+    String? duration,
+    String? meetingType,
+    int limit = 20,
+  }) async {
+    try {
+      Query query = _firestore
+          .collection('project_recruit_infos')
+          .where('isCompleted', isEqualTo: false)
+          .orderBy('createdAt', descending: true)
+          .limit(limit);
+
+      final querySnapshot = await query.get();
+      List<ProjectRecruitInfo> recruitInfos =
+          querySnapshot.docs
+              .map(
+                (doc) => ProjectRecruitInfo.fromJson(
+                  doc.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList();
+
+      // 클라이언트 사이드 필터링
+      if (keyword != null && keyword.isNotEmpty) {
+        recruitInfos =
+            recruitInfos
+                .where(
+                  (info) =>
+                      info.title.toLowerCase().contains(
+                        keyword.toLowerCase(),
+                      ) ||
+                      info.introduction.toLowerCase().contains(
+                        keyword.toLowerCase(),
+                      ),
+                )
+                .toList();
+      }
+
+      if (duration != null) {
+        recruitInfos =
+            recruitInfos
+                .where((info) => info.duration?.name == duration)
+                .toList();
+      }
+
+      if (meetingType != null) {
+        recruitInfos =
+            recruitInfos
+                .where((info) => info.meetingType?.name == meetingType)
+                .toList();
+      }
+
+      return recruitInfos;
+    } catch (e) {
+      print('ProjectService::getRecruitInfoList $e');
+      throw Exception('Failed to get recruit info list: $e');
+    }
+  }
+
+  // 모집 완료 처리
+  Future<void> completeRecruitment(String projectId) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw Exception('User is not signed in.');
+      }
+
+      final project = await getProject(projectId);
+      if (project == null || project.leaderId != user.uid) {
+        throw Exception('Only project leader can complete recruitment.');
+      }
+
+      final batch = _firestore.batch();
+
+      // 프로젝트 상태 변경
+      batch.update(_firestore.collection('projects').doc(projectId), {
+        'status': ProjectStatus.inProgress.name,
+        'updatedAt': Timestamp.fromDate(DateTime.now()),
+      });
+
+      // 모집글 완료 처리
+      if (project.recruitInfoId != null) {
+        batch.update(
+          _firestore
+              .collection('project_recruit_infos')
+              .doc(project.recruitInfoId!),
+          {
+            'isCompleted': true,
+            'updatedAt': Timestamp.fromDate(DateTime.now()),
+          },
+        );
+      }
+
+      await batch.commit();
+    } catch (e) {
+      print('ProjectService::completeRecruitment $e');
+      throw Exception('Failed to complete recruitment: $e');
     }
   }
 
@@ -125,9 +269,9 @@ class ProjectService {
         throw Exception('Only project leader can delete project.');
       }
 
-      // 모든 멤버의 projectIds에서 제거
       final batch = _firestore.batch();
 
+      // 모든 멤버의 projectIds에서 제거
       for (String memberId in project.memberIds) {
         final userRef = _firestore.collection('users').doc(memberId);
         batch.update(userRef, {
@@ -136,8 +280,16 @@ class ProjectService {
       }
 
       // 프로젝트 삭제
-      final projectRef = _firestore.collection('projects').doc(projectId);
-      batch.delete(projectRef);
+      batch.delete(_firestore.collection('projects').doc(projectId));
+
+      // 연관된 모집글도 삭제
+      if (project.recruitInfoId != null) {
+        batch.delete(
+          _firestore
+              .collection('project_recruit_infos')
+              .doc(project.recruitInfoId!),
+        );
+      }
 
       await batch.commit();
     } catch (e) {
@@ -146,7 +298,8 @@ class ProjectService {
     }
   }
 
-  // 검색 및 필터링
+  // 기존 searchProjects 메서드는 getRecruitInfoList로 대체됨
+  @Deprecated('Use getRecruitInfoList instead')
   Future<List<ProjectData>> searchProjects({
     String? keyword,
     List<String>? techStack,
@@ -154,53 +307,20 @@ class ProjectService {
     String? meetingType,
   }) async {
     try {
-      Query query = _firestore
-          .collection('projects')
-          .where('status', isEqualTo: ProjectStatus.recruiting.name)
-          .orderBy('createdAt', descending: true);
+      // 레거시 지원을 위해 유지, 하지만 새로운 방식 사용 권장
+      final recruitInfos = await getRecruitInfoList(
+        keyword: keyword,
+        duration: duration,
+        meetingType: meetingType,
+      );
 
-      final querySnapshot = await query.get();
-      List<ProjectData> projects =
-          querySnapshot.docs
-              .map(
-                (doc) =>
-                    ProjectData.fromJson(doc.data() as Map<String, dynamic>),
-              )
-              .toList();
-
-      // 클라이언트 사이드 필터링
-      if (keyword != null && keyword.isNotEmpty) {
-        projects =
-            projects
-                .where(
-                  (project) =>
-                      project.title.toLowerCase().contains(
-                        keyword.toLowerCase(),
-                      ) ||
-                      project.description.toLowerCase().contains(
-                        keyword.toLowerCase(),
-                      ),
-                )
-                .toList();
-      }
-
-      if (duration != null) {
-        projects =
-            projects
-                .where(
-                  (project) => project.recruitInfo.duration?.name == duration,
-                )
-                .toList();
-      }
-
-      if (meetingType != null) {
-        projects =
-            projects
-                .where(
-                  (project) =>
-                      project.recruitInfo.meetingType?.name == meetingType,
-                )
-                .toList();
+      // ProjectData로 변환 (모집 정보는 제외)
+      List<ProjectData> projects = [];
+      for (var recruitInfo in recruitInfos) {
+        final project = await getProject(recruitInfo.projectId);
+        if (project != null) {
+          projects.add(project);
+        }
       }
 
       return projects;
