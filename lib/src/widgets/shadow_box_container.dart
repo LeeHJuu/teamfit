@@ -9,7 +9,7 @@ class ShadowBoxContainer extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

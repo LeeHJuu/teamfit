@@ -1,18 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/project_preview_info_box.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/models/project_recruit_info.dart';
+import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class ProjectItemBox extends StatelessWidget {
-  const ProjectItemBox({super.key});
+  final ProjectRecruitInfo recruitInfo;
+  const ProjectItemBox(this.recruitInfo, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 20),
-      child: Row(
+    return ShadowBoxContainer(
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(color: Colors.green, width: 65, height: 65),
+          Container(color: Colors.green, width: 80, height: 80),
           SizedBox(width: 10),
-          ProjectPreviewInfoBox(),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '사이드 프로젝트 백엔드/디자이너 모집',
+                  style: CustomText.Subtitle_M_16,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '사이드 프로젝트 백엔드/디자이너 모집',
+                  style: CustomText.Body_Light_XS_12,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

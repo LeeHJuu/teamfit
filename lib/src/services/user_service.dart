@@ -10,7 +10,7 @@ class UserService {
   // 사용자 정보 파이어베이스에 업로드
   Future<void> uploadUserData(UserData userData) async {
     try {
-      final userDocRef = _firestore.collection('user').doc(userData.uid);
+      final userDocRef = _firestore.collection('users').doc(userData.uid);
       await userDocRef.set(userData.toJson());
     } catch (e) {
       print(e);
@@ -27,7 +27,7 @@ class UserService {
 
       // 재인증
       await currentUser.reauthenticateWithCredential(authcredential);
-      final userRef = _firestore.collection('user').doc(currentUser.uid);
+      final userRef = _firestore.collection('users').doc(currentUser.uid);
 
       await userRef.delete();
       await currentUser.delete();
@@ -57,7 +57,7 @@ class UserService {
       if (user == null) {
         throw Exception('User is not signed in.');
       }
-      final userDocRef = _firestore.collection('user').doc(user.uid);
+      final userDocRef = _firestore.collection('users').doc(user.uid);
       final userDoc = await userDocRef.get();
 
       if (!userDoc.exists) {
@@ -81,7 +81,7 @@ class UserService {
       return Stream.value(null);
     }
 
-    return _firestore.collection('user').doc(user.uid).snapshots().map((
+    return _firestore.collection('users').doc(user.uid).snapshots().map((
       snapshot,
     ) {
       if (!snapshot.exists || snapshot.data() == null) {
@@ -101,7 +101,7 @@ class UserService {
   Future<bool> findUser(UserCredential userCredential) async {
     try {
       final user = userCredential.user;
-      final userDocRef = _firestore.collection('user').doc(user?.uid);
+      final userDocRef = _firestore.collection('users').doc(user?.uid);
       final userDoc = await userDocRef.get();
       return userDoc.exists;
     } catch (e) {
@@ -126,7 +126,7 @@ class UserService {
         scoresMap[entry.key.name] = entry.value;
       }
 
-      final userDocRef = _firestore.collection('user').doc(user.uid);
+      final userDocRef = _firestore.collection('users').doc(user.uid);
       await userDocRef.update({'detailData.personalityScores': scoresMap});
     } catch (e) {
       print('UserService::updatePersonalityScores $e');

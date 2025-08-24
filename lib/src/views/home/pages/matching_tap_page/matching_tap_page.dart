@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/ai_recommended_team_projects.dart';
+import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/recommended_team_projects.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/all_team_projects.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/make_team_button.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/team_search_tap.dart';
@@ -10,16 +10,14 @@ class MatchingTapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       background: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
-        child: ListView(
-          children: [
-            TeamSearchTap(),
-            MakeTeamButton(),
-            AIRecommendedTeamProjects(),
-            AllTeamProjects(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          SizedBox(height: 10),
+          Padding(padding: const EdgeInsets.all(20), child: TeamSearchTap()),
+          Padding(padding: const EdgeInsets.all(20), child: MakeTeamButton()),
+          RecommendedTeamProjects(),
+          AllTeamProjects(),
+        ],
       ),
     );
   }

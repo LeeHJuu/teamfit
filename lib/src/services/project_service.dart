@@ -117,7 +117,7 @@ class ProjectService {
       Query query = _firestore
           .collection('project_recruit_infos')
           .where('isCompleted', isEqualTo: false)
-          .orderBy('createdAt', descending: true)
+          // .orderBy('createdAt', descending: true)
           .limit(limit);
 
       final querySnapshot = await query.get();
