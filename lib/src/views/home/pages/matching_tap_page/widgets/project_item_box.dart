@@ -4,8 +4,8 @@ import 'package:teamfit/src/models/project_recruit_info.dart';
 import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class ProjectItemBox extends StatelessWidget {
-  final ProjectRecruitInfo recruitInfo;
-  const ProjectItemBox(this.recruitInfo, {super.key});
+  final ProjectRecruitInfo item;
+  const ProjectItemBox(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +13,17 @@ class ProjectItemBox extends StatelessWidget {
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(color: Colors.green, width: 80, height: 80),
+          if (item.projectImage != null)
+            Container(color: Colors.green, width: 80, height: 80)
+          else
+            SizedBox(),
           SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '사이드 프로젝트 백엔드/디자이너 모집',
+                  item.title,
                   style: CustomText.Subtitle_M_16,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
