@@ -4,6 +4,8 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/views/project/detail/widgets/project_app_bar.dart';
 import 'package:teamfit/src/views/project/detail/widgets/project_bottom_navigation_bar.dart';
 import 'package:teamfit/src/views/project/detail/widgets/project_week_date_bar.dart';
+import 'package:teamfit/src/views/project/detail/widgets/all_view_content.dart';
+import 'package:teamfit/src/views/project/detail/widgets/progress_content.dart';
 import 'package:teamfit/src/widgets/rounded_container.dart';
 
 class ProjectPage extends ConsumerStatefulWidget {
@@ -103,19 +105,11 @@ class _ProjectPageState extends ConsumerState<ProjectPage> {
   Widget _buildTabContent() {
     switch (selectedTabIndex) {
       case 0:
-        return _buildAllViewContent();
+        return AllViewContent();
       case 1:
-        return _buildProgressContent();
+        return ProgressContent();
       default:
         return Container();
     }
-  }
-
-  Widget _buildAllViewContent() {
-    return Container(child: Center(child: Text('전체 보기 내용')));
-  }
-
-  Widget _buildProgressContent() {
-    return Container(child: Center(child: Text('진행 현황 내용')));
   }
 }
