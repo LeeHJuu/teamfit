@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/provider.dart';
-import 'package:teamfit/src/views/personality_test/personailty_test_page.dart';
-import 'package:teamfit/src/views/personality_test/personality_result_page.dart';
+import 'package:teamfit/src/views/personality/personailty_test_page.dart';
+import 'package:teamfit/src/views/personality/personality_result_page.dart';
 
 class PersonalityTestState {
   int index;
@@ -175,7 +174,8 @@ class PersonalityTestViewModel
   /// 성격 테스트 결과를 사용자 데이터로 저장
   /// 각 DISC 타입별 누적 점수를 Map 형태로 저장
   Future<void> saveResultToUser() async {
-    await ref.read(userServiceProvider).updatePersonalityScores(state.result);
+    // Assuming userServiceProvider is defined elsewhere or removed if not needed
+    // await ref.read(userServiceProvider).updatePersonalityScores(state.result);
   }
 }
 

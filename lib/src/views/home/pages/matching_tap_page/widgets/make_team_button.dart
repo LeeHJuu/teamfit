@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/views/add_team_project/add_project_goal_page.dart';
+import 'package:teamfit/src/views/project/create/add_project_goal_page.dart';
 
 class MakeTeamButton extends StatelessWidget {
   const MakeTeamButton({super.key});

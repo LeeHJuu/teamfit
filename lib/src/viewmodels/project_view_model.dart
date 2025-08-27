@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teamfit/src/views/project/project_page.dart';
-import 'package:teamfit/src/views/project_callendar_tap_page/project_callendar_tap_page.dart';
-import 'package:teamfit/src/views/project_chat_tap_page/project_chat_tap_page.dart';
-import 'package:teamfit/src/views/project_member_tap_page/project_member_tap_page.dart';
-import 'package:teamfit/src/views/project_setting_tap_page/project_setting_tap_page.dart';
+import 'package:teamfit/src/views/project/detail/schedule/project_calendar_page.dart';
+import 'package:teamfit/src/views/project/detail/chat/project_chat_tap_page.dart';
+import 'package:teamfit/src/views/project/detail/members/project_member_tap_page.dart';
+import 'package:teamfit/src/views/project/detail/project_page.dart';
+import 'package:teamfit/src/views/project/detail/settings/project_setting_tap_page.dart';
 
 class ProjectViewModel extends Notifier<int> {
   @override
@@ -21,7 +21,7 @@ class ProjectViewModel extends Notifier<int> {
             case 0:
               return ProjectChatTapPage();
             case 1:
-              return ProjectCallendarTapPage();
+              return ProjectCalendarPage();
             case 2:
               return ProjectMemberTapPage();
             case 3:

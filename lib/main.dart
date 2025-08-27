@@ -9,7 +9,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:teamfit/firebase_options.dart';
 import 'package:teamfit/src/config/theme/theme.dart';
 import 'package:teamfit/src/views/home/home_page.dart';
-import 'package:teamfit/src/views/login/login_page.dart';
+import 'package:teamfit/src/views/auth/login/login_page.dart';
+import 'package:teamfit/src/views/project/detail/schedule/project_calendar_page.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -65,7 +66,8 @@ class MyApp extends StatelessWidget {
     if (isLogined) {
       return HomePage();
     } else {
-      return LoginPage();
+      // return LoginPage();
+      return ProjectCalendarPage();
     }
   }
 }

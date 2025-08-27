@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
-import 'package:teamfit/src/views/project/project_page.dart';
-import 'package:teamfit/src/views/personality_test/personality_test_alert.dart';
+import 'package:teamfit/src/views/personality/personality_test_alert.dart';
+import 'package:teamfit/src/views/project/detail/project_page.dart';
 
 class HomeTapPage extends ConsumerStatefulWidget {
   const HomeTapPage({super.key});
