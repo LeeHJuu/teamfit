@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ShadowBoxContainer extends StatelessWidget {
-  Widget body;
-  ShadowBoxContainer(this.body);
+  Widget child;
+  ShadowBoxContainer({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,14 @@ class ShadowBoxContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 5,
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 6,
+            spreadRadius: 1,
             offset: Offset(0, 0),
           ),
         ],
       ),
-      child: body,
+      child: child,
     );
   }
 }

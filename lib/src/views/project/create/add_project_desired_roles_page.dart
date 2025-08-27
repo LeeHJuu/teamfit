@@ -74,7 +74,7 @@ class _AddProjectDesiredRolesPageState
                       );
                     },
                     child: ShadowBoxContainer(
-                      Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [Icon(Icons.add), Text('추가하기')],
                       ),

@@ -18,7 +18,7 @@ class DesiredRoleBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowBoxContainer(
-      Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomInputItem(title: '직무', body: role.label),

@@ -72,7 +72,7 @@ class _ProjectCalendarPageState extends State<ProjectCalendarPage> {
       body: RoundedContainer(
         background: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20),
           child: ListView(
             children: [
               // 스케쥴 데이터를 역순으로 표시 (높은 회차부터)

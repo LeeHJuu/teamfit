@@ -3,6 +3,7 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/views/project/detail/widgets/motivational_card.dart';
 import 'package:teamfit/src/views/project/detail/widgets/task_item.dart';
 import 'package:teamfit/src/views/project/detail/widgets/member_progress_item.dart';
+import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class ProgressContent extends StatelessWidget {
   const ProgressContent({super.key});
@@ -12,7 +13,7 @@ class ProgressContent extends StatelessWidget {
     return ListView(
       children: [
         // 동기부여 메시지
-        Padding(padding: EdgeInsets.all(16), child: MotivationalCard()),
+        MotivationalCard(),
         SizedBox(height: 20),
 
         // 오늘의 할일
@@ -27,8 +28,8 @@ class ProgressContent extends StatelessWidget {
 
   // 오늘의 할일
   Widget _buildTodayTasks() {
-    return Padding(
-      padding: EdgeInsets.all(16),
+    return ShadowBoxContainer(
+      // padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -86,12 +87,12 @@ class ProgressContent extends StatelessWidget {
 
   // 멤버 진행 현황
   Widget _buildMemberProgressStatus() {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
             children: [
               Text('👀', style: TextStyle(fontSize: 20)),
               SizedBox(width: 8),
@@ -101,44 +102,44 @@ class ProgressContent extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 12),
-          MemberProgressItem(
-            role: '리더',
-            nickname: '냥냥이',
-            progress: 50,
-            totalTime: '3:21:23',
-            taskCount: 2,
-            taskDetails: [],
-            onPoke: () {
-              // TODO: 찌르기 기능
-            },
-          ),
-          SizedBox(height: 8),
-          MemberProgressItem(
-            role: '리더',
-            nickname: '냥냥이',
-            progress: 50,
-            totalTime: '3:21:23',
-            taskCount: 2,
-            taskDetails: ['24:59:59'],
-            onPoke: () {
-              // TODO: 찌르기 기능
-            },
-          ),
-          SizedBox(height: 8),
-          MemberProgressItem(
-            role: '리더',
-            nickname: '냥냥이',
-            progress: 50,
-            totalTime: '3:21:23',
-            taskCount: 2,
-            taskDetails: ['24:59:59', '24:59:59'],
-            onPoke: () {
-              // TODO: 찌르기 기능
-            },
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 12),
+        MemberProgressItem(
+          role: '리더',
+          nickname: '냥냥이',
+          progress: 50,
+          totalTime: '3:21:23',
+          taskCount: 2,
+          taskDetails: [],
+          onPoke: () {
+            // TODO: 찌르기 기능
+          },
+        ),
+        SizedBox(height: 8),
+        MemberProgressItem(
+          role: '리더',
+          nickname: '냥냥이',
+          progress: 50,
+          totalTime: '3:21:23',
+          taskCount: 2,
+          taskDetails: ['24:59:59'],
+          onPoke: () {
+            // TODO: 찌르기 기능
+          },
+        ),
+        SizedBox(height: 8),
+        MemberProgressItem(
+          role: '리더',
+          nickname: '냥냥이',
+          progress: 50,
+          totalTime: '3:21:23',
+          taskCount: 2,
+          taskDetails: ['24:59:59', '24:59:59'],
+          onPoke: () {
+            // TODO: 찌르기 기능
+          },
+        ),
+      ],
     );
   }
 }

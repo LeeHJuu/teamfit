@@ -10,7 +10,7 @@ class ProjectItemBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowBoxContainer(
-      Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (item.projectImage != null)

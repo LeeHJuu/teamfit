@@ -26,7 +26,7 @@ class RecommendedTeamProjectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowBoxContainer(
-      Column(
+      child: Column(
         children: [
           Container(width: double.infinity, height: 80, color: Colors.grey),
           Text('포트폴리오 제작'),

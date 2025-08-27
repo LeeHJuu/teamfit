@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class RemainingScheduleCard extends StatelessWidget {
   final int remainingCount;
@@ -13,19 +14,7 @@ class RemainingScheduleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+    return ShadowBoxContainer(
       child: Column(
         children: [
           Row(

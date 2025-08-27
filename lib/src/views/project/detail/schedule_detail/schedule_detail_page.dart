@@ -52,7 +52,7 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
       body: RoundedContainer(
         background: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               // 상단 회차 및 일정 입력 영역
