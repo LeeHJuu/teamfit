@@ -29,7 +29,6 @@ class ProgressContent extends StatelessWidget {
   // 오늘의 할일
   Widget _buildTodayTasks() {
     return ShadowBoxContainer(
-      // padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -91,7 +90,7 @@ class ProgressContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text('👀', style: TextStyle(fontSize: 20)),

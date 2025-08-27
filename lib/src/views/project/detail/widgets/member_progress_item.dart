@@ -94,7 +94,7 @@ class _MemberProgressItemState extends State<MemberProgressItem> {
           child: TextButton(
             onPressed: widget.onPoke,
             style: TextButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),

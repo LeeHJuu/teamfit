@@ -8,7 +8,7 @@ class ShadowBoxContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,

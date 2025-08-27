@@ -12,14 +12,11 @@ class AllViewContent extends StatelessWidget {
     return ListView(
       children: [
         // 남은 일정 알림 카드
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: RemainingScheduleCard(
-            remainingCount: 1,
-            onRecordPressed: () {
-              // TODO: 기록 기능 구현
-            },
-          ),
+        RemainingScheduleCard(
+          remainingCount: 1,
+          onRecordPressed: () {
+            // TODO: 기록 기능 구현
+          },
         ),
         SizedBox(height: 20),
 
@@ -28,27 +25,21 @@ class AllViewContent extends StatelessWidget {
         SizedBox(height: 20),
 
         // 진행 현황
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: ProgressStatusCard(round: 1, remainingDays: 3, progress: 0.5),
-        ),
+        ProgressStatusCard(round: 1, remainingDays: 3, progress: 0.5),
         SizedBox(height: 20),
 
         // 팀원 타이머 기록
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: TeamTimerRecords(
-            teamName: '무적팀',
-            records: [
-              TimerRecord(name: '서유리', time: '10:00:00'),
-              TimerRecord(name: '황동민', time: '8:25:00'),
-              TimerRecord(name: '황동민', time: '6:20:10'),
-              TimerRecord(name: '황동민', time: '8:25:00'),
-              TimerRecord(name: '황동민', time: '8:25:00'),
-              TimerRecord(name: '황동민', time: '8:25:00'),
-              TimerRecord(name: '황동민', time: '8:25:00'),
-            ],
-          ),
+        TeamTimerRecords(
+          teamName: '무적팀',
+          records: [
+            TimerRecord(name: '서유리', time: '10:00:00'),
+            TimerRecord(name: '황동민', time: '8:25:00'),
+            TimerRecord(name: '황동민', time: '6:20:10'),
+            TimerRecord(name: '황동민', time: '8:25:00'),
+            TimerRecord(name: '황동민', time: '8:25:00'),
+            TimerRecord(name: '황동민', time: '8:25:00'),
+            TimerRecord(name: '황동민', time: '8:25:00'),
+          ],
         ),
       ],
     );
@@ -58,7 +49,6 @@ class AllViewContent extends StatelessWidget {
   Widget _buildTodayTeamSchedule() {
     return Container(
       color: Color(0xFFFFF3F1),
-      padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

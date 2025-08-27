@@ -133,7 +133,7 @@ class TagSelectorWidget extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 20),
                     ),
                     child: Text(
                       '확인',
