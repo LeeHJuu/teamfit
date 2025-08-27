@@ -10,7 +10,7 @@ import 'package:teamfit/firebase_options.dart';
 import 'package:teamfit/src/config/theme/theme.dart';
 import 'package:teamfit/src/views/home/home_page.dart';
 import 'package:teamfit/src/views/auth/login/login_page.dart';
-import 'package:teamfit/src/views/project/detail/schedule/project_calendar_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -52,22 +52,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'TeamFit',
       themeMode: ThemeMode.light,
       theme: theme,
-      home: _startPage(),
+      home: _buildHomePage(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
     );
   }
 
-  Widget _startPage() {
-    // 로그인상태 확인
-    final isLogined = false;
-    if (isLogined) {
+  Widget _buildHomePage() {
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser != null) {
       return HomePage();
     } else {
       return LoginPage();
-      // return ProjectCalendarPage();
     }
   }
 }

@@ -102,11 +102,6 @@ class LoginViewModel extends StreamNotifier<UserData?> {
     await ref.read(userServiceProvider).sendUserOpinion(text);
   }
 
-  // 일회성 유저 데이터 조회 (기존 호환성 유지)
-  Future<UserData?> fetchUser() async {
-    return await ref.read(userServiceProvider).fetchUser();
-  }
-
   // 회원가입 시작 - 임시 데이터 초기화
   void startSignup(UserCredential userCredential) {
     final user = userCredential.user!;
