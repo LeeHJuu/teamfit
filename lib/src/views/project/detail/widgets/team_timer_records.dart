@@ -52,25 +52,22 @@ class TeamTimerRecords extends StatelessWidget {
       children: [
         Stack(
           children: [
-            CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.grey[300],
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Icon(Icons.person, color: Colors.grey[600], size: 30),
             ),
             Positioned(
-              top: 0,
-              left: 0,
-              child: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: CustomColor.primary_60,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.local_fire_department,
-                  color: Colors.white,
-                  size: 12,
-                ),
+              top: 2,
+              left: 2,
+              child: Icon(
+                Icons.local_fire_department,
+                color: CustomColor.primary_60,
+                size: 24,
               ),
             ),
           ],

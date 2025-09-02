@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/passion_record_button.dart';
 
 class RemainingScheduleCard extends StatelessWidget {
   final int remainingCount;
@@ -29,17 +30,7 @@ class RemainingScheduleCard extends StatelessWidget {
               ),
             ],
           ),
-          ElevatedButton(
-            onPressed: onRecordPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: CustomColor.primary_60,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            child: Text('기록하고 열정온도 올리기'),
-          ),
+          PassionRecordButton(onPressed: onRecordPressed),
         ],
       ),
     );

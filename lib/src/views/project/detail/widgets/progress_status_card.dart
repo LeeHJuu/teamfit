@@ -22,50 +22,51 @@ class ProgressStatusCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.hourglass_empty,
-                color: CustomColor.primary_60,
-                size: 24,
-              ),
-              SizedBox(width: 8),
-              Text(
-                '${round}회차 진행 현황',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
+          _buildHeader(),
           SizedBox(height: 12),
-          Text(
-            message,
-            style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-          ),
+          _buildMessage(),
           SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: LinearProgressIndicator(
-                  value: progress,
-                  backgroundColor: Colors.grey[300],
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    CustomColor.primary_60,
-                  ),
-                ),
-              ),
-              SizedBox(width: 12),
-              Text(
-                '${(progress * 100).toInt()}%',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: CustomColor.primary_60,
-                ),
-              ),
-            ],
-          ),
+          _buildProgressBar(),
         ],
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      children: [
+        Icon(Icons.hourglass_empty, color: CustomColor.primary_60, size: 24),
+        SizedBox(width: 8),
+        Text(
+          '${round}회차 진행 현황',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMessage() {
+    return Text(
+      message,
+      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+    );
+  }
+
+  Widget _buildProgressBar() {
+    return Row(
+      children: [
+        Expanded(
+          child: LinearProgressIndicator(
+            value: progress,
+            backgroundColor: Colors.grey[300],
+            valueColor: AlwaysStoppedAnimation<Color>(CustomColor.primary_60),
+            minHeight: 16,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        SizedBox(width: 12),
+        Text('${(progress * 100).toInt()}%'),
+      ],
     );
   }
 }

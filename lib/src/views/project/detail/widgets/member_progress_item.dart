@@ -31,7 +31,13 @@ class _MemberProgressItemState extends State<MemberProgressItem> {
 
   @override
   Widget build(BuildContext context) {
-    return ShadowBoxContainer(
+    return Container(
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -116,66 +122,38 @@ class _MemberProgressItemState extends State<MemberProgressItem> {
   Widget _buildProgressAndTimeRow() {
     return Row(
       children: [
-        // 진행율
-        Row(
-          children: [
-            Text(
-              '진행율',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black,
-                fontWeight: FontWeight.normal,
-              ),
+        // 진행률 박스 (노란색)
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Color(0xFFFFF3C1), // 연노랑
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            '진행률  ${widget.progress}%',
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(width: 8),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFF3F1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                '${widget.progress}%',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-
-        SizedBox(width: 24),
-
-        // 총 시간
-        Row(
-          children: [
-            Text(
-              '총 시간',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black,
-                fontWeight: FontWeight.normal,
-              ),
+        SizedBox(width: 16),
+        // 총 시간 박스 (파랑)
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Color(0xFFE3F2FD), // 연파랑
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            '총 시간  ${widget.totalTime}',
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(width: 8),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Color(0xFFE3F2FD),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                widget.totalTime,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );

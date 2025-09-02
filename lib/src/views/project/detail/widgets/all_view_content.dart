@@ -26,7 +26,7 @@ class AllViewContent extends StatelessWidget {
 
         // 진행 현황
         ProgressStatusCard(round: 1, remainingDays: 3, progress: 0.5),
-        SizedBox(height: 20),
+        SizedBox(height: 10),
 
         // 팀원 타이머 기록
         TeamTimerRecords(
@@ -52,24 +52,24 @@ class AllViewContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '오늘의 팀일정',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(
+              '오늘의 팀일정',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
-          SizedBox(height: 12),
           ScheduleItem(
-            time: '09:00 am',
             duration: '09:00~12:00',
             title: '트렌드 리서치',
             description: '4개의 세부 일정이 있습니다',
           ),
-          SizedBox(height: 12),
           ScheduleItem(
-            time: '13:00 pm',
             duration: '13:00~17:00',
             title: '주간 회의',
             description: '일정 공유 및 진척도 회의\n이슈 공유',
           ),
+          SizedBox(height: 10),
         ],
       ),
     );
