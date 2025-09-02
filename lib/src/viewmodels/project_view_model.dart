@@ -19,7 +19,7 @@ class ProjectViewModel extends Notifier<int> {
         builder: (context) {
           switch (newIndex) {
             case 0:
-              return ProjectChatTapPage();
+              return ProjectChatTapPage(projectId: 'projectId');
             case 1:
               return ProjectCalendarPage();
             case 2:

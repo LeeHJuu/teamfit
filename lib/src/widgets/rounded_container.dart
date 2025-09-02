@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class RoundedContainer extends StatelessWidget {
   final Color background;
-  final Widget body;
+  final Widget child;
 
-  RoundedContainer({required this.background, required this.body});
+  RoundedContainer({required this.background, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class RoundedContainer extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(color: background),
-        child: body,
+        child: child,
       ),
     );
   }

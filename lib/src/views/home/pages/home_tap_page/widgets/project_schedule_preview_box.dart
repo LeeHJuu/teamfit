@@ -12,7 +12,7 @@ class ProjectSchedulePreviewBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       background: Colors.white,
-      body: Column(
+      child: Column(
         children: [
           SizedBox(height: 60),
           _leftScheduleAlarm(context),

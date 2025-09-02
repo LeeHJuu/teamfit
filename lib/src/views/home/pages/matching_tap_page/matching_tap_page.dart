@@ -10,7 +10,7 @@ class MatchingTapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       background: Colors.white,
-      body: ListView(
+      child: ListView(
         children: [
           SizedBox(height: 10),
           Padding(padding: const EdgeInsets.all(20), child: TeamSearchTap()),

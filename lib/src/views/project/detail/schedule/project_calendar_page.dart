@@ -71,7 +71,7 @@ class _ProjectCalendarPageState extends State<ProjectCalendarPage> {
       backgroundColor: CustomColor.primary_60,
       body: RoundedContainer(
         background: Colors.white,
-        body: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(20),
           child: ListView(
             children: [

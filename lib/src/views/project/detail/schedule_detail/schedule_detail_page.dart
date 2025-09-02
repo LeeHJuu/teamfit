@@ -51,7 +51,7 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
       backgroundColor: CustomColor.primary_60,
       body: RoundedContainer(
         background: Colors.white,
-        body: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [

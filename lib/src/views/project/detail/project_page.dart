@@ -29,7 +29,7 @@ class _ProjectPageState extends ConsumerState<ProjectPage> {
           Expanded(
             child: RoundedContainer(
               background: Colors.white,
-              body: Column(
+              child: Column(
                 children: [
                   _tapButton(),
                   SizedBox(height: 10),
