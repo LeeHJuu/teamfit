@@ -5,7 +5,7 @@ import 'package:teamfit/src/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/views/personality/widgets/test_step_title.dart';
 import 'package:teamfit/src/views/project/create/add_project_preferred_members_page.dart';
 import 'package:teamfit/src/views/project/create/widgets/desired_role_box.dart';
-import 'package:teamfit/src/views/project/create/widgets/desired_roles_bottom_sheet.dart';
+import 'package:teamfit/src/widgets/bottom_sheets/desired_roles_bottom_sheet.dart';
 import 'package:teamfit/src/widgets/custom_progress_bar.dart';
 import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
 import 'package:teamfit/src/widgets/shadow_box_container.dart';

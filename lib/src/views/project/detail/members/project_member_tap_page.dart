@@ -7,7 +7,7 @@ import '../../../../config/theme/custom_text.dart';
 import '../../../../widgets/rounded_container.dart';
 import '../../../../widgets/common_app_bar.dart';
 import 'widgets/team_member_list.dart';
-import 'widgets/invite_member_bottom_sheet.dart';
+import '../../../../widgets/bottom_sheets/invite_member_bottom_sheet.dart';
 import '../../../profile/member_profile_page.dart';
 
 class ProjectMemberTapPage extends StatefulWidget {

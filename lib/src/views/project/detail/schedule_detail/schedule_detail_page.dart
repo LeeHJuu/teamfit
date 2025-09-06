@@ -4,6 +4,7 @@ import 'package:teamfit/src/widgets/rounded_container.dart';
 import 'package:teamfit/src/models/schedule_data.dart';
 import 'widgets/schedule_detail_input_section.dart';
 import 'widgets/schedule_member_item.dart';
+import '../../../../widgets/bottom_sheets/date_picker_bottom_sheet.dart';
 
 class ScheduleDetailPage extends StatefulWidget {
   final ScheduleData scheduleData;
@@ -23,6 +24,8 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
   late TextEditingController scheduleController;
   late TextEditingController tagController;
   late TextEditingController taskController;
+  DateTime? selectedStartDate;
+  DateTime? selectedEndDate;
 
   @override
   void initState() {
@@ -30,6 +33,8 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
     scheduleController = TextEditingController();
     tagController = TextEditingController();
     taskController = TextEditingController();
+    selectedStartDate = widget.scheduleData.startDate;
+    selectedEndDate = widget.scheduleData.endDate;
   }
 
   @override
@@ -85,16 +90,24 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
     );
   }
 
-  void _selectDate() async {
-    final DateTime? picked = await showDatePicker(
+  void _selectDate() {
+    showModalBottomSheet(
       context: context,
-      initialDate: widget.scheduleData.startDate,
-      firstDate: DateTime(2024),
-      lastDate: DateTime(2030),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder:
+          (context) => DatePickerBottomSheet(
+            initialStartDate: selectedStartDate,
+            initialEndDate: selectedEndDate,
+            onDateRangeSelected: (startDate, endDate) {
+              setState(() {
+                selectedStartDate = startDate;
+                selectedEndDate = endDate;
+              });
+              // 날짜 선택 처리
+              print('Selected date range: $startDate - $endDate');
+            },
+          ),
     );
-    if (picked != null) {
-      // 날짜 선택 처리
-      print('Selected date: $picked');
-    }
   }
 }

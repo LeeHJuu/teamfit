@@ -15,7 +15,7 @@ class ProjectPreviewBox extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
-        color: CustomColor.gray_20,
+        color: CustomColor.primary_60,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

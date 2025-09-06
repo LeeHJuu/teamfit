@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamfit/src/config/enums.dart';
 import 'tag_selector_widget.dart';
 import 'task_input_widget.dart';
 import 'task_checkbox_item.dart';
@@ -77,7 +78,8 @@ class _TagTaskManagerState extends State<TagTaskManager> {
         // SizedBox(height: 8),
 
         // 새 태그 추가 버튼 (선택된 태그가 없거나 3개 미만일 때만)
-        if (selectedTags.length < 3) TagSelectorWidget(onTagSelected: _addTag),
+        if (selectedTags.length < 3)
+          TagSelectorWidget(onTagSelected: (priority) => _addTag(priority)),
       ],
     );
   }

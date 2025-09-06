@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../config/theme/custom_color.dart';
-import '../../../../../config/theme/custom_text.dart';
+import '../../config/theme/custom_color.dart';
+import '../../config/theme/custom_text.dart';
 
 class InviteMemberBottomSheet extends StatelessWidget {
   @override
