@@ -30,17 +30,13 @@ class TeamTimerRecords extends StatelessWidget {
             style: TextStyle(fontSize: 12, color: Colors.grey[600]),
           ),
           SizedBox(height: 16),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children:
-                  records.map((record) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: 12),
-                      child: _buildTimerRecordItem(record),
-                    );
-                  }).toList(),
-            ),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children:
+                records.map((record) {
+                  return _buildTimerRecordItem(record);
+                }).toList(),
           ),
         ],
       ),
