@@ -26,11 +26,11 @@ class ScheduleDetailInputSection extends StatelessWidget {
           children: [
             Container(
               // width: 40,
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              height: 40,
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              // height: 40,
               decoration: BoxDecoration(
                 color: CustomColor.primary_60,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Text(

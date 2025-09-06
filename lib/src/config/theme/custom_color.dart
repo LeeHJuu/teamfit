@@ -23,4 +23,9 @@ class CustomColor {
   static Color primary_80 = Color(0xFFfeab9a);
   static Color primary_90 = Color(0xFFffd5cc);
   static Color primary_95 = Color(0xFFffeae6);
+
+  // 태그 색상
+  static Color tag_important = Color(0xFFFF6766);
+  static Color tag_normal = Color(0xFFFF9968);
+  static Color tag_later = Color(0xFF669AFF);
 }
