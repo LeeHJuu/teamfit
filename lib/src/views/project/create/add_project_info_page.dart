@@ -74,8 +74,7 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
         return;
       },
       child: Scaffold(
-        appBar: AppBar(
-      scrolledUnderElevation: 0,),
+        appBar: AppBar(scrolledUnderElevation: 0),
         body: Column(
           children: [
             CustomProgressBar(

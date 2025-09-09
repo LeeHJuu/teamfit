@@ -38,9 +38,6 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
                     ? CustomColor.primary_60
                     : CustomColor.gray_80,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(10),
-          ),
         ),
         child: Row(
           children: [

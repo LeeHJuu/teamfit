@@ -79,14 +79,9 @@ class PersonalityTestAlert extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PersonailtyTestPage()),
           );
         },
-        style: FilledButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(10),
-          ),
-        ),
         child: Text(
           'personality_test.alert.button_text'.tr(),
-          style: CustomText.Subtitle_M_16.copyWith(color: Colors.white),
+          style: CustomText.Subtitle_M_16,
         ),
       ),
     );

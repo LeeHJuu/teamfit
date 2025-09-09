@@ -48,7 +48,7 @@ class _RecommendedTeamProjectsState
             children: [
               Text('오류가 발생했습니다'),
               SizedBox(height: 8),
-              ElevatedButton(
+              FilledButton(
                 onPressed:
                     () =>
                         ref

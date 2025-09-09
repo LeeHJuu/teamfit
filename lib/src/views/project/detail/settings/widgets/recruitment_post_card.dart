@@ -73,19 +73,7 @@ class RecruitmentPostCard extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton(
             onPressed: onEndRecruitment,
-            style: OutlinedButton.styleFrom(
-              side: BorderSide(color: CustomColor.primary_60),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-            ),
-            child: Text(
-              '모집 종료하기',
-              style: CustomText.Body_Heavy_M_14.copyWith(
-                color: CustomColor.primary_60,
-              ),
-            ),
+            child: Text('모집 종료하기', style: CustomText.Body_Heavy_M_14),
           ),
         ),
       ],

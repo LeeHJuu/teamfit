@@ -31,9 +31,10 @@ class SocialLoginButton extends StatelessWidget {
             onPressed: loginFunction,
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(50),
+                borderRadius: BorderRadius.circular(50),
               ),
               backgroundColor: background,
+              foregroundColor: textColor,
               side:
                   background == Colors.white
                       ? BorderSide(color: CustomColor.gray_90)
@@ -41,7 +42,7 @@ class SocialLoginButton extends StatelessWidget {
             ),
             child: Text(
               'button_text.login'.tr(args: [title]),
-              style: CustomText.Subtitle_M_16.copyWith(color: textColor),
+              style: CustomText.Subtitle_M_16,
             ),
           ),
         ),

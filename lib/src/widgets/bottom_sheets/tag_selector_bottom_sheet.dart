@@ -124,7 +124,7 @@ class _TagSelectorBottomSheetState extends State<TagSelectorBottomSheet> {
           // 확인 버튼
           Container(
             width: double.infinity,
-            child: ElevatedButton(
+            child: FilledButton(
               onPressed:
                   _tempSelectedTag != null
                       ? () {
@@ -132,15 +132,11 @@ class _TagSelectorBottomSheetState extends State<TagSelectorBottomSheet> {
                         Navigator.pop(context);
                       }
                       : null,
-              style: ElevatedButton.styleFrom(
+              style: FilledButton.styleFrom(
                 backgroundColor:
                     _tempSelectedTag != null
                         ? CustomColor.primary_60
                         : CustomColor.gray_80,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 16),
               ),
               child: Text(
                 '확인',

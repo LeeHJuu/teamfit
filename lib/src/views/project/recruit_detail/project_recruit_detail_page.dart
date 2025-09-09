@@ -60,7 +60,7 @@ class _ProjectRecruitDetailPageState extends State<ProjectRecruitDetailPage> {
       slivers: [
         // AppBar 영역
         SliverAppBar(
-      scrolledUnderElevation: 0,
+          scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
           elevation: 0,
           pinned: false,
@@ -144,32 +144,14 @@ class _ProjectRecruitDetailPageState extends State<ProjectRecruitDetailPage> {
   Widget _buildRejectButton() {
     return OutlinedButton(
       onPressed: () {},
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(color: CustomColor.gray_70, width: 1),
-        backgroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      child: Text(
-        '거절하기',
-        style: CustomText.Body_Light_M_14.copyWith(color: CustomColor.gray_40),
-      ),
+      child: Text('거절하기', style: CustomText.Body_Light_M_14),
     );
   }
 
   Widget _buildApplyButton() {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: CustomColor.primary_60,
-        padding: EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        elevation: 0,
-      ),
-      child: Text(
-        '지원하기',
-        style: CustomText.Body_Light_M_14.copyWith(color: Colors.white),
-      ),
+      child: Text('지원하기', style: CustomText.Body_Light_M_14),
     );
   }
 

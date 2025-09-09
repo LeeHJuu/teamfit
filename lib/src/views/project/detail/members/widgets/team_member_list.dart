@@ -80,20 +80,14 @@ class TeamMemberList extends StatelessWidget {
         onPressed: onInviteTap,
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: CustomColor.gray_80),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          foregroundColor: CustomColor.gray_60,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.mail_outline, color: CustomColor.gray_60, size: 20),
+            Icon(Icons.mail_outline, size: 20),
             const SizedBox(width: 8),
-            Text(
-              '멤버 초대하기',
-              style: CustomText.Label_Light_M_16.copyWith(
-                color: CustomColor.gray_30,
-              ),
-            ),
+            Text('초대하기', style: CustomText.Body_Light_S_13),
           ],
         ),
       ),

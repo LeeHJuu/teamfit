@@ -90,17 +90,8 @@ class ApplicantItem extends StatelessWidget {
             onPressed: onProfileTap,
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: CustomColor.gray_80),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             ),
-            child: Text(
-              '프로필 보기',
-              style: CustomText.Body_Light_S_13.copyWith(
-                color: CustomColor.gray_30,
-              ),
-            ),
+            child: Text('프로필 보기', style: CustomText.Body_Light_S_13),
           ),
         ],
       ),

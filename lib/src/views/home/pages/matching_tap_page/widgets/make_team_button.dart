@@ -17,15 +17,7 @@ class MakeTeamButton extends StatelessWidget {
             MaterialPageRoute(builder: (context) => AddProjectGoalPage()),
           );
         },
-        style: FilledButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(10),
-          ),
-        ),
-        child: Text(
-          '팀 만들기',
-          style: CustomText.Subtitle_M_16.copyWith(color: Colors.white),
-        ),
+        child: Text('팀 만들기', style: CustomText.Subtitle_M_16),
       ),
     );
   }

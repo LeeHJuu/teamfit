@@ -73,19 +73,7 @@ class ApplicantProfilePage extends StatelessWidget {
           Expanded(
             child: OutlinedButton(
               onPressed: () => _rejectApplicant(context),
-              style: OutlinedButton.styleFrom(
-                // side: BorderSide(color: CustomColor.gray_80),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              child: Text(
-                '거절하기',
-                style: CustomText.Body_Heavy_M_14.copyWith(
-                  color: CustomColor.primary_60,
-                ),
-              ),
+              child: Text('거절하기', style: CustomText.Body_Heavy_M_14),
             ),
           ),
           const SizedBox(width: 12),
@@ -93,17 +81,7 @@ class ApplicantProfilePage extends StatelessWidget {
           Expanded(
             child: FilledButton(
               onPressed: () => _acceptApplicant(context),
-              style: FilledButton.styleFrom(
-                backgroundColor: CustomColor.primary_60,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              child: Text(
-                '수락하기',
-                style: CustomText.Body_Heavy_M_14.copyWith(color: Colors.white),
-              ),
+              child: Text('수락하기', style: CustomText.Body_Heavy_M_14),
             ),
           ),
         ],

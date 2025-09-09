@@ -82,16 +82,9 @@ class InputBoxItem extends StatelessWidget {
                 SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: FilledButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: CustomColor.primary_60,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                    ),
+
                     child: Text(
                       '확인',
                       style: CustomText.Body_Light_M_14.copyWith(

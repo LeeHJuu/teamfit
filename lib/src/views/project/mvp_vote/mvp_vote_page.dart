@@ -102,12 +102,12 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
             children: [
               Text('팀원 정보를 불러올 수 없습니다'),
               SizedBox(height: 8),
-              ElevatedButton(
+              FilledButton(
                 onPressed:
                     () => ref
                         .read(mvpVoteViewModel.notifier)
                         .loadTeamMembers(widget.projectId),
-                child: Text('다시 시도'),
+                child: Text('다시 시도', style: TextStyle()),
               ),
             ],
           ),

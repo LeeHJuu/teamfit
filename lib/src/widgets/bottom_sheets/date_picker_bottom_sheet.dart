@@ -116,7 +116,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
             padding: EdgeInsets.all(20),
             child: Container(
               width: double.infinity,
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed:
                     (_tempStartDate != null && _tempEndDate != null)
                         ? () {
@@ -127,15 +127,11 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
                           Navigator.pop(context);
                         }
                         : null,
-                style: ElevatedButton.styleFrom(
+                style: FilledButton.styleFrom(
                   backgroundColor:
                       (_tempStartDate != null && _tempEndDate != null)
                           ? CustomColor.primary_60
                           : CustomColor.gray_80,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: Text(
                   '확인',

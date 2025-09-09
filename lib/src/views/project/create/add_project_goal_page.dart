@@ -25,8 +25,7 @@ class _AddProjectGoalPageState extends ConsumerState<AddProjectGoalPage> {
     final state = ref.watch(addTeamProjectViewModel);
 
     return Scaffold(
-      appBar: AppBar(
-      scrolledUnderElevation: 0,),
+      appBar: AppBar(scrolledUnderElevation: 0),
       body: Column(
         children: [
           CustomProgressBar(

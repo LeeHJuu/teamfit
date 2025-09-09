@@ -30,54 +30,47 @@ class _TestAnswerButtonState extends State<TestAnswerButton> {
             '${widget.label}.answers.${widget.index}'
         ? Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: SizedBox(
-            width: double.infinity,
-            height: 80,
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: buttonColor,
-                side: BorderSide(color: Colors.transparent),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: buttonColor,
+              side: BorderSide(color: Colors.transparent),
+            ),
+            onPressed: () {
+              setState(() {
+                buttonColor = Colors.orange;
+              });
+
+              Future.delayed(const Duration(milliseconds: 300), () {
                 setState(() {
-                  buttonColor = Colors.orange;
+                  buttonColor = CustomColor.gray_95;
                 });
+                // 문자열 인덱스를 PersonalityType으로 변환
+                PersonalityType personalityType;
+                switch (widget.index) {
+                  case 'D':
+                    personalityType = PersonalityType.D;
+                    break;
+                  case 'I':
+                    personalityType = PersonalityType.I;
+                    break;
+                  case 'S':
+                    personalityType = PersonalityType.S;
+                    break;
+                  case 'C':
+                    personalityType = PersonalityType.C;
+                    break;
+                  default:
+                    personalityType = PersonalityType.D; // 기본값
+                }
 
-                Future.delayed(const Duration(milliseconds: 300), () {
-                  setState(() {
-                    buttonColor = CustomColor.gray_95;
-                  });
-                  // 문자열 인덱스를 PersonalityType으로 변환
-                  PersonalityType personalityType;
-                  switch (widget.index) {
-                    case 'D':
-                      personalityType = PersonalityType.D;
-                      break;
-                    case 'I':
-                      personalityType = PersonalityType.I;
-                      break;
-                    case 'S':
-                      personalityType = PersonalityType.S;
-                      break;
-                    case 'C':
-                      personalityType = PersonalityType.C;
-                      break;
-                    default:
-                      personalityType = PersonalityType.D; // 기본값
-                  }
-
-                  widget.vm.nextQuestion(context, personalityType);
-                });
-              },
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '${widget.label}.answers.${widget.index}'.tr(),
-                  style: CustomText.Label_Light_S_14,
-                ),
+                widget.vm.nextQuestion(context, personalityType);
+              });
+            },
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${widget.label}.answers.${widget.index}'.tr(),
+                style: CustomText.Label_Light_S_14,
               ),
             ),
           ),
