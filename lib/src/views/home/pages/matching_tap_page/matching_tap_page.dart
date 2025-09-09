@@ -13,7 +13,7 @@ class MatchingTapPage extends StatelessWidget {
       child: ListView(
         children: [
           SizedBox(height: 10),
-          Padding(padding: const EdgeInsets.all(20), child: TeamSearchTap()),
+          TeamSearchTap(),
           Padding(padding: const EdgeInsets.all(20), child: MakeTeamButton()),
           RecommendedTeamProjects(),
           AllTeamProjects(),

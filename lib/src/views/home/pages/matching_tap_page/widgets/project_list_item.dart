@@ -5,25 +5,32 @@ import 'package:teamfit/src/models/project_recruit_info.dart';
 import 'package:teamfit/src/views/project/recruit_detail/project_recruit_detail_page.dart';
 import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
-class ProjectItemBox extends StatelessWidget {
+class ProjectListItem extends StatelessWidget {
   final ProjectRecruitInfo item;
-  const ProjectItemBox(this.item, {super.key});
+  const ProjectListItem(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _navigateToDetail(context),
       child: ShadowBoxContainer(
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildProjectImage(),
-            SizedBox(height: 12),
-            _buildProjectInfo(),
-            SizedBox(height: 12),
-            _buildProjectDetails(),
-            SizedBox(height: 12),
-            _buildTechTags(),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildProjectGoal(),
+                  SizedBox(height: 8),
+                  _buildProjectTitle(),
+                  SizedBox(height: 8),
+                  _buildProjectDetails(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -32,8 +39,8 @@ class ProjectItemBox extends StatelessWidget {
 
   Widget _buildProjectImage() {
     return Container(
-      width: double.infinity,
-      height: 140,
+      width: 80,
+      height: 80,
       decoration: BoxDecoration(
         color: CustomColor.gray_90,
         borderRadius: BorderRadius.circular(8),
@@ -58,49 +65,47 @@ class ProjectItemBox extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Icon(Icons.groups, size: 40, color: Colors.white),
+                  child: Text(
+                    'Team\nfit',
+                    style: CustomText.Body_Heavy_XS_12.copyWith(
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
               : null,
     );
   }
 
-  Widget _buildProjectInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: CustomColor.primary_95,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Text(
-            '🏆 ${item.projectGoal?.label ?? "포트폴리오 제작"}',
-            style: CustomText.Body_Light_XS_12.copyWith(
-              color: CustomColor.primary_30,
-            ),
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          item.title,
-          style: CustomText.Label_Heavy_M_16,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
+  Widget _buildProjectGoal() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+
+      child: Text(
+        '🏆 ${item.projectGoal?.label ?? "공모전"}',
+        style: CustomText.Body_Light_XXS_11,
+      ),
+    );
+  }
+
+  Widget _buildProjectTitle() {
+    return Text(
+      item.title,
+      style: CustomText.Label_Heavy_M_16,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
   Widget _buildProjectDetails() {
     return Row(
       children: [
-        _buildDetailChip(Icons.location_on, item.meetingType?.label ?? '오프라인'),
+        _buildDetailChip(Icons.location_on, item.meetingType?.label ?? '온라인'),
         SizedBox(width: 8),
         _buildDetailChip(Icons.people, '${_getTotalRecruitCount()}명'),
         SizedBox(width: 8),
-        _buildDetailChip(Icons.schedule, item.duration?.label ?? '1개월'),
+        _buildDetailChip(Icons.schedule, item.duration?.label ?? '~2025.09.12'),
       ],
     );
   }
@@ -109,11 +114,11 @@ class ProjectItemBox extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 14, color: CustomColor.gray_50),
-        SizedBox(width: 4),
+        Icon(icon, size: 12, color: CustomColor.gray_50),
+        SizedBox(width: 2),
         Text(
           text,
-          style: CustomText.Body_Light_XS_12.copyWith(
+          style: CustomText.Body_Light_XXS_11.copyWith(
             color: CustomColor.gray_50,
           ),
         ),
@@ -125,56 +130,41 @@ class ProjectItemBox extends StatelessWidget {
     final allTechs =
         item.recruitMembers
             .expand((member) => member.technologies)
-            .take(4)
+            .take(3)
             .toList();
 
+    // 샘플 데이터가 없을 경우 기본 태그 사용
+    final techs = allTechs.isEmpty ? ['백엔드', '디자이너', 'Next.js'] : allTechs;
+
     return Wrap(
-      spacing: 6,
-      runSpacing: 6,
-      children: [
-        ...allTechs.map((tech) => _buildTechTag(tech)).toList(),
-        if (item.recruitMembers.expand((m) => m.technologies).length > 4)
-          _buildMoreTag(),
-      ],
+      spacing: 4,
+      runSpacing: 4,
+      children: techs.map((tech) => _buildTechTag(tech)).toList(),
     );
   }
 
   Widget _buildTechTag(String tech) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: CustomColor.gray_95,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         tech,
-        style: CustomText.Body_Light_XS_12.copyWith(color: CustomColor.gray_40),
-      ),
-    );
-  }
-
-  Widget _buildMoreTag() {
-    final totalTechs =
-        item.recruitMembers.expand((member) => member.technologies).length;
-    final remainingCount = totalTechs - 4;
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: CustomColor.primary_95,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        '+$remainingCount',
-        style: CustomText.Body_Light_XS_12.copyWith(
-          color: CustomColor.primary_40,
+        style: CustomText.Body_Light_XXS_11.copyWith(
+          color: CustomColor.gray_40,
         ),
       ),
     );
   }
 
   int _getTotalRecruitCount() {
-    return item.recruitMembers.fold(0, (sum, member) => sum + member.count);
+    final count = item.recruitMembers.fold(
+      0,
+      (sum, member) => sum + member.count,
+    );
+    return count > 0 ? count : 5; // 기본값 5명
   }
 
   void _navigateToDetail(BuildContext context) {
