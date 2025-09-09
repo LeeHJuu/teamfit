@@ -12,60 +12,65 @@ class RecruitInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadowBoxContainer(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 제목을 외부로 분리
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text('모집 인원', style: CustomText.Label_Heavy_M_16),
+        ),
+        SizedBox(height: 16),
+        // 직무별로 ShadowBoxContainer 생성
+        ...recruitInfo.recruitMembers.map((member) {
+          return _buildRecruitMemberBox(member);
+        }).toList(),
+      ],
+    );
+  }
+
+  Widget _buildRecruitMemberBox(member) {
+    // 현재 모집된 인원 수 (실제로는 API에서 가져와야 함)
+    int currentCount = member.role.label == '디자이너' ? 1 : 0;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(left: 20, right: 20, bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 6,
+            spreadRadius: 1,
+            offset: Offset(0, 0),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildSectionTitle(),
-          SizedBox(height: 16),
-          _buildRecruitList(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSectionTitle() {
-    return Text('모집 인원', style: CustomText.Label_Heavy_M_16);
-  }
-
-  Widget _buildRecruitList() {
-    return Column(
-      children:
-          recruitInfo.recruitMembers.map((member) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: _buildRecruitItem(member),
-            );
-          }).toList(),
-    );
-  }
-
-  Widget _buildRecruitItem(member) {
-    // 현재 모집된 인원 수 (실제로는 API에서 가져와야 함)
-    int currentCount = member.role.label == '디자인' ? 1 : 0;
-
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(member.role.label, style: CustomText.Body_Heavy_M_14),
-              SizedBox(height: 4),
-              _buildTechTags(member.technologies),
+              Text(
+                '$currentCount / ${member.count}명',
+                style: CustomText.Body_Heavy_M_14.copyWith(
+                  color:
+                      currentCount >= member.count
+                          ? CustomColor.gray_50
+                          : CustomColor.primary_60,
+                ),
+              ),
             ],
           ),
-        ),
-        Text(
-          '$currentCount / ${member.count}명',
-          style: CustomText.Body_Heavy_M_14.copyWith(
-            color:
-                currentCount >= member.count
-                    ? CustomColor.gray_50
-                    : CustomColor.primary_60,
-          ),
-        ),
-      ],
+          SizedBox(height: 8),
+          _buildTechTags(member.technologies),
+        ],
+      ),
     );
   }
 

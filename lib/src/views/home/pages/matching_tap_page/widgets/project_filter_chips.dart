@@ -1,46 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/config/enums.dart';
+import 'package:teamfit/src/models/filter_item.dart';
+import 'package:teamfit/src/viewmodels/project_filter_view_model.dart';
 
-class ProjectFilterChips extends StatefulWidget {
+class ProjectFilterChips extends ConsumerWidget {
   const ProjectFilterChips({Key? key}) : super(key: key);
 
   @override
-  _ProjectFilterChipsState createState() => _ProjectFilterChipsState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(projectFilterViewModel);
+    final viewModel = ref.read(projectFilterViewModel.notifier);
 
-class _ProjectFilterChipsState extends State<ProjectFilterChips> {
-  UserGoal? selectedProjectType;
-  UserRole? selectedPosition;
-  ProjectMemberCareerLevel? selectedExperience;
-  MeetingType? selectedMeeting;
-
-  final List<FilterItem<UserGoal>> projectTypeItems = [
-    FilterItem('프로젝트 유형', null),
-    ...UserGoal.values.map((e) => FilterItem(e.label, e)),
-  ];
-
-  final List<FilterItem<UserRole>> positionItems = [
-    FilterItem('포지션', null),
-    FilterItem('개발', UserRole.development),
-    FilterItem('디자인', UserRole.design),
-    FilterItem('경영·비즈니스', UserRole.business),
-    FilterItem('마케팅·광고', UserRole.marketing),
-  ];
-
-  final List<FilterItem<ProjectMemberCareerLevel>> experienceItems = [
-    FilterItem('경력', null),
-    ...ProjectMemberCareerLevel.values.map((e) => FilterItem(e.label, e)),
-  ];
-
-  final List<FilterItem<MeetingType>> meetingItems = [
-    FilterItem('진행 방식', null),
-    ...MeetingType.values.map((e) => FilterItem(e.label, e)),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
       height: 48,
       child: ListView.separated(
@@ -52,29 +25,35 @@ class _ProjectFilterChipsState extends State<ProjectFilterChips> {
           switch (index) {
             case 0:
               return _buildFilterChip<UserGoal>(
-                items: projectTypeItems,
-                selectedValue: selectedProjectType,
-                onSelected:
-                    (value) => setState(() => selectedProjectType = value),
+                context,
+                ref,
+                items: viewModel.projectTypeItems,
+                selectedValue: state.selectedProjectType,
+                onSelected: viewModel.setProjectType,
               );
             case 1:
               return _buildFilterChip<UserRole>(
-                items: positionItems,
-                selectedValue: selectedPosition,
-                onSelected: (value) => setState(() => selectedPosition = value),
+                context,
+                ref,
+                items: viewModel.positionItems,
+                selectedValue: state.selectedPosition,
+                onSelected: viewModel.setPosition,
               );
             case 2:
               return _buildFilterChip<ProjectMemberCareerLevel>(
-                items: experienceItems,
-                selectedValue: selectedExperience,
-                onSelected:
-                    (value) => setState(() => selectedExperience = value),
+                context,
+                ref,
+                items: viewModel.experienceItems,
+                selectedValue: state.selectedExperience,
+                onSelected: viewModel.setExperience,
               );
             case 3:
               return _buildFilterChip<MeetingType>(
-                items: meetingItems,
-                selectedValue: selectedMeeting,
-                onSelected: (value) => setState(() => selectedMeeting = value),
+                context,
+                ref,
+                items: viewModel.meetingItems,
+                selectedValue: state.selectedMeeting,
+                onSelected: viewModel.setMeeting,
               );
             default:
               return SizedBox.shrink();
@@ -84,7 +63,9 @@ class _ProjectFilterChipsState extends State<ProjectFilterChips> {
     );
   }
 
-  Widget _buildFilterChip<T>({
+  Widget _buildFilterChip<T>(
+    BuildContext context,
+    WidgetRef ref, {
     required List<FilterItem<T>> items,
     required T? selectedValue,
     required Function(T?) onSelected,
@@ -191,11 +172,4 @@ class _ProjectFilterChipsState extends State<ProjectFilterChips> {
       ),
     );
   }
-}
-
-class FilterItem<T> {
-  final String label;
-  final T? value;
-
-  FilterItem(this.label, this.value);
 }

@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/viewmodels/mvp_vote_view_model.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/team_member_selector.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/mvp_comment_field.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/mvp_submit_dialog.dart';
 import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
 
-class MvpVotePage extends StatefulWidget {
+class MvpVotePage extends ConsumerStatefulWidget {
   final String projectId;
 
   const MvpVotePage({Key? key, required this.projectId}) : super(key: key);
 
   @override
-  _MvpVotePageState createState() => _MvpVotePageState();
+  ConsumerState<MvpVotePage> createState() => _MvpVotePageState();
 }
 
-class _MvpVotePageState extends State<MvpVotePage> {
-  String? selectedMemberId;
-  String comment = '';
-
-  final List<TeamMember> teamMembers = [
-    TeamMember(id: '1', name: '협장', role: '협장'),
-    TeamMember(id: '2', name: '밥식', role: '밥식'),
-    TeamMember(id: '3', name: '부남', role: '부남'),
-    TeamMember(id: '4', name: '낭남', role: '낭남'),
-    TeamMember(id: '5', name: '농농', role: '농농'),
-  ];
+class _MvpVotePageState extends ConsumerState<MvpVotePage> {
+  @override
+  void initState() {
+    super.initState();
+    // 위젯이 생성될 때 팀원 목록 로드
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(mvpVoteViewModel.notifier).loadTeamMembers(widget.projectId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(mvpVoteViewModel);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
@@ -42,14 +44,14 @@ class _MvpVotePageState extends State<MvpVotePage> {
                 children: [
                   _buildHeader(),
                   SizedBox(height: 32),
-                  _buildMvpSelector(),
+                  _buildMvpSelector(state),
                   SizedBox(height: 32),
-                  _buildCommentSection(),
+                  _buildCommentSection(state),
                 ],
               ),
             ),
           ),
-          _buildSubmitButton(),
+          _buildSubmitButton(state),
         ],
       ),
     );
@@ -82,46 +84,71 @@ class _MvpVotePageState extends State<MvpVotePage> {
     );
   }
 
-  Widget _buildMvpSelector() {
+  Widget _buildMvpSelector(MvpVoteState state) {
+    if (state.isLoading) {
+      return Container(
+        height: 200,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (state.error != null) {
+      return Container(
+        height: 200,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('팀원 정보를 불러올 수 없습니다'),
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed:
+                    () => ref
+                        .read(mvpVoteViewModel.notifier)
+                        .loadTeamMembers(widget.projectId),
+                child: Text('다시 시도'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('MVP 한 명을 선택해주세요', style: CustomText.Label_Heavy_M_16),
         SizedBox(height: 16),
         TeamMemberSelector(
-          members: teamMembers,
-          selectedMemberId: selectedMemberId,
+          members: state.teamMembers,
+          selectedMemberId: state.selectedMemberId,
           onMemberSelected: (memberId) {
-            setState(() {
-              selectedMemberId = memberId;
-            });
+            ref.read(mvpVoteViewModel.notifier).setSelectedMember(memberId);
           },
         ),
       ],
     );
   }
 
-  Widget _buildCommentSection() {
+  Widget _buildCommentSection(MvpVoteState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('코멘트를 남겨주세요 (선택)', style: CustomText.Label_Heavy_M_16),
         SizedBox(height: 16),
         MvpCommentField(
-          onCommentChanged: (value) {
-            setState(() {
-              comment = value;
-            });
+          onCommentChanged: (comment) {
+            ref.read(mvpVoteViewModel.notifier).setComment(comment);
           },
         ),
       ],
     );
   }
 
-  Widget _buildSubmitButton() {
+  Widget _buildSubmitButton(MvpVoteState state) {
     return NextStepBottomButton(
-      title: '제출하기',
-      isPossible: selectedMemberId != null,
+      title: state.isSubmitting ? '제출 중...' : '제출하기',
+      isPossible: state.canSubmit,
       moveNext: () => _showSubmitDialog(),
     );
   }
@@ -131,26 +158,21 @@ class _MvpVotePageState extends State<MvpVotePage> {
       context: context,
       builder:
           (context) => MvpSubmitDialog(
-            onConfirm: () {
+            onConfirm: () async {
               Navigator.pop(context); // 다이얼로그 닫기
-              _submitVote();
+              final success =
+                  await ref.read(mvpVoteViewModel.notifier).submitVote();
+              if (success) {
+                Navigator.pop(context); // 페이지 닫기
+              } else {
+                // 에러 처리
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('투표 제출에 실패했습니다. 다시 시도해주세요.')),
+                );
+              }
             },
             onCancel: () => Navigator.pop(context),
           ),
     );
   }
-
-  void _submitVote() {
-    // TODO: MVP 투표 제출 로직 구현
-    print('MVP 투표 제출: $selectedMemberId, 코멘트: $comment');
-    Navigator.pop(context); // 페이지 닫기
-  }
-}
-
-class TeamMember {
-  final String id;
-  final String name;
-  final String role;
-
-  TeamMember({required this.id, required this.name, required this.role});
 }

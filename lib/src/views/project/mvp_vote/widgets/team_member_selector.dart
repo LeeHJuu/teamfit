@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import '../mvp_vote_page.dart';
+import 'package:teamfit/src/models/team_member.dart';
 
 class TeamMemberSelector extends StatelessWidget {
   final List<TeamMember> members;

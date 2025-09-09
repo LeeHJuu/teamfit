@@ -15,7 +15,7 @@ class RoundedContainer extends StatelessWidget {
       ),
       child: Container(
         width: double.infinity,
-        height: double.infinity,
+        // height: double.infinity,
         decoration: BoxDecoration(color: background),
         child: child,
       ),

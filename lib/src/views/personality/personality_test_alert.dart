@@ -9,28 +9,21 @@ class PersonalityTestAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AlertContainer(
+      child: _buildAlertContainer(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AlertTitle(),
-            AlertDescription(),
-            AlertImage(),
-            AlertButton(),
+            _buildAlertTitle(),
+            _buildAlertDescription(),
+            _buildAlertImage(),
+            _buildAlertButton(context),
           ],
         ),
       ),
     );
   }
-}
 
-class AlertContainer extends StatelessWidget {
-  final Widget child;
-
-  const AlertContainer({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAlertContainer({required Widget child}) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -46,11 +39,8 @@ class AlertContainer extends StatelessWidget {
       child: child,
     );
   }
-}
 
-class AlertTitle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAlertTitle() {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Text(
@@ -59,11 +49,8 @@ class AlertTitle extends StatelessWidget {
       ),
     );
   }
-}
 
-class AlertDescription extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAlertDescription() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
@@ -73,21 +60,15 @@ class AlertDescription extends StatelessWidget {
       ),
     );
   }
-}
 
-class AlertImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAlertImage() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Image.asset('assets/images/main_img_w_bg.png', width: 200),
     );
   }
-}
 
-class AlertButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAlertButton(BuildContext context) {
     return SizedBox(
       height: 50,
       width: double.infinity,
