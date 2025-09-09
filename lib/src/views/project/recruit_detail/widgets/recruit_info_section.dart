@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/models/project_recruit_info.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class RecruitInfoSection extends StatelessWidget {
   final ProjectRecruitInfo recruitInfo;

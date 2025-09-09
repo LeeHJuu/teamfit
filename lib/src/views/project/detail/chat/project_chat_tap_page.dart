@@ -5,7 +5,7 @@ import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/viewmodels/chat_view_model.dart';
 import 'package:teamfit/src/views/project/detail/chat/widgets/chat_message_list.dart';
 import 'package:teamfit/src/views/project/detail/chat/widgets/chat_input_field.dart';
-import 'package:teamfit/src/widgets/rounded_container.dart';
+import 'package:teamfit/src/widgets/components/rounded_container.dart';
 
 class ProjectChatTapPage extends ConsumerWidget {
   final String projectId;
@@ -68,6 +68,7 @@ class ProjectChatTapPage extends ConsumerWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0,
       backgroundColor: CustomColor.primary_60,
       elevation: 0,
       leading: IconButton(

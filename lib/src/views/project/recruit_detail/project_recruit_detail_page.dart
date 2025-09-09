@@ -6,7 +6,7 @@ import 'package:teamfit/src/views/project/recruit_detail/widgets/project_header_
 import 'package:teamfit/src/views/project/recruit_detail/widgets/recruit_info_section.dart';
 import 'package:teamfit/src/views/project/recruit_detail/widgets/project_description_section.dart';
 import 'package:teamfit/src/views/project/recruit_detail/widgets/project_recommendation_section.dart';
-import 'package:teamfit/src/widgets/rounded_container.dart';
+import 'package:teamfit/src/widgets/components/rounded_container.dart';
 
 class ProjectRecruitDetailPage extends StatefulWidget {
   final ProjectRecruitInfo recruitInfo;
@@ -60,6 +60,7 @@ class _ProjectRecruitDetailPageState extends State<ProjectRecruitDetailPage> {
       slivers: [
         // AppBar 영역
         SliverAppBar(
+      scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
           elevation: 0,
           pinned: false,

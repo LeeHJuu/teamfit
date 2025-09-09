@@ -50,7 +50,7 @@ class SkillsCard extends StatelessWidget {
   }
 
   List<String> _getSkills() {
-    final stackTags = member.detailData?.stackTags;
+    final stackTags = member.stackTags;
     if (stackTags != null && stackTags.isNotEmpty) {
       return stackTags;
     }

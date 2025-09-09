@@ -5,9 +5,9 @@ import '../../config/theme/custom_color.dart';
 import '../../config/theme/custom_text.dart';
 import '../../models/recruit_member.dart';
 import '../../viewmodels/add_team_project_view_model.dart';
-import '../custom_select_button.dart';
-import '../custom_text_field.dart';
-import '../next_step_bottom_button.dart';
+import '../components/custom_select_button.dart';
+import '../components/custom_text_field.dart';
+import '../components/next_step_bottom_button.dart';
 
 class DesiredRolesBottomSheet extends ConsumerStatefulWidget {
   final Function(RecruitMember) onComplete;

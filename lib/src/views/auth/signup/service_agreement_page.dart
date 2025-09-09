@@ -4,7 +4,7 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/views/auth/signup/add_user_info_page.dart';
 import 'package:teamfit/src/views/auth/signup/widgets/sign_in_step_title.dart';
-import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
+import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
 class ServiceAgreementPage extends StatefulWidget {
   @override
@@ -38,7 +38,8 @@ class _ServiceAgreementPageState extends State<ServiceAgreementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+      scrolledUnderElevation: 0,),
       body: Column(
         children: [
           SignInStepTitle('signin_page.service_agreement.title'.tr()),

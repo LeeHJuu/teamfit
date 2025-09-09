@@ -6,7 +6,7 @@ import 'package:teamfit/src/viewmodels/mvp_vote_view_model.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/team_member_selector.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/mvp_comment_field.dart';
 import 'package:teamfit/src/views/project/mvp_vote/widgets/mvp_submit_dialog.dart';
-import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
+import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
 class MvpVotePage extends ConsumerStatefulWidget {
   final String projectId;
@@ -33,7 +33,7 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
+      appBar: appBar(),
       body: Column(
         children: [
           Expanded(
@@ -42,23 +42,24 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(),
+                  header(),
                   SizedBox(height: 32),
-                  _buildMvpSelector(state),
+                  mvpSelector(state),
                   SizedBox(height: 32),
-                  _buildCommentSection(state),
+                  commentSection(state),
                 ],
               ),
             ),
           ),
-          _buildSubmitButton(state),
+          submitButton(state),
         ],
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget appBar() {
     return AppBar(
+      scrolledUnderElevation: 0,
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
@@ -68,7 +69,7 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
     );
   }
 
-  Widget _buildHeader() {
+  Widget header() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -84,7 +85,7 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
     );
   }
 
-  Widget _buildMvpSelector(MvpVoteState state) {
+  Widget mvpSelector(MvpVoteState state) {
     if (state.isLoading) {
       return Container(
         height: 200,
@@ -130,7 +131,7 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
     );
   }
 
-  Widget _buildCommentSection(MvpVoteState state) {
+  Widget commentSection(MvpVoteState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -145,7 +146,7 @@ class _MvpVotePageState extends ConsumerState<MvpVotePage> {
     );
   }
 
-  Widget _buildSubmitButton(MvpVoteState state) {
+  Widget submitButton(MvpVoteState state) {
     return NextStepBottomButton(
       title: state.isSubmitting ? '제출 중...' : '제출하기',
       isPossible: state.canSubmit,

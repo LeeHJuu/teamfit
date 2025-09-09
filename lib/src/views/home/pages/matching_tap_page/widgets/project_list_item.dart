@@ -3,7 +3,7 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/models/project_recruit_info.dart';
 import 'package:teamfit/src/views/project/recruit_detail/project_recruit_detail_page.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class ProjectListItem extends StatelessWidget {
   final ProjectRecruitInfo item;
@@ -123,39 +123,6 @@ class ProjectListItem extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildTechTags() {
-    final allTechs =
-        item.recruitMembers
-            .expand((member) => member.technologies)
-            .take(3)
-            .toList();
-
-    // 샘플 데이터가 없을 경우 기본 태그 사용
-    final techs = allTechs.isEmpty ? ['백엔드', '디자이너', 'Next.js'] : allTechs;
-
-    return Wrap(
-      spacing: 4,
-      runSpacing: 4,
-      children: techs.map((tech) => _buildTechTag(tech)).toList(),
-    );
-  }
-
-  Widget _buildTechTag(String tech) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: CustomColor.gray_95,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        tech,
-        style: CustomText.Body_Light_XXS_11.copyWith(
-          color: CustomColor.gray_40,
-        ),
-      ),
     );
   }
 

@@ -48,7 +48,8 @@ class PersonalityResultPage extends StatelessWidget {
         _background(),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(
+      scrolledUnderElevation: 0,backgroundColor: Colors.transparent, elevation: 0),
           body: Column(
             children: [
               _resultCard(),

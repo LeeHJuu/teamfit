@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/home/home_page.dart';
-import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
+import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
 class WelcomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+      scrolledUnderElevation: 0,),
       body: Column(
         children: [
           // SignInStepTitle의 코드를 참고하여, 텍스트를 가운데 정렬로 예외 처리

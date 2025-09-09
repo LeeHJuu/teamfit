@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../models/user_data.dart';
-import '../../../../models/user_detail_data.dart';
 import '../../../../config/enums.dart';
 import '../../../../config/theme/custom_color.dart';
 import '../../../../config/theme/custom_text.dart';
@@ -34,39 +33,33 @@ class _ProjectMemberTapPageState extends State<ProjectMemberTapPage> {
         email: 'leader@example.com',
         nickname: '불꽃리더',
         projectIds: ['project1'],
-        detailData: UserDetailData(
-          role: UserRole.development,
-          mannerTemperature: 85.0,
-          attendanceRate: 100.0,
-          mvpCount: 2,
-          participationRate: 100.0,
-        ),
+        role: UserRole.development,
+        mannerTemperature: 85.0,
+        attendanceRate: 100.0,
+        mvpCount: 2,
+        participationRate: 100.0,
       ),
       UserData(
         uid: '2',
         email: 'designer@example.com',
         nickname: '멋쟁이디쟈너',
         projectIds: ['project1'],
-        detailData: UserDetailData(
-          role: UserRole.design,
-          mannerTemperature: 75.0,
-          attendanceRate: 95.0,
-          mvpCount: 1,
-          participationRate: 90.0,
-        ),
+        role: UserRole.design,
+        mannerTemperature: 75.0,
+        attendanceRate: 95.0,
+        mvpCount: 1,
+        participationRate: 90.0,
       ),
       UserData(
         uid: '3',
         email: 'developer@example.com',
         nickname: '현쥬님짱',
         projectIds: ['project1'],
-        detailData: UserDetailData(
-          role: UserRole.development,
-          mannerTemperature: 90.0,
-          attendanceRate: 100.0,
-          mvpCount: 3,
-          participationRate: 95.0,
-        ),
+        role: UserRole.development,
+        mannerTemperature: 90.0,
+        attendanceRate: 100.0,
+        mvpCount: 3,
+        participationRate: 95.0,
       ),
     ];
     _filteredMembers = List.from(_members);

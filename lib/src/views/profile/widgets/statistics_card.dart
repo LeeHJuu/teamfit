@@ -13,16 +13,14 @@ class StatisticsCard extends StatelessWidget {
     return Row(
       children: [
         // MVP 횟수
-        Expanded(
-          child: _buildStatItem('MVP', '${member.detailData?.mvpCount ?? 0}번'),
-        ),
+        Expanded(child: _buildStatItem('MVP', '${member.mvpCount ?? 0}번')),
         // 구분선
         Container(width: 1, height: 40, color: CustomColor.gray_80),
         // 출석율
         Expanded(
           child: _buildStatItem(
             '출석율',
-            '${member.detailData?.attendanceRate?.toInt() ?? 0}%',
+            '${member.attendanceRate?.toInt() ?? 0}%',
           ),
         ),
         // 구분선

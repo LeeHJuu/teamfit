@@ -5,8 +5,8 @@ import 'package:teamfit/src/config/enums.dart';
 import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/auth/signup/welcome_page.dart';
 import 'package:teamfit/src/views/auth/signup/widgets/sign_in_step_title.dart';
-import 'package:teamfit/src/widgets/custom_select_button.dart';
-import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
+import 'package:teamfit/src/widgets/components/custom_select_button.dart';
+import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
 class AddUserGoalPage extends ConsumerStatefulWidget {
   @override
@@ -22,7 +22,8 @@ class _AddUserGoalPageState extends ConsumerState<AddUserGoalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+      scrolledUnderElevation: 0,),
       body: Column(
         children: [
           SignInStepTitle('signin_page.user_goal.title'.tr()),

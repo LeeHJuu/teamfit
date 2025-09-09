@@ -35,7 +35,7 @@ class ProfileHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              '매너온도 ${member.detailData?.mannerTemperature?.toInt() ?? 0}°C',
+              '매너온도 ${member.mannerTemperature?.toInt() ?? 0}°C',
               style: CustomText.Body_Heavy_S_13.copyWith(color: Colors.white),
             ),
           ),

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/viewmodels/personality_test_view_model.dart';
 import 'package:teamfit/src/views/personality/widgets/test_answer_button.dart';
 import 'package:teamfit/src/views/personality/widgets/test_step_title.dart';
-import 'package:teamfit/src/widgets/custom_progress_bar.dart';
+import 'package:teamfit/src/widgets/components/custom_progress_bar.dart';
 
 class PersonailtyTestPage extends ConsumerWidget {
   @override
@@ -20,6 +20,7 @@ class PersonailtyTestPage extends ConsumerWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+      scrolledUnderElevation: 0,
           actions: [
             IconButton(
               onPressed: () {

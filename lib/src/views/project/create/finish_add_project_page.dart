@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teamfit/src/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/views/home/home_page.dart';
 import 'package:teamfit/src/views/personality/widgets/test_step_title.dart';
-import 'package:teamfit/src/widgets/next_step_bottom_button.dart';
+import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
 class FinishAddProjectPage extends ConsumerWidget {
   const FinishAddProjectPage({super.key});
@@ -11,7 +11,8 @@ class FinishAddProjectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+      scrolledUnderElevation: 0,),
       body: Column(
         children: [
           TestStepTitle('완료', '팀 공고가 올라갔어요!'),

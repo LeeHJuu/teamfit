@@ -51,7 +51,7 @@ class ApplicantItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final role = applicant.detailData?.role?.label ?? '역할 미정';
+    final role = applicant.role?.label ?? '역할 미정';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),

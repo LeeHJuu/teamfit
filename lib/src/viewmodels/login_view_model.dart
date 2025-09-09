@@ -110,7 +110,6 @@ class LoginViewModel extends StreamNotifier<UserData?> {
       email: user.email,
       nickname: '',
       projectIds: [],
-      detailData: null,
     );
   }
 

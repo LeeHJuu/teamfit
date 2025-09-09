@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class TeamTimerRecords extends StatelessWidget {
   final String teamName;

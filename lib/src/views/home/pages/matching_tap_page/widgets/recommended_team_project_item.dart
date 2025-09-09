@@ -3,7 +3,7 @@ import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/models/project_recruit_info.dart';
 import 'package:teamfit/src/views/project/recruit_detail/project_recruit_detail_page.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class RecommendedTeamProjectItem extends StatelessWidget {
   final ProjectRecruitInfo recruitInfo;

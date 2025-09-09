@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class ScheduleItem extends StatelessWidget {
   final String duration; // "09:30 AM - 11:00 AM" 형태로 받음

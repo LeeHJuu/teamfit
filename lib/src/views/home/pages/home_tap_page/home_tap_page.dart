@@ -23,7 +23,7 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
     final loginState = ref.watch(loginViewModel);
     final items = loginState.value?.projectIds ?? [];
 
-    return loginState.value?.detailData?.personalityScores == null
+    return loginState.value?.personalityScores == null
         ? PersonalityTestAlert()
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,

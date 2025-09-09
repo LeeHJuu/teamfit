@@ -50,7 +50,7 @@ class ProfileInfoCard extends StatelessWidget {
   }
 
   String _getGenderText() {
-    final gender = member.detailData?.gender;
+    final gender = member.gender;
     if (gender == null) return '미입력';
 
     switch (gender) {
@@ -64,7 +64,7 @@ class ProfileInfoCard extends StatelessWidget {
   }
 
   String _getAgeText() {
-    final birthDate = member.detailData?.birthDate;
+    final birthDate = member.birthDate;
     if (birthDate == null) return '미입력';
 
     final now = DateTime.now();

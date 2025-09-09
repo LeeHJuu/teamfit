@@ -33,7 +33,7 @@ class TeamMemberList extends StatelessWidget {
   }
 
   Widget _buildMemberItem(UserData member) {
-    final role = member.detailData?.role?.label ?? '역할 미정';
+    final role = member.role?.label ?? '역할 미정';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),

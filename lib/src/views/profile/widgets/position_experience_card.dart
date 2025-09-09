@@ -52,7 +52,7 @@ class PositionExperienceCard extends StatelessWidget {
   }
 
   String _getRoleText() {
-    final role = member.detailData?.role;
+    final role = member.role;
     if (role == null) return '미입력';
 
     switch (role) {
@@ -70,7 +70,7 @@ class PositionExperienceCard extends StatelessWidget {
   }
 
   String _getCareerText() {
-    final career = member.detailData?.career;
+    final career = member.career;
     if (career == null) return '미입력';
 
     switch (career) {

@@ -3,7 +3,7 @@ import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/recommend
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/all_team_projects.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/make_team_button.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/team_search_tap.dart';
-import 'package:teamfit/src/widgets/rounded_container.dart';
+import 'package:teamfit/src/widgets/components/rounded_container.dart';
 
 class MatchingTapPage extends StatelessWidget {
   @override

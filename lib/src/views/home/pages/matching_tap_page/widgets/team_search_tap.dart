@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/widgets/custom_search_field.dart';
+import 'package:teamfit/src/widgets/components/custom_search_field.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/project_filter_chips.dart';
 
 class TeamSearchTap extends StatelessWidget {

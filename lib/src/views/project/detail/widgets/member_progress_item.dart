@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/config/theme/custom_color.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
 
 class MemberProgressItem extends StatefulWidget {
   final String role;

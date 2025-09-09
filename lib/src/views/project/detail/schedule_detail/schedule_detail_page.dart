@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/theme/custom_color.dart';
-import 'package:teamfit/src/widgets/rounded_container.dart';
+import 'package:teamfit/src/widgets/components/rounded_container.dart';
 import 'package:teamfit/src/models/schedule_data.dart';
 import 'widgets/schedule_detail_input_section.dart';
 import 'widgets/schedule_member_item.dart';
@@ -49,6 +49,7 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+      scrolledUnderElevation: 0,
         title: Text('달력'),
         backgroundColor: CustomColor.primary_60,
         foregroundColor: Colors.white,

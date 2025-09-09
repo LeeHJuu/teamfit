@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class MotivationalCard extends StatelessWidget {
   final String emoji;

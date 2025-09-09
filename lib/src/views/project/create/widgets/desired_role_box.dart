@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamfit/src/config/enums.dart';
-import 'package:teamfit/src/widgets/input_box_item.dart';
-import 'package:teamfit/src/widgets/shadow_box_container.dart';
+import 'package:teamfit/src/widgets/components/input_box_item.dart';
+import 'package:teamfit/src/widgets/components/shadow_box_container.dart';
 
 class DesiredRoleBox extends StatelessWidget {
   final UserRole role;
