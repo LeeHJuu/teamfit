@@ -24,7 +24,10 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
     final items = loginState.value?.projectIds ?? [];
 
     return loginState.value?.personalityScores == null
-        ? PersonalityTestAlert()
+        ? Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: PersonalityTestAlert(),
+        )
         : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [_carouselSlider(items), _carouselNavigator(items)],

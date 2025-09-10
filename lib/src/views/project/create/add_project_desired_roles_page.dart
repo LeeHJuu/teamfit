@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teamfit/src/models/recruit_member.dart';
 import 'package:teamfit/src/viewmodels/add_team_project_view_model.dart';
 import 'package:teamfit/src/views/personality/widgets/test_step_title.dart';
 import 'package:teamfit/src/views/project/create/add_project_preferred_members_page.dart';
@@ -21,13 +20,6 @@ class AddProjectDesiredRolesPage extends ConsumerStatefulWidget {
 class _AddProjectDesiredRolesPageState
     extends ConsumerState<AddProjectDesiredRolesPage> {
   bool _isPossible = false;
-  List<RecruitMember> recruitMembers = [];
-
-  void _updateIsPossible() {
-    setState(() {
-      _isPossible = recruitMembers.isNotEmpty;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +31,7 @@ class _AddProjectDesiredRolesPageState
         return;
       },
       child: Scaffold(
-        appBar: AppBar(
-      scrolledUnderElevation: 0,),
+        appBar: AppBar(scrolledUnderElevation: 0),
         body: Column(
           children: [
             CustomProgressBar(
@@ -50,7 +41,7 @@ class _AddProjectDesiredRolesPageState
               child: ListView(
                 children: [
                   TestStepTitle('04', '모집 인원과 바라는 팀원'),
-                  ...recruitMembers.map(
+                  ...?state.projectInfo?.recruitMembers.map(
                     (member) => DesiredRoleBox(
                       role: member.role,
                       count: member.count,
@@ -64,12 +55,7 @@ class _AddProjectDesiredRolesPageState
                         isScrollControlled: true,
                         builder: (context) {
                           return DesiredRolesBottomSheet(
-                            onComplete: (member) {
-                              // setState(() {
-                              //   recruitMembers.add(member);
-                              // });
-                              _updateIsPossible();
-                            },
+                            onComplete: (member) {},
                           );
                         },
                       );
@@ -84,22 +70,25 @@ class _AddProjectDesiredRolesPageState
                 ],
               ),
             ),
-            _nextStepButton(context),
+            _nextStepButton(
+              context,
+              state.projectInfo?.recruitMembers.isNotEmpty ?? false,
+            ),
           ],
         ),
       ),
     );
   }
 
-  NextStepBottomButton _nextStepButton(BuildContext context) {
+  NextStepBottomButton _nextStepButton(BuildContext context, bool isPossible) {
     return NextStepBottomButton(
       title: '다음',
-      isPossible: _isPossible,
+      isPossible: isPossible,
       moveNext: () {
         // 모집 팀원 정보를 ViewModel에 저장
-        ref
-            .read(addTeamProjectViewModel.notifier)
-            .setRecruitMembers(recruitMembers);
+        // ref
+        //     .read(addTeamProjectViewModel.notifier)
+        //     .setRecruitMembers(recruitMembers);
 
         ref.read(addTeamProjectViewModel.notifier).nextStep(context);
         Navigator.push(

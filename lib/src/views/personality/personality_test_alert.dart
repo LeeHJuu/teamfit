@@ -8,17 +8,15 @@ class PersonalityTestAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: _buildAlertContainer(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildAlertTitle(),
-            _buildAlertDescription(),
-            _buildAlertImage(),
-            _buildAlertButton(context),
-          ],
-        ),
+    return _buildAlertContainer(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildAlertTitle(),
+          _buildAlertDescription(),
+          _buildAlertImage(),
+          _buildAlertButton(context),
+        ],
       ),
     );
   }

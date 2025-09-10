@@ -20,7 +20,7 @@ class StatisticsCard extends StatelessWidget {
         Expanded(
           child: _buildStatItem(
             '출석율',
-            '${member.attendanceRate?.toInt() ?? 0}%',
+            '${member.detailData?.attendanceRate?.toInt() ?? 0}%',
           ),
         ),
         // 구분선

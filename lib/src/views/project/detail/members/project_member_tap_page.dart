@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../../models/user_data.dart';
-import '../../../../config/enums.dart';
-import '../../../../config/theme/custom_color.dart';
-import '../../../../config/theme/custom_text.dart';
-import '../../../../widgets/rounded_container.dart';
-import '../../../../widgets/common_app_bar.dart';
-import 'widgets/team_member_list.dart';
-import '../../../../widgets/bottom_sheets/invite_member_bottom_sheet.dart';
-import '../../../profile/member_profile_page.dart';
+import 'package:teamfit/src/config/enums.dart';
+import 'package:teamfit/src/config/theme/custom_color.dart';
+import 'package:teamfit/src/config/theme/custom_text.dart';
+import 'package:teamfit/src/models/user_detail_data.dart';
+import 'package:teamfit/src/models/user_data.dart';
+import 'package:teamfit/src/views/profile/member_profile_page.dart';
+import 'package:teamfit/src/views/project/detail/members/widgets/team_member_list.dart';
+import 'package:teamfit/src/widgets/bottom_sheets/invite_member_bottom_sheet.dart';
+import 'package:teamfit/src/widgets/common_app_bar.dart';
+import 'package:teamfit/src/widgets/components/rounded_container.dart';
 
 class ProjectMemberTapPage extends StatefulWidget {
   @override
@@ -33,33 +34,39 @@ class _ProjectMemberTapPageState extends State<ProjectMemberTapPage> {
         email: 'leader@example.com',
         nickname: '불꽃리더',
         projectIds: ['project1'],
-        role: UserRole.development,
-        mannerTemperature: 85.0,
-        attendanceRate: 100.0,
-        mvpCount: 2,
-        participationRate: 100.0,
+        detailData: UserDetailData(
+          role: UserRole.development,
+          mannerTemperature: 85.0,
+          attendanceRate: 100.0,
+          mvpCount: 2,
+          participationRate: 100.0,
+        ),
       ),
       UserData(
         uid: '2',
         email: 'designer@example.com',
         nickname: '멋쟁이디쟈너',
         projectIds: ['project1'],
-        role: UserRole.design,
-        mannerTemperature: 75.0,
-        attendanceRate: 95.0,
-        mvpCount: 1,
-        participationRate: 90.0,
+        detailData: UserDetailData(
+          role: UserRole.design,
+          mannerTemperature: 75.0,
+          attendanceRate: 95.0,
+          mvpCount: 1,
+          participationRate: 90.0,
+        ),
       ),
       UserData(
         uid: '3',
         email: 'developer@example.com',
         nickname: '현쥬님짱',
         projectIds: ['project1'],
-        role: UserRole.development,
-        mannerTemperature: 90.0,
-        attendanceRate: 100.0,
-        mvpCount: 3,
-        participationRate: 95.0,
+        detailData: UserDetailData(
+          role: UserRole.development,
+          mannerTemperature: 90.0,
+          attendanceRate: 100.0,
+          mvpCount: 3,
+          participationRate: 95.0,
+        ),
       ),
     ];
     _filteredMembers = List.from(_members);

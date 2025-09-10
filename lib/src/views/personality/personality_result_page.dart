@@ -56,26 +56,33 @@ class PersonalityResultPage extends ConsumerWidget {
     final userData = ref.watch(loginViewModel).value;
     final nickname = userData?.nickname ?? '사용자';
 
-    return Stack(
-      children: [
-        _background(),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            scrolledUnderElevation: 0,
+    return PopScope(
+      onPopInvoked: (didPop) {
+        final vm = ref.read(personalityTestViewModel.notifier);
+        vm.removeLastResponse();
+        return;
+      },
+      child: Stack(
+        children: [
+          _background(),
+          Scaffold(
             backgroundColor: Colors.transparent,
-            elevation: 0,
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+            body: Column(
+              children: [
+                _resultCard(nickname),
+                _descriptionText(),
+                Spacer(),
+                _bottomButtons(ref),
+              ],
+            ),
           ),
-          body: Column(
-            children: [
-              _resultCard(nickname),
-              _descriptionText(),
-              Spacer(),
-              _bottomButtons(ref),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -109,7 +116,10 @@ class PersonalityResultPage extends ConsumerWidget {
       children: [
         Text(
           '$nickname님은',
-          style: CustomText.Title_L_22.copyWith(fontWeight: FontWeight.w500),
+          style: CustomText.Title_L_22.copyWith(
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
         ),
         _buildRichTitle(),
       ],
@@ -132,7 +142,10 @@ class PersonalityResultPage extends ConsumerWidget {
         spans.add(
           TextSpan(
             text: remainingText.substring(0, highlightIndex),
-            style: CustomText.Title_L_22.copyWith(fontWeight: FontWeight.w500),
+            style: CustomText.Title_L_22.copyWith(
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
           ),
         );
       }
@@ -148,7 +161,10 @@ class PersonalityResultPage extends ConsumerWidget {
               color: _getHighlightColor(),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Text(highlighted, style: CustomText.Title_L_22),
+            child: Text(
+              highlighted,
+              style: CustomText.Title_L_22.copyWith(color: Colors.black87),
+            ),
           ),
         ),
       );
@@ -161,7 +177,10 @@ class PersonalityResultPage extends ConsumerWidget {
         spans.add(
           TextSpan(
             text: afterHighlight,
-            style: CustomText.Title_L_22.copyWith(fontWeight: FontWeight.w500),
+            style: CustomText.Title_L_22.copyWith(
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
           ),
         );
       }
@@ -217,14 +236,17 @@ class PersonalityResultPage extends ConsumerWidget {
           spans.add(
             TextSpan(
               text: remainingText.substring(0, earliestIndex),
-              style: CustomText.Body_Light_M_14,
+              style: CustomText.Body_Light_M_14.copyWith(color: Colors.black87),
             ),
           );
         }
 
         // 볼드 키워드 추가
         spans.add(
-          TextSpan(text: foundKeyword, style: CustomText.Body_Heavy_M_14),
+          TextSpan(
+            text: foundKeyword,
+            style: CustomText.Body_Heavy_M_14.copyWith(color: Colors.black87),
+          ),
         );
 
         // 남은 텍스트 업데이트
@@ -236,10 +258,7 @@ class PersonalityResultPage extends ConsumerWidget {
         spans.add(
           TextSpan(
             text: remainingText,
-            style: CustomText.Body_Light_M_14.copyWith(
-              height: 1.6,
-              color: Colors.black87,
-            ),
+            style: CustomText.Body_Light_M_14.copyWith(color: Colors.black87),
           ),
         );
         break;

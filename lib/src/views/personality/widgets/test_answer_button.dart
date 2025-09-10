@@ -34,6 +34,7 @@ class _TestAnswerButtonState extends State<TestAnswerButton> {
             style: OutlinedButton.styleFrom(
               backgroundColor: buttonColor,
               side: BorderSide(color: Colors.transparent),
+              foregroundColor: CustomColor.gray_10,
             ),
             onPressed: () {
               setState(() {
