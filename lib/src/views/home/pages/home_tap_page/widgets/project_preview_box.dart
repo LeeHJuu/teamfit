@@ -72,7 +72,12 @@ class ProjectPreviewBox extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 5, // 자식 위젯의 수에 따라 조정하세요.
           itemBuilder: (context, index) {
-            return TeamMemberProgressIcon();
+            // 예시 데이터로 임시 값 사용
+            return TeamMemberProgressIcon(
+              nickname: '멤버${index + 1}',
+              accumulatedTime: '120',
+              progress: 0.2 * (index + 1),
+            );
           },
           separatorBuilder: (context, index) => SizedBox(width: 5),
         ),

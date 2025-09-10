@@ -6,7 +6,7 @@ import '../../config/theme/custom_text.dart';
 import '../../models/recruit_member.dart';
 import '../../viewmodels/add_team_project_view_model.dart';
 import '../components/custom_select_button.dart';
-import '../components/custom_text_field.dart';
+import '../components/custom_input_field.dart';
 import '../components/next_step_bottom_button.dart';
 
 class DesiredRolesBottomSheet extends ConsumerStatefulWidget {
@@ -186,12 +186,12 @@ class _DesiredRolesBottomSheetState
     return Row(
       children: [
         Expanded(
-          child: CustomTextField(
+          child: CustomInputField(
             hintText: '필요 인원을 입력해주세요 (예: 1)',
-            onSubmit: () {
+            onSubmitted: (value) {
               // 입력 완료 처리
             },
-            textController: _countController,
+            controller: _countController,
           ),
         ),
         SizedBox(width: 10),
@@ -203,10 +203,10 @@ class _DesiredRolesBottomSheetState
   Widget _buildTechnologySelection() {
     return Column(
       children: [
-        CustomTextField(
-          textController: _techController,
+        CustomInputField(
+          controller: _techController,
           hintText: '기술을 입력하고 Enter를 누르세요',
-          onSubmit: () {
+          onSubmitted: (value) {
             if (_techController.text.trim().isNotEmpty) {
               setState(() {
                 technologies.add(_techController.text.trim());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamfit/src/widgets/components/custom_search_field.dart';
+import 'package:teamfit/src/widgets/components/custom_search_bar.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/project_filter_chips.dart';
 
 class TeamSearchTap extends StatelessWidget {
@@ -17,10 +17,10 @@ class TeamSearchTap extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: CustomSearchField(
-            textController: searchController,
+          child: CustomSearchBar(
+            controller: searchController,
             hintText: '찾으시는 팀프로젝트를 입력해주세요.',
-            onSearch: () {
+            onSearchPressed: () {
               // 검색 기능 구현
               print('검색 버튼 클릭됨');
             },

@@ -7,7 +7,7 @@ import 'package:teamfit/src/views/project/create/add_project_desired_roles_page.
 import 'package:teamfit/src/widgets/components/custom_progress_bar.dart';
 import 'package:teamfit/src/widgets/components/custom_dropdown_menu.dart';
 import 'package:teamfit/src/widgets/components/custom_select_button.dart';
-import 'package:teamfit/src/widgets/components/custom_text_field.dart';
+import 'package:teamfit/src/widgets/components/custom_input_field.dart';
 import 'package:teamfit/src/widgets/components/input_box_item.dart';
 import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
@@ -66,8 +66,7 @@ class _AddProjectMeetingTypePageState
         return;
       },
       child: Scaffold(
-        appBar: AppBar(
-      scrolledUnderElevation: 0,),
+        appBar: AppBar(scrolledUnderElevation: 0),
         body: Column(
           children: [
             Expanded(
@@ -95,10 +94,10 @@ class _AddProjectMeetingTypePageState
       children: [
         InputBoxItem(
           title: '팀 이름',
-          body: CustomTextField(
+          body: CustomInputField(
             hintText: '팀 이름을 입력해주세요',
             maxLength: 20,
-            textController: _teamNameController,
+            controller: _teamNameController,
           ),
         ),
         InputBoxItem(

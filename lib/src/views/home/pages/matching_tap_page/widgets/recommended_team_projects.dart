@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teamfit/src/config/theme/custom_color.dart';
 import 'package:teamfit/src/config/theme/custom_text.dart';
 import 'package:teamfit/src/viewmodels/recommended_projects_view_model.dart';
 import 'package:teamfit/src/views/home/pages/matching_tap_page/widgets/recommended_team_project_item.dart';
+import 'package:teamfit/src/widgets/components/custom_carousel_indicator.dart';
 
 class RecommendedTeamProjects extends ConsumerStatefulWidget {
   const RecommendedTeamProjects({super.key});
@@ -101,27 +101,10 @@ class _RecommendedTeamProjectsState
   }
 
   Widget _buildCarouselIndicator(RecommendedProjectsState state) {
-    final itemCount = state.projects.length;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(itemCount, (index) {
-        return GestureDetector(
-          onTap: () => _carouselController.animateToPage(index),
-          child: Container(
-            width: state.currentIndex == index ? 24.0 : 12.0,
-            height: 12.0,
-            margin: EdgeInsets.symmetric(horizontal: 4.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color:
-                  state.currentIndex == index
-                      ? CustomColor.primary_60
-                      : CustomColor.gray_90,
-            ),
-          ),
-        );
-      }),
+    return CustomCarouselIndicator(
+      itemCount: state.projects.length,
+      currentIndex: state.currentIndex,
+      onTap: (index) => _carouselController.animateToPage(index),
     );
   }
 }

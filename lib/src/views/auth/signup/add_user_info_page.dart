@@ -7,7 +7,7 @@ import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/auth/signup/add_user_role_page.dart';
 import 'package:teamfit/src/views/auth/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/widgets/components/custom_select_button.dart';
-import 'package:teamfit/src/widgets/components/custom_text_field.dart';
+import 'package:teamfit/src/widgets/components/custom_input_field.dart';
 import 'package:teamfit/src/widgets/components/input_box_item.dart';
 import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
@@ -111,8 +111,7 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-      scrolledUnderElevation: 0,),
+        appBar: AppBar(scrolledUnderElevation: 0),
         body: Column(
           children: [
             SignInStepTitle('signin_page.user_info.title'.tr()),
@@ -275,11 +274,11 @@ class _AddUserInfoPageState extends ConsumerState<AddUserInfoPage> {
   }
 
   Widget _nicknameInputField() {
-    return CustomTextField(
-      textController: _nameTextController,
+    return CustomInputField(
+      controller: _nameTextController,
       hintText: 'signin_page.user_info.nickname.hint_text'.tr(),
-      helperText: 'signin_page.user_info.nickname.helper_text'.tr(),
-      onChange: _updateIsPossible,
+      guideText: 'signin_page.user_info.nickname.helper_text'.tr(),
+      onChanged: (value) => _updateIsPossible(),
     );
   }
 

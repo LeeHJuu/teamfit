@@ -5,6 +5,7 @@ import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/home/pages/home_tap_page/widgets/project_preview_box.dart';
 import 'package:teamfit/src/views/personality/personality_test_alert.dart';
 import 'package:teamfit/src/views/project/detail/project_page.dart';
+import 'package:teamfit/src/widgets/components/custom_carousel_indicator.dart';
 
 class HomeTapPage extends ConsumerStatefulWidget {
   const HomeTapPage({super.key});
@@ -34,25 +35,14 @@ class _HomeTapPageState extends ConsumerState<HomeTapPage> {
         );
   }
 
-  Row _carouselNavigator(List<String> items) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          items.asMap().entries.map((entry) {
-            int index = entry.key;
-            return GestureDetector(
-              onTap: () => _carouselSliderController.animateToPage(index),
-              child: Container(
-                width: _current == index ? 24.0 : 12.0,
-                height: 12.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: _current == index ? Colors.black : Colors.grey,
-                ),
-              ),
-            );
-          }).toList(),
+  Widget _carouselNavigator(List<String> items) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: CustomCarouselIndicator(
+        itemCount: items.length,
+        currentIndex: _current,
+        onTap: (index) => _carouselSliderController.animateToPage(index),
+      ),
     );
   }
 

@@ -9,7 +9,7 @@ import 'package:teamfit/src/views/personality/widgets/test_step_title.dart';
 import 'package:teamfit/src/views/project/create/add_project_meeting_type_page.dart';
 import 'package:teamfit/src/widgets/components/custom_progress_bar.dart';
 import 'package:teamfit/src/widgets/components/custom_scroll_text_field.dart';
-import 'package:teamfit/src/widgets/components/custom_text_field.dart';
+import 'package:teamfit/src/widgets/components/custom_input_field.dart';
 import 'package:teamfit/src/widgets/components/input_box_item.dart';
 import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
@@ -170,8 +170,8 @@ class _AddProjectInfoPageState extends ConsumerState<AddProjectInfoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        CustomTextField(
-          textController: _titleController,
+        CustomInputField(
+          controller: _titleController,
           maxLength: 20,
           hintText: "모집글 제목을 입력해주세요",
         ),

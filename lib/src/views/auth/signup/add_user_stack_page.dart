@@ -8,7 +8,7 @@ import 'package:teamfit/src/viewmodels/login_view_model.dart';
 import 'package:teamfit/src/views/auth/signup/add_user_goal_page.dart';
 import 'package:teamfit/src/views/auth/signup/widgets/sign_in_step_title.dart';
 import 'package:teamfit/src/widgets/components/custom_dropdown_menu.dart';
-import 'package:teamfit/src/widgets/components/custom_text_field.dart';
+import 'package:teamfit/src/widgets/components/custom_input_field.dart';
 import 'package:teamfit/src/widgets/components/input_box_item.dart';
 import 'package:teamfit/src/widgets/components/next_step_bottom_button.dart';
 
@@ -28,8 +28,7 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      scrolledUnderElevation: 0,),
+      appBar: AppBar(scrolledUnderElevation: 0),
       body: Column(
         children: [
           SignInStepTitle('signin_page.user_stack.title'.tr()),
@@ -60,10 +59,10 @@ class _AddUserStackPageState extends ConsumerState<AddUserStackPage> {
       title: 'signin_page.user_stack.stack.title'.tr(),
       body: Column(
         children: [
-          CustomTextField(
-            textController: _userStackTextController,
+          CustomInputField(
+            controller: _userStackTextController,
             hintText: 'signin_page.user_stack.stack.hint_text'.tr(),
-            onSubmit: () {
+            onSubmitted: (value) {
               setState(() {
                 userStacks.add(_userStackTextController.text.trim());
                 _userStackTextController.clear();
